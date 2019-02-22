@@ -5,9 +5,9 @@ module.exports = {
   database: 'nideshop',
   prefix: 'nideshop_',
   encoding: 'utf8mb4',
-  host: '220.231.216.128',
+  host: '数据库地址',
   port: '3306',
   user: 'root',
-  password: 'Ectriptestdb2018',
+  password: '数据库密码',
   dateStrings: true
 };
