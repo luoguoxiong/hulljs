@@ -12,7 +12,7 @@ module.exports = class extends Base {
         join: 'left',
         as: 'g',
         on: ['c.value_id', 'g.id']
-      }).where({user_id: this.getLoginUserId(), type_id: parseInt(typeId)}).countSelect();
+      }).where({user_id: this.getLoginUserId(), type_id: parseInt(typeId)}).select();
 
     return this.success(list);
   }
