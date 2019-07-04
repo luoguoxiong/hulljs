@@ -11,6 +11,7 @@ module.exports = {
     'brand',
     'search',
     'region'
+    // 'cart'
   ],
 
   // 可以公开访问的Action
@@ -18,7 +19,8 @@ module.exports = {
     // 格式为： controller+action
     'comment/list',
     'comment/count',
-    // 'cart/index',
+    // 'cart/checkout',
+    // 'cart/checkOne'
     // 'cart/add',
     // 'cart/checked',
     // 'cart/update',
