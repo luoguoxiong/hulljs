@@ -1,0 +1,27 @@
+{
+  "name": "webbuild",
+  "version": "0.0.1",
+  "description": "webpack 构建工具",
+  "main": "index.js",
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "father": "./bin/index.js"
+  },
+  "scripts": {
+      "build":"tsc -w",
+      "start":"node --experimental-specifier-resolution=node ./dist/index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "ora": "^6.1.0",
+    "webpack": "^5.72.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  },
+  "engines": {
+    "node": ">= 12.0.0"
+  }
+}

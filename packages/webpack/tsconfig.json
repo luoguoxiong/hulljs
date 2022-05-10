@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "strict": true,
+      "jsx": "preserve",
+      "sourceMap": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "skipLibCheck": false,
+      "skipDefaultLibCheck": false,
+      "lib": ["esnext", "dom"],
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "paths": {
+        "@/*": ["./src/*"]
+      }
+    },
+  }
