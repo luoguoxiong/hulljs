@@ -1,3 +1,4 @@
-import log from './log';
-import { getPath } from './path';
-export { log, getPath };
+export { log } from './log';
+export { getPath } from './path';
+export { getExistFile } from './getExistFile';
+export { getUserConfig } from './getUserConfig';

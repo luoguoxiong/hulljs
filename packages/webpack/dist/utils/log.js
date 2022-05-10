@@ -1,5 +1,11 @@
-import chalk from 'chalk';
-const log = (chalkInstans) => (msg) => console.log(chalkInstans(msg));
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.log = void 0;
+const chalk_1 = __importDefault(require("chalk"));
+const curryLog = (chalkInstans, logType) => (msg) => (logType ? console.log(`${logType}:`, chalkInstans(msg)) : console.log(chalkInstans(msg)));
 const colors = [
     'blue',
     'magenta',
@@ -16,13 +22,13 @@ const getChalkInstance = () => {
     index = index % (colors.length - 1);
     const color = colors[index];
     index++;
-    return chalk[color];
+    return chalk_1.default[color];
 };
-export default {
-    error: log(chalk.red),
-    warn: log(chalk.yellow),
-    success: log(chalk.green),
-    msg: log(chalk.cyan),
-    free: (msg) => log(getChalkInstance())(msg),
+exports.log = {
+    error: curryLog(chalk_1.default.red, 'error'),
+    warn: curryLog(chalk_1.default.yellow, 'warn'),
+    success: curryLog(chalk_1.default.green, 'success'),
+    msg: curryLog(chalk_1.default.cyan),
+    free: (msg) => curryLog(getChalkInstance())(msg),
 };
 //# sourceMappingURL=log.js.map

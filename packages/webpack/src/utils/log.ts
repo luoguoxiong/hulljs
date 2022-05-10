@@ -1,6 +1,7 @@
-import chalk, { ChalkInstance } from 'chalk';
+import chalk, { ChalkFunction }from 'chalk';
 
-const log = (chalkInstans:ChalkInstance) => (msg:string,) => console.log(chalkInstans(msg));
+const curryLog = ( chalkInstans:ChalkFunction, logType?:string) => (msg:any) =>
+  (logType ? console.log(`${logType}:`, chalkInstans(msg)) : console.log(chalkInstans(msg)));
 
 const colors = [
   'blue',
@@ -16,18 +17,19 @@ const colors = [
 
 let index = 0;
 
-const getChalkInstance = ():ChalkInstance => {
+const getChalkInstance = () => {
   index = index % (colors.length - 1);
-  const color = colors[index] as keyof ChalkInstance;
+  const color = colors[index] as keyof ChalkFunction;
   index++;
-  return chalk[color] as ChalkInstance;
+  return chalk[color] as ChalkFunction;
 };
 
-export default {
-  error: log(chalk.red),
-  warn: log(chalk.yellow),
-  success: log(chalk.green),
-  msg: log(chalk.cyan),
-  free: (msg:string):void => log(getChalkInstance())(msg),
+
+export const log = {
+  error: curryLog( chalk.red, 'error'),
+  warn: curryLog( chalk.yellow, 'warn'),
+  success: curryLog(chalk.green, 'success'),
+  msg: curryLog(chalk.cyan),
+  free: (msg:string):void => curryLog(getChalkInstance())(msg),
 };
 

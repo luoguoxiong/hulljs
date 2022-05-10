@@ -1,36 +1,20 @@
-import path from 'path';
-import webpack, { Configuration }from 'webpack';
-import ora from 'ora';
-import { getPath, log } from './utils';
+import yParser from 'yargs-parser';
+import { ENV } from './types';
+import build from './build';
+import { log } from './utils';
+// builder --p 80 --env development -w ===> { _: [], p: 80, env: development, w: true }
+interface Args {
+    p?:number;
+    env?:ENV;
+    w?:boolean;
+}
+const args = yParser(process.argv.slice(2)) as Args;
 
-const spinner = ora('building for production...');
+try {
+  const env = (args.env || '').includes('prod') ? 'production' : 'development';
+  build({ cwd: process.cwd(), env, watch: args.w });
+} catch (error) {
+  log.error(error);
+  process.exit(1);
+}
 
-spinner.start();
-
-const { dirname } = getPath(import.meta.url);
-
-const config:Configuration = {
-  mode: 'development',
-  devtool: 'source-map',
-  entry: path.join(dirname, './test/index.js'),
-  output: {
-    path: path.join(dirname, './test/output'),
-    filename: '[name].js',
-    publicPath: '',
-  },
-};
-
-
-webpack(config, (err, stats) => {
-  spinner.stop();
-  if (err) throw err;
-  process.stdout.write(
-    `${stats ? stats.toString({
-      colors: true,
-      modules: false,
-      children: true,
-      chunks: false,
-      chunkModules: false,
-    }) : '' }\n\n`
-  );
-});

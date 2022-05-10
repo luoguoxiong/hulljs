@@ -1,2 +1,2 @@
-#!/usr/bin/env node --experimental-specifier-resolution=node
-import '../dist/index.js';
+#!/usr/bin/env node
+require('../dist/index');
