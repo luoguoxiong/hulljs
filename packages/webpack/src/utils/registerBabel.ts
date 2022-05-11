@@ -20,7 +20,7 @@ export const registerBabel = function(opts:IRegisterBabelOpts):void {
     presets: [
       [require.resolve('babel-preset-common'), {
         target: 'node',
-        typescript: true,
+        isTypeScript: true,
       }],
     ],
     extensions: ['.es6', '.es', '.jsx', '.js', '.mjs', '.ts', '.tsx'],
