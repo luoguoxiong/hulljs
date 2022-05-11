@@ -1,6 +1,7 @@
 
 import { IBuildOptions } from '../types';
-import { getUserConfig, isDefault } from '../utils';
+import { getUserConfig } from '../utils';
+
 const build = async(opts:IBuildOptions) => {
   const { cwd } = opts;
   const config = await getUserConfig(cwd);

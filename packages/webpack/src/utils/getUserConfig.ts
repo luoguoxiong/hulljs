@@ -1,8 +1,5 @@
 import{ CONFIG_FILES } from '../constants';
-import { getExistFile } from './getExistFile';
-import { log } from './log';
-import { registerBabel } from './registerBabel';
-import { isDefault } from './';
+import { isDefault, getExistFile, registerBabel, log } from './';
 
 export const getUserConfig = async(cwd:string) => {
   try {
