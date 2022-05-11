@@ -1,5 +1,4 @@
 import { join } from 'path';
-import getBabelConfig from './getBabelConfig';
 
 interface IRegisterBabelOpts {
   cwd:string;
@@ -17,12 +16,13 @@ const slash = (input:string) => {
 
 export const registerBabel = function(opts:IRegisterBabelOpts):void {
   const { cwd, only } = opts;
-  const { opts: babelConfig } = getBabelConfig({
-    target: 'node',
-    typescript: true,
-  });
   require('@babel/register')({
-    ...babelConfig,
+    presets: [
+      [require.resolve('babel-preset-common'), {
+        target: 'node',
+        typescript: true,
+      }],
+    ],
     extensions: ['.es6', '.es', '.jsx', '.js', '.mjs', '.ts', '.tsx'],
     only: only.map((file) => slash(join(cwd, file))),
     babelrc: false,

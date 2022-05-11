@@ -15,7 +15,7 @@ function transformImportLess2Css() {
     };
 }
 function default_1(opts) {
-    const { target, typescript, runtimeHelpers, filePath, browserFiles, nodeFiles, nodeVersion, lazy, lessInBabelMode } = opts;
+    const { target, typescript, type, runtimeHelpers, filePath, browserFiles, nodeFiles, nodeVersion, lazy, lessInBabelMode } = opts;
     let isBrowser = target === 'browser';
     // rollup 场景下不会传入 filePath
     if (filePath) {
@@ -40,12 +40,12 @@ function default_1(opts) {
                 ...(typescript ? [require.resolve('@babel/preset-typescript')] : []),
                 [require.resolve('@babel/preset-env'), {
                         targets,
-                        modules: 'auto',
+                        modules: type === 'esm' ? false : 'auto',
                     }],
                 ...(isBrowser ? [require.resolve('@babel/preset-react')] : []),
             ],
             plugins: [
-                ...((lazy && !isBrowser)
+                ...((type === 'cjs' && lazy && !isBrowser)
                     ? [[require.resolve('@babel/plugin-transform-modules-commonjs'), {
                                 lazy: true,
                             }]]
@@ -62,7 +62,7 @@ function default_1(opts) {
                 [require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }],
                 ...(runtimeHelpers
                     ? [[require.resolve('@babel/plugin-transform-runtime'), {
-                                useESModules: isBrowser,
+                                useESModules: isBrowser && (type === 'esm'),
                                 version: require('@babel/runtime/package.json').version,
                             }]]
                     : []),
