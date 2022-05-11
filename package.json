@@ -4,7 +4,8 @@
   "description": "build-tools",
   "main": "index.js",
   "scripts": {
-    "build":"npm run build --workspaces"
+    "build":"npm run build --workspaces",
+    "pub":"npm run pub --workspaces"
   },
   "repository": {
     "type": "git",

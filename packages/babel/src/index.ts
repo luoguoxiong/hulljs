@@ -1,22 +1,5 @@
 import { extname } from 'path';
-type ModuleFormat = 'amd' | 'umd' | 'systemjs' | 'commonjs' | 'cjs' | 'auto' | false
-interface IPresetEnvOptions{
-    targets?:string | Record<string, string>;
-    useBuiltIns?:'usage' | 'entry' | false;
-    modules?:ModuleFormat;
-}
-interface Options {
-    /** 是否是浏览器环境 */
-    isBrowser:boolean;
-    /** 是否使用TypeScript */
-    isTypeScript:boolean;
-    /** Node版本号 */
-    nodeVersion?:number;
-    /** preset-env配置 */
-    presetEnvOptions:IPresetEnvOptions;
-}
-
-interface IGetBabelConfigOpts {
+export interface IGetBabelOptions {
     target:'browser' | 'node';
     type?:'amd' | 'umd' | 'systemjs' | 'commonjs' | 'cjs' | 'auto' | false;
     isTypeScript?:boolean;
@@ -55,8 +38,9 @@ function transformImportLess2Css() {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default (_context:any, options:IGetBabelConfigOpts):PersentRe => {
-  const { target, isTypeScript, type, runtimeHelpers, filePath, browserFiles, nodeFiles, nodeVersion, lazy, lessInBabelMode } = options;
+export default (_context:any, options:IGetBabelOptions):PersentRe => {
+  const { target, isTypeScript, type, runtimeHelpers, filePath, browserFiles,
+    nodeFiles, nodeVersion, lazy, lessInBabelMode } = options;
   let isBrowser = target === 'browser';
   if (filePath) {
     if (extname(filePath) === '.tsx' || extname(filePath) === '.jsx') {
@@ -84,8 +68,7 @@ export default (_context:any, options:IGetBabelConfigOpts):PersentRe => {
       ...((type === 'cjs' && lazy && !isBrowser)
         ? [[require.resolve('@babel/plugin-transform-modules-commonjs'), {
           lazy: true,
-        }]]
-        : []),
+        }]] : []),
       ...(lessInBabelMode ? [transformImportLess2Css] : []),
       require.resolve('babel-plugin-react-require'),
       require.resolve('@babel/plugin-syntax-dynamic-import'),

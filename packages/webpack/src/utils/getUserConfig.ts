@@ -1,16 +1,18 @@
 import{ CONFIG_FILES } from '../constants';
-import { IBundleOptions } from '../types';
 import { getExistFile } from './getExistFile';
+import { log } from './log';
 import { registerBabel } from './registerBabel';
-export const getUserConfig = (cwd:string):IBundleOptions => {
+import { isDefault } from './';
 
-  registerBabel({
-    cwd,
-    only: CONFIG_FILES,
-  });
-  const filePath = getExistFile({ cwd, files: CONFIG_FILES, returnRelative: false });
-
-  console.log(require(filePath));
-
-  return { port: 1 };
+export const getUserConfig = async(cwd:string) => {
+  try {
+    registerBabel({
+      cwd,
+      only: CONFIG_FILES,
+    });
+    const filePath = getExistFile({ cwd, files: CONFIG_FILES, returnRelative: false });
+    return isDefault(await import(filePath));
+  } catch (error) {
+    log.error(error);
+  }
 };
