@@ -1,0 +1,16 @@
+{
+  "name": "babel-preset-common",
+  "version": "1.0.0",
+  "description": "",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "author": "",
+  "scripts": {
+    "build": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/babel__helper-plugin-utils": "^7.10.0",
+    "typescript": "^4.6.4"
+  },
+  "license": "ISC"
+}
