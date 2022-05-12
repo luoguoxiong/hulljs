@@ -1,7 +1,7 @@
 import { join } from 'path';
 import babel, { IGetBabelOptions } from 'babel-preset-common';
 interface IRegisterBabelOpts {
-  cwd:string;
+    appDirectory:string;
   only:string[];
 }
 
@@ -15,7 +15,7 @@ const slash = (input:string) => {
 };
 
 export const registerBabel = function(opts:IRegisterBabelOpts):void {
-  const { cwd, only } = opts;
+  const { appDirectory, only } = opts;
   const babelOptions:IGetBabelOptions = {
     target: 'node',
     isTypeScript: true,
@@ -23,7 +23,7 @@ export const registerBabel = function(opts:IRegisterBabelOpts):void {
   require('@babel/register')({
     presets: [[babel, babelOptions]],
     extensions: ['.es6', '.es', '.jsx', '.js', '.mjs', '.ts', '.tsx'],
-    only: only.map((file) => slash(join(cwd, file))),
+    only: only.map((file) => slash(join(appDirectory, file))),
     babelrc: false,
     cache: false,
   });

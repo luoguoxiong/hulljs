@@ -1,18 +1,8 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "src": ["./src/*"]
-      },
-      "module": "esnext",
-      "moduleResolution": "node",
-      "target": "es5",
-      "lib": ["es2015", "dom"],
-      "experimentalDecorators": true,
-      "jsx": "react",
-      "skipLibCheck": true,
-      "declaration": true,
-      "allowSyntheticDefaultImports":true,
-    },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
-  
+}

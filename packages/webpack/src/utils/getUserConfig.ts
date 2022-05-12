@@ -1,13 +1,13 @@
 import{ CONFIG_FILES } from '../constants';
 import { isDefault, getExistFile, registerBabel, log } from './';
 
-export const getUserConfig = async(cwd:string) => {
+export const getUserConfig = async(appDirectory:string) => {
   try {
     registerBabel({
-      cwd,
+      appDirectory,
       only: CONFIG_FILES,
     });
-    const filePath = getExistFile({ cwd, files: CONFIG_FILES, returnRelative: false });
+    const filePath = getExistFile({ appDirectory, files: CONFIG_FILES, returnRelative: false });
     return isDefault(await import(filePath));
   } catch (error) {
     log.error(error);

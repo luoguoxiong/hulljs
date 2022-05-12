@@ -1,3 +1,4 @@
+import fs from 'fs';
 import yParser from 'yargs-parser';
 import { ENV } from './types';
 import build from './build';
@@ -11,8 +12,9 @@ interface Args {
 const args = yParser(process.argv.slice(2)) as Args;
 
 try {
+  const appDirectory = fs.realpathSync(process.cwd());
   const env = (args.env || '').includes('prod') ? 'production' : 'development';
-  build({ cwd: process.cwd(), env, watch: args.w });
+  build({ appDirectory, env });
 } catch (error) {
   log.error(error);
   process.exit(1);

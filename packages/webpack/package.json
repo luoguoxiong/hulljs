@@ -29,10 +29,13 @@
     "@babel/preset-react": "7.12.1",
     "@babel/preset-typescript": "7.12.1",
     "@babel/register": "7.12.1",
-    "babel-preset-common":"workspace:^",
+    "babel-preset-common": "workspace:^",
     "chalk": "4.1.2",
+    "jsonfile": "^6.1.0",
     "ora": "^6.1.0",
+    "terser-webpack-plugin": "^5.3.1",
     "webpack": "^5.72.0",
+    "webpack-merge": "^5.8.0",
     "yargs-parser": "^21.0.1"
   },
   "devDependencies": {
