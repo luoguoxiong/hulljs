@@ -11,7 +11,7 @@ const build = async(opts:IBuildOptions) => {
   };
   const { appDirectory } = opts;
   const webpackConf = getWebpackConfig(opts);
-  console.log(webpackConf);
+//   console.log(webpackConf);
 //   const config = await getUserConfig(appDirectory);
 //   if(typeof config === 'function'){
 //     config(true, {});

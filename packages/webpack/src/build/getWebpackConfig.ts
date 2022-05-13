@@ -3,9 +3,13 @@ import { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import { WEBPACK_COMMON_CONF, WEBPACK_DEV_CONF, WEBPACK_PROD_CONF } from '../constants';
 import { IBuildOptions, SelfWebpackConfig } from '../types';
+import { getAliasAndModulesFromConfig } from './modules';
+
 export const getWebpackConfig = (selfConfig:IBuildOptions):Configuration => {
 
   const { appDirectory, env, buildArgs } = selfConfig;
+
+  const { modules, alias } = getAliasAndModulesFromConfig(appDirectory);
 
   const { shouldUseSourceMap = false, outputPath, outputPublicPath, resolveAlias } = buildArgs as SelfWebpackConfig;
 
@@ -31,12 +35,22 @@ export const getWebpackConfig = (selfConfig:IBuildOptions):Configuration => {
     optimization: {
     },
     resolve: {
-      modules: ['node_modules', appDirectory],
-      // tsconfig.json、jsconfig.json 需要配置paths  "@/*": ["./*"] 和 "baseUrl": ".",
+      modules,
       alias: {
-        '@': appDirectory,
         ...resolveAlias,
+        ...alias,
       },
+    },
+    module: {
+      strictExportPresence: true,
+      rules: [
+        ...(isUseSourceMap ? [{
+          exclude: /@babel(?:\/|\\{1,2})runtime/,
+          test: /\.(js|mjs|jsx|ts|tsx|css)$/,
+          use: ['source-map-loader'],
+        }] : []),
+      ],
+
     },
   };
 
