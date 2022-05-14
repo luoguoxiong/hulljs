@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'fs';
 import { log } from '../utils';
 
 interface IgetAliasFromConfigRe {
+    isTypeScript:boolean;
     alias:Record<string, string>;
     modules:string[];
 }
@@ -34,6 +35,7 @@ export const getAliasAndModulesFromConfig = (appDirectory:string):IgetAliasFromC
       });
 
       return {
+        isTypeScript: hasTsConfig,
         alias,
         modules,
       };
@@ -44,6 +46,7 @@ export const getAliasAndModulesFromConfig = (appDirectory:string):IgetAliasFromC
   };
 
   const config:IgetAliasFromConfigRe = {
+    isTypeScript: false,
     modules: [],
     alias: {},
   };

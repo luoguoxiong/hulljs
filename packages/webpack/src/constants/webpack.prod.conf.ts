@@ -10,12 +10,9 @@ export const WEBPACK_PROD_CONF:Configuration = {
     assetModuleFilename: 'static/media/[name].[hash][ext]',
   },
   optimization: {
-    // 生产环境开启
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        // esbuild 是一个非常快的 JavaScript 打包器和压缩器。
-        minify: TerserPlugin.esbuildMinify,
         terserOptions: {
           parse: {
             ecma: 5,

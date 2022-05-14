@@ -1,5 +1,7 @@
 export type ENV = 'development' | 'production' | string
 
+export type ProjectType = 'react' | 'vue' | false;
+
 /** webpack构建配置 */
 export interface IBundleOptions{
     /** devServer 端口 */
@@ -20,6 +22,10 @@ export interface IBuildOptions{
 export interface SelfWebpackConfig {
     /** 环境变量 */
     env?:ENV;
+    /** 项目类型 react、vue */
+    projectType:ProjectType;
+    /** entry */
+    entry:any;
     /** output.path */
     outputPath:string;
     /** output.publicPath */
@@ -32,4 +38,6 @@ export interface SelfWebpackConfig {
     resolveAlias?:Record<string, string>;
     /** 是否使用SourceMap */
     shouldUseSourceMap?:boolean;
+    /** fileSizeLimit */
+    fileSizeLimit?:number;
 }

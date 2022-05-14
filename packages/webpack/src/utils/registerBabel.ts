@@ -1,8 +1,8 @@
 import { join } from 'path';
-import babel, { IGetBabelOptions } from 'babel-preset-common';
+import babel, { IGetBabelOptions } from 'babel-preset-build-tools';
 interface IRegisterBabelOpts {
     appDirectory:string;
-  only:string[];
+    only:string[];
 }
 
 const slash = (input:string) => {
@@ -19,6 +19,9 @@ export const registerBabel = function(opts:IRegisterBabelOpts):void {
   const babelOptions:IGetBabelOptions = {
     target: 'node',
     isTypeScript: true,
+    projectType: false,
+    type: 'cjs',
+    isUseRunTime: false,
   };
   require('@babel/register')({
     presets: [[babel, babelOptions]],

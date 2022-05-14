@@ -1,15 +1,14 @@
 import path from 'path';
+import { SelfWebpackConfig } from 'webbuild';
 
-export default (isDev, isSetOptions) => {
-  console.log(isDev, isSetOptions);
-  return {
-    mode: 'development',
-    devtool: 'source-map',
-    entry: path.join(__dirname, './test/index.js'),
-    output: {
-      path: path.join(__dirname, './test/output'),
-      filename: '[name].js',
-      publicPath: '',
-    },
+export default (env, isSetOptions) => {
+  console.log(env, isSetOptions);
+  const config:SelfWebpackConfig = {
+    projectType: 'react',
+    entry: path.resolve(__dirname, './src/index.ts'),
+    outputPath: path.resolve(__dirname, './output'),
+    outputPublicPath: '',
+    fileSizeLimit: 1000,
   };
+  return config;
 };

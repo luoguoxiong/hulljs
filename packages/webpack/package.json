@@ -2,13 +2,14 @@
   "name": "webbuild",
   "version": "0.0.1",
   "description": "webpack 构建工具",
-  "main": "index.js",
   "type": "commonjs",
   "author": "",
   "license": "ISC",
   "bin": {
     "father": "./bin/index.js"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.js",
   "scripts": {
     "build": "tsc -w",
     "start": "node --experimental-specifier-resolution=node ./dist/index.js"
@@ -16,8 +17,11 @@
   "dependencies": {
     "@babel/core": "7.12.3",
     "@babel/register": "7.12.1",
-    "babel-preset-common": "workspace:^",
+    "@svgr/webpack": "^6.2.1",
+    "babel-loader": "^8.2.5",
+    "babel-preset-build-tools": "0.0.1",
     "chalk": "4.1.2",
+    "file-loader": "^6.2.0",
     "jsonfile": "^6.1.0",
     "ora": "^6.1.0",
     "source-map-loader": "^3.0.1",
