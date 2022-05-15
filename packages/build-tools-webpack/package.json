@@ -1,12 +1,12 @@
 {
-  "name": "webbuild",
+  "name": "build-tools-webpack",
   "version": "0.0.1",
   "description": "webpack 构建工具",
   "type": "commonjs",
   "author": "",
   "license": "ISC",
   "bin": {
-    "father": "./bin/index.js"
+    "builder": "./bin/index.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.js",

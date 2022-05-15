@@ -4,8 +4,8 @@
   "description": "",
   "main": "builsTools.js",
   "scripts": {
-    "dev": "father  --p 80 --env dev",
-    "prod": "father  --p 80 --env prod"
+    "dev": "builder  --p 80 --env dev",
+    "prod": "builder  --p 80 --env prod"
   },
   "author": "",
   "license": "ISC"
