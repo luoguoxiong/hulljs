@@ -48,19 +48,18 @@ function transformImportLess2Css() {
 }
 export const presetForCommon = (opts:CommonPersetOptions):PersentRe => {
 
-  const { target, nodeVersion, type, isTypeScript, lessInBabelMode, isUseRunTime } = opts;
+  const { target, type, isTypeScript, lessInBabelMode, isUseRunTime } = opts;
 
   const isBrowser = target === 'browser';
-
-  const targets = isBrowser ? { browsers: ['last 2 versions', 'IE 10'] } : { node: nodeVersion };
 
   return {
     presets: [
       ...(isTypeScript ? [require.resolve('@babel/preset-typescript')] : []),
       [require.resolve('@babel/preset-env'), {
-        targets,
-        modules: type,
-      }],
+        useBuiltIns: 'entry',
+        corejs: 3,
+        exclude: ['transform-typeof-symbol'],
+      } ],
     ],
     plugins: [
       /** node构建时使用 */
@@ -78,7 +77,7 @@ export const presetForCommon = (opts:CommonPersetOptions):PersentRe => {
       ...(isUseRunTime ? [ [require.resolve('@babel/plugin-transform-runtime'), {
         useESModules: isBrowser && type === false,
         version: require('@babel/runtime/package.json').version,
-        /** 如果不设置这个，在ci调试环境会找不到@babel/runtime */
+        /** 如果不设置absoluteRuntime，在ci调试环境会找不到@babel/runtime */
         absoluteRuntime: path.dirname(
           require.resolve('@babel/runtime/package.json')
         ),

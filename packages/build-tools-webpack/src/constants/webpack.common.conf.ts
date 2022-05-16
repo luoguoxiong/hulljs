@@ -1,9 +1,11 @@
-import { Configuration } from 'webpack';
-
+import webpack, { Configuration } from 'webpack';
 export const WEBPACK_COMMON_CONF:Configuration = {
   target: 'web',
   infrastructureLogging: {
     level: 'none',
+  },
+  watchOptions: {
+    poll: 1000,
   },
   resolve: {
     extensions: [
@@ -28,4 +30,20 @@ export const WEBPACK_COMMON_CONF:Configuration = {
     strictExportPresence: true,
     rules: [],
   },
+  plugins: [
+    new webpack.ProgressPlugin({
+      activeModules: false,
+      entries: true,
+      modules: true,
+      modulesCount: 5000,
+      profile: false,
+      dependencies: true,
+      dependenciesCount: 10000,
+      percentBy: 'entries',
+    }),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/,
+    }),
+  ],
 };

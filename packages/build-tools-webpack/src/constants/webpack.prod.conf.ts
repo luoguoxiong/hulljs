@@ -1,4 +1,5 @@
 import { Configuration } from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
 export const WEBPACK_PROD_CONF:Configuration = {
@@ -37,4 +38,10 @@ export const WEBPACK_PROD_CONF:Configuration = {
       }),
     ],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name].[contenthash:8].css',
+      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+    }),
+  ],
 };

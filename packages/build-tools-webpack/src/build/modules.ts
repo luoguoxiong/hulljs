@@ -25,7 +25,8 @@ export const getAliasAndModulesFromConfig = (appDirectory:string):IgetAliasFromC
       const config = JSON.parse(readFileSync(configPath).toString()).compilerOptions || {};
       const { baseUrl = '', paths = {} } = config;
       const absoluteBaseUrl = resolve(appDirectory, baseUrl);
-      const modules = [resolve(appDirectory, 'node_modules'), absoluteBaseUrl];
+    //   why node_modules??
+      const modules = [resolve(appDirectory, 'node_modules'), absoluteBaseUrl, 'node_modules'];
       const alias:Record<string, string> = {};
 
       Object.keys(paths).forEach((item) => {

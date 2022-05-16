@@ -1,35 +1,31 @@
 
 import webpack from 'webpack';
-import { IBuildOptions, SelfWebpackConfig } from '../types';
-import { getUserConfig } from '../utils';
+import { IBuildOptions } from '../types';
+import { getUserConfig, log } from '../utils';
 import { getWebpackConfig } from './getWebpackConfig';
-
+import { startDevServer } from './startDevServer';
 const build = async(opts:IBuildOptions) => {
-  const { appDirectory } = opts;
-  const config = await getUserConfig(appDirectory);
-  console.log('opts', config);
+  try {
+    const { appDirectory, env } = opts;
+    const config = await getUserConfig(appDirectory);
+    opts.buildArgs;
+    if(typeof config === 'function'){
+      const resConf = config(env);
+      opts.buildArgs = resConf;
+    } else if(typeof config === 'object'){
+      opts.buildArgs = config;
+    }else{
+      log.error('你设置easyBuild必须配置的是函数或者对象！');
+      return;
+    }
 
-  if(typeof config === 'function'){
-    const resConf = config(true, {}) as SelfWebpackConfig;
-    opts.buildArgs = resConf;
+    const webpackConf = getWebpackConfig(opts);
+    const compiler = webpack(webpackConf);
+    await startDevServer(compiler, { port: 5000 });
+  } catch (error:any) {
+    log.error(error);
+    throw Error(error);
   }
-
-  const webpackConf = getWebpackConfig(opts);
-
-  webpack(webpackConf, (err, stats) => {
-    if (err) {
-      console.log(err);
-    };
-    // process.stdout.write(
-    //   `${stats ? stats.toString({
-    //     colors: true,
-    //     modules: false,
-    //     children: true,
-    //     chunks: false,
-    //     chunkModules: false,
-    //   }) : '' }\n\n`
-    // );
-  });
 };
 
 export default build;

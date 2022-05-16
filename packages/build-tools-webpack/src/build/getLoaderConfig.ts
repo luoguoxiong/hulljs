@@ -1,6 +1,14 @@
 import { IGetBabelOptions } from 'babel-preset-build-tools';
 import { ProjectType } from '../types';
 
+interface IngetJsLoaderConfig{
+    isProduction:boolean;
+    appDirectory:string;
+    isTypeScript:boolean;
+    projectType:ProjectType;
+    extraBabelPlugins:any[];
+}
+
 export const getFileLoaderConfig = (fileSizeLimit:number) => [
   {
     test: [/\.avif$/],
@@ -56,16 +64,19 @@ export const getFileLoaderConfig = (fileSizeLimit:number) => [
   },
 ];
 
-export const getJsLoaderConfig = (appDirectory:string, isTypeScript:boolean, projectType:ProjectType) => {
+export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
+  const { appDirectory, isTypeScript, projectType, extraBabelPlugins = [], isProduction } = opts;
   const babelOptions:IGetBabelOptions = {
     target: 'browser',
     isTypeScript,
     projectType,
     type: 'auto',
+    isProduction,
     isUseRunTime: true,
   };
 
   return [
+    // 处理appDirectory
     {
       test: /\.(js|mjs|jsx|ts|tsx)$/,
       include: appDirectory,
@@ -77,12 +88,14 @@ export const getJsLoaderConfig = (appDirectory:string, isTypeScript:boolean, pro
             babelOptions,
           ],
         ],
+        plugins: extraBabelPlugins,
         babelrc: false,
         configFile: false,
         cacheDirectory: true,
         compact: true,
       },
     },
+    // 例如node_modules内的@babel_runtime@7.17.9@@babel/runtime/helpers/classCallCheck.js
     {
       test: /\.(js|mjs)$/,
       exclude: /@babel(?:\/|\\{1,2})runtime/,

@@ -5,7 +5,6 @@ export interface IGetBabelOptions {
     projectType:'react' | 'vue' | false;
     isTypeScript?:boolean;
     isProduction?:boolean;
-    nodeVersion?:number;
     isUseRunTime?:boolean;
     lessInBabelMode?:boolean|{
       paths?:any[];
@@ -20,12 +19,13 @@ export interface PersentRe{
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (_context:any, options:IGetBabelOptions):PersentRe => {
 
-  const { target, isTypeScript, type = 'auto', nodeVersion = 6, isProduction = false, lessInBabelMode = false, projectType, isUseRunTime } = options;
+  const {
+    target, isTypeScript, type = 'auto', isProduction = false,
+    lessInBabelMode = false, projectType, isUseRunTime } = options;
 
   const presetCommon = presetForCommon({
     target,
     type,
-    nodeVersion,
     lessInBabelMode,
     isTypeScript,
     isUseRunTime,

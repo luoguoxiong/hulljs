@@ -1,18 +1,21 @@
 import path from 'path';
-import { Configuration } from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { WEBPACK_COMMON_CONF, WEBPACK_DEV_CONF, WEBPACK_PROD_CONF } from '../constants';
 import { IBuildOptions, SelfWebpackConfig } from '../types';
 import { getFileLoaderConfig, getJsLoaderConfig } from './getLoaderConfig';
 import { getAliasAndModulesFromConfig } from './modules';
-
 export const getWebpackConfig = (selfConfig:IBuildOptions):Configuration => {
 
   const { appDirectory, env, buildArgs } = selfConfig;
 
   const { modules, alias, isTypeScript } = getAliasAndModulesFromConfig(appDirectory);
 
-  const { shouldUseSourceMap = false, outputPath, outputPublicPath, resolveAlias, entry, projectType, fileSizeLimit = 1000 } = buildArgs as SelfWebpackConfig;
+  const { shouldUseSourceMap = false, outputPath, outputPublicPath, resolveAlias,
+    entry, projectType, fileSizeLimit = 1000, extraBabelPlugins = [],
+    htmlPluginConfig, definePluginOptions = {}, isUseBundleAnalyzer = false } = buildArgs as SelfWebpackConfig;
 
   const isProduction = (env || '').includes('prod');
 
@@ -55,12 +58,25 @@ export const getWebpackConfig = (selfConfig:IBuildOptions):Configuration => {
         {
           oneOf: [
             ...getFileLoaderConfig(fileSizeLimit),
-            ...getJsLoaderConfig(appDirectory, isTypeScript, projectType),
+            ...getJsLoaderConfig({ appDirectory, isTypeScript, projectType, extraBabelPlugins, isProduction }),
           ],
         },
       ],
-
     },
+    plugins: [
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        cache: false,
+        minify: isProduction,
+        template: path.join(__dirname, '../../public/index.html'),
+        ...htmlPluginConfig,
+      }),
+      new webpack.DefinePlugin({
+        ...definePluginOptions,
+        'DEBUG': !isProduction,
+      }),
+      ...(isUseBundleAnalyzer ? [new BundleAnalyzerPlugin()] : []),
+    ],
   };
 
   return merge(isProduction ? WEBPACK_PROD_CONF : WEBPACK_DEV_CONF, WEBPACK_COMMON_CONF, config);

@@ -21,6 +21,7 @@ export const registerBabel = function(opts:IRegisterBabelOpts):void {
     isTypeScript: true,
     projectType: false,
     type: 'cjs',
+    isProduction: true,
     isUseRunTime: false,
   };
   require('@babel/register')({
