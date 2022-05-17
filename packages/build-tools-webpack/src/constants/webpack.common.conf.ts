@@ -1,4 +1,5 @@
 import webpack, { Configuration } from 'webpack';
+import WebpackBar from 'webpackbar';
 export const WEBPACK_COMMON_CONF:Configuration = {
   target: 'web',
   infrastructureLogging: {
@@ -31,16 +32,7 @@ export const WEBPACK_COMMON_CONF:Configuration = {
     rules: [],
   },
   plugins: [
-    new webpack.ProgressPlugin({
-      activeModules: false,
-      entries: true,
-      modules: true,
-      modulesCount: 5000,
-      profile: false,
-      dependencies: true,
-      dependenciesCount: 10000,
-      percentBy: 'entries',
-    }),
+    new WebpackBar(),
     new webpack.IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
