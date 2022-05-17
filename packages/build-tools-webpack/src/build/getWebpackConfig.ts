@@ -73,6 +73,7 @@ export const getWebpackConfig = async():Promise<Configuration> => {
           cache: false,
           minify: isProduction,
           template: path.join(__dirname, '../../public/index.html'),
+          favicon: path.join(__dirname, '../../public/favicon.ico'),
           ...htmlPluginConfig,
         }),
         new webpack.DefinePlugin({

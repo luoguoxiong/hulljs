@@ -9,7 +9,9 @@ export default (env:string):SelfWebpackConfig => {
     outputPath: path.resolve(__dirname, './output'),
     outputPublicPath: '',
     htmlPluginConfig: {
+      title: 'easyBuild',
       template: path.resolve(__dirname, './public/index.html'),
+      favicon: path.join(__dirname, './public/favicon.ico'),
     },
   };
   return config;
