@@ -25,7 +25,7 @@ export const getAliasAndModulesFromConfig = (appDirectory:string):IgetAliasFromC
       const config = JSON.parse(readFileSync(configPath).toString()).compilerOptions || {};
       const { baseUrl = '', paths = {} } = config;
       const absoluteBaseUrl = resolve(appDirectory, baseUrl);
-    //   why node_modules??
+    //   why node_modules?? node_modules 不设置 webpackdevserver会出错！！！
       const modules = [resolve(appDirectory, 'node_modules'), absoluteBaseUrl, 'node_modules'];
       const alias:Record<string, string> = {};
 

@@ -4,15 +4,18 @@
   "description": "",
   "main": "builsTools.js",
   "scripts": {
-    "dev": "builder  --p 80 --env dev",
-    "prod": "builder  --p 80 --env prod"
+    "dev": "builder dev --port 8000",
+    "build": "builder build",
+    "server": "builder server --port 8888"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^5.72.1"
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4"
   },
   "dependencies": {
-    "webpack": "^5.72.1"
+    "react": "^16.10.0",
+    "react-dom": "^16.10.0"
   }
 }
