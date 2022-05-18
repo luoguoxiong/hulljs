@@ -5,7 +5,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { WEBPACK_COMMON_CONF, WEBPACK_DEV_CONF, WEBPACK_PROD_CONF } from '../constants';
 import{ choosePort } from '../utils/usePort';
-import { getFileLoaderConfig, getJsLoaderConfig } from './getLoaderConfig';
+import { getFileLoaderConfig, getJsLoaderConfig, getCssLoaderConfig } from './getLoaderConfig';
 import { getAliasAndModulesFromConfig } from './modules';
 import { configTool } from './config';
 export const getWebpackConfig = async():Promise<Configuration> => {
@@ -62,6 +62,7 @@ export const getWebpackConfig = async():Promise<Configuration> => {
             oneOf: [
               ...getFileLoaderConfig(),
               ...getJsLoaderConfig({ isTypeScript, isProduction }),
+              ...getCssLoaderConfig(),
               ...(extraModuleRules ? extraModuleRules : []),
             ],
           },
@@ -73,6 +74,7 @@ export const getWebpackConfig = async():Promise<Configuration> => {
           cache: false,
           minify: isProduction,
           template: path.join(__dirname, '../../public/index.html'),
+          favicon: path.join(__dirname, '../../public/favicon.ico'),
           ...htmlPluginConfig,
         }),
         new webpack.DefinePlugin({

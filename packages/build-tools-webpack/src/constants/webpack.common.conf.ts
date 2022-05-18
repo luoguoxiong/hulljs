@@ -20,11 +20,6 @@ export const WEBPACK_COMMON_CONF:Configuration = {
       '.tsx',
       '.json',
       '.web.jsx',
-      '.jsx',
-      '.less',
-      '.scss',
-      '.sass',
-      '.css',
     ],
   },
   module: {

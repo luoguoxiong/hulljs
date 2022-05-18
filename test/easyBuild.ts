@@ -7,9 +7,11 @@ export default (env:string):SelfWebpackConfig => {
     projectType: 'react',
     entry: path.resolve(__dirname, './src/index'),
     outputPath: path.resolve(__dirname, './output'),
-    outputPublicPath: '',
+    outputPublicPath: '/',
     htmlPluginConfig: {
+      title: 'easyBuild',
       template: path.resolve(__dirname, './public/index.html'),
+      favicon: path.join(__dirname, './public/favicon.ico'),
     },
   };
   return config;
