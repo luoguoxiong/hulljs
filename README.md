@@ -1,2 +1,2 @@
-# easyBuildTool
-so easy to build your npm packages
+# hulljs
+hulljs 一套前端壳构建工具
