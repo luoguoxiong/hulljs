@@ -1,7 +1,7 @@
 import { Configuration } from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 export const WEBPACK_PROD_CONF:Configuration = {
   mode: 'production',
   bail: true,
@@ -36,6 +36,7 @@ export const WEBPACK_PROD_CONF:Configuration = {
           },
         },
       }),
+      new CssMinimizerPlugin(),
     ],
   },
   plugins: [

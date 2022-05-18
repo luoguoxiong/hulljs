@@ -6,15 +6,17 @@
   "scripts": {
     "dev": "builder dev --port 8000",
     "build": "builder build",
-    "server": "builder server --port 8888"
+    "server": "builder server --port 8000"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.4"
+    "@types/react-dom": "^18.0.4",
+    "postcss-px-to-viewport": "^1.1.1"
   },
   "dependencies": {
+    "antd": "^4.20.5",
     "react": "^16.10.0",
     "react-dom": "^16.10.0"
   }

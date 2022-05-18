@@ -11,6 +11,7 @@ const build = async(opts:IBuildOptions, ciType:CITYPE) => {
 
     const configFnOrObj = await getUserConfig(appDirectory);
 
+
     let config;
     if(typeof configFnOrObj === 'function'){
       const resConf = configFnOrObj(env);

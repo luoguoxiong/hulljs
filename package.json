@@ -23,6 +23,7 @@
   },
   "browserslist": [],
   "dependencies": {
+    "postcss-preset-env": "^7.5.0",
     "webpackbar": "^5.0.2"
   }
 }

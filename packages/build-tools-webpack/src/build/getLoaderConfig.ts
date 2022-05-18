@@ -1,5 +1,8 @@
 import { IGetBabelOptions } from 'babel-preset-build-tools';
+import minCssExtract from 'mini-css-extract-plugin';
+import { getExistFile } from '../utils';
 import { configTool } from './config';
+
 
 interface IngetJsLoaderConfig{
     isProduction:boolean;
@@ -104,7 +107,7 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
           compact: true,
         },
       },
-      // 例如node_modules内的@babel_runtime@7.17.9@@babel/runtime/helpers/classCallCheck.js
+      // 处理appDirectory外的js
       {
         test: /\.(js|mjs)$/,
         exclude: /@babel(?:\/|\\{1,2})runtime/,
@@ -128,4 +131,95 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
 
 };
 
-// export const getCssLoaderConfig = () => {};
+export const getCssLoaderConfig = () => {
+  const config = configTool.getConfig();
+
+  if(config){
+
+    const { env, shouldUseSourceMap, appDirectory } = config;
+
+    const isProduction = (env || '').includes('prod');
+
+    const isUseSourceMap = isProduction ? shouldUseSourceMap : false;
+
+    const postcssConfigPath = getExistFile({ appDirectory, files: ['postcss.config.js', 'postcss.config.cjs'] });
+
+    const getStyleLoaders = (isCssModule:boolean, otherCssLoader?:string) => {
+      const loaders:any[] = [
+        isProduction ? minCssExtract.loader : require.resolve('style-loader'),
+        {
+          loader: require.resolve('css-loader'),
+          options: {
+            modules: isCssModule,
+            sourceMap: isUseSourceMap,
+          },
+        },
+        {
+          loader: require.resolve('postcss-loader'),
+          options: {
+            postcssOptions: {
+              config: postcssConfigPath,
+              plugins: [
+                [
+                  require.resolve('postcss-preset-env'),
+                  { stage: 3 },
+                ],
+              ],
+            },
+            sourceMap: isUseSourceMap,
+          },
+        },
+      ];
+      if (otherCssLoader) {
+        loaders.push(
+          {
+            loader: require.resolve('resolve-url-loader'),
+            options: {
+              root: appDirectory,
+            },
+          },
+          {
+            loader: require.resolve(otherCssLoader),
+            options: {
+              sourceMap: true,
+            },
+          }
+        );
+      }
+      return loaders;
+    };
+    return [
+      {
+        test: /\.css$/,
+        exclude: /\.module.css$/,
+        use: getStyleLoaders(false),
+        sideEffects: true,
+      },
+      {
+        test: /\.module.css$/,
+        use: getStyleLoaders(true),
+      },
+      {
+        test: /\.less$/,
+        exclude: /\.module\.less$/,
+        use: getStyleLoaders(false, 'less-loader'),
+        sideEffects: true,
+      },
+      {
+        test: /\.module\.less$/,
+        use: getStyleLoaders(true, 'less-loader'),
+      },
+      {
+        test: /\.(sass|scss)$/,
+        exclude: /\.module\.(sass|scss)$/,
+        use: getStyleLoaders(false, 'sass-loader'),
+        sideEffects: true,
+      },
+      {
+        test: /\.module\.(sass|scss)$/,
+        use: getStyleLoaders(true, 'sass-loader'),
+      },
+    ];
+  }
+  return [];
+};
