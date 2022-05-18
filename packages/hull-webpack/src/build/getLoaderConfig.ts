@@ -1,4 +1,4 @@
-import { IGetBabelOptions } from 'babel-preset-build-tools';
+import { IGetBabelOptions } from 'babel-preset-hull';
 import minCssExtract from 'mini-css-extract-plugin';
 import { getExistFile } from '../utils';
 import { configTool } from './config';
@@ -96,7 +96,7 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
         options: {
           presets: [
             [
-              require.resolve('babel-preset-build-tools'),
+              require.resolve('babel-preset-hull'),
               babelOptions,
             ],
           ],
@@ -115,7 +115,7 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
         options: {
           presets: [
             [
-              require.resolve('babel-preset-build-tools'),
+              require.resolve('babel-preset-hull'),
               babelOptions,
             ],
           ],

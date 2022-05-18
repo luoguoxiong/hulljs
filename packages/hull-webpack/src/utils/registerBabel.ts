@@ -1,5 +1,5 @@
 import { join } from 'path';
-import babel, { IGetBabelOptions } from 'babel-preset-build-tools';
+import babel, { IGetBabelOptions } from 'babel-preset-hull';
 interface IRegisterBabelOpts {
     appDirectory:string;
     only:string[];

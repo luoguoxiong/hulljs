@@ -1,6 +1,6 @@
 import{ CONFIG_FILES } from '../constants';
 import { IngetUserConfigRe } from '../types';
-import { isDefault, getExistFile, registerBabel, log } from './';
+import { isDefault, getExistFile, registerBabel, log } from '.';
 
 export const getUserConfig = async(appDirectory:string):IngetUserConfigRe => {
   try {

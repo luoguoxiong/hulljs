@@ -1,7 +1,7 @@
 {
-  "name": "build-tools-webpack",
+  "name": "hull-webpack",
   "version": "0.0.2",
-  "description": "webpack 构建工具",
+  "description": "bull-webpack",
   "type": "commonjs",
   "author": "",
   "license": "ISC",
@@ -11,15 +11,14 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.js",
   "scripts": {
-    "build": "tsc -w",
-    "start": "node --experimental-specifier-resolution=node ./dist/index.js"
+    "build": "tsc -w"
   },
   "dependencies": {
     "@babel/core": "7.12.3",
     "@babel/register": "7.12.1",
     "@svgr/webpack": "^6.2.1",
     "babel-loader": "^8.2.3",
-    "babel-preset-build-tools": "0.0.1",
+    "babel-preset-hull": "0.0.1",
     "cac": "^6.7.12",
     "chalk": "4.1.2",
     "css-loader": "^6.7.1",
