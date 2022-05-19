@@ -26,7 +26,7 @@ const build = async(opts:IBuildOptions, ciType:CITYPE) => {
       ...opts,
       ...config,
       isUseBundleAnalyzer: analyzer || config.isUseBundleAnalyzer,
-      port: port || config.devServer?.port || 5000,
+      port: port || (config.devServer || {}).port || 5000,
     };
 
     configTool.setConfig(buildOpts);

@@ -16,13 +16,18 @@ export const getAliasAndModulesFromConfig = (appDirectory:string):IgetAliasFromC
   const hasTsConfig = existsSync(tsConfigPath);
   const hasJsConfig = existsSync(jsConfigPath);
 
+
   if(hasTsConfig && hasJsConfig){
     log.warn('同时存在 tsconfig.json 和 jsconfig.json,优先使用tsconfig.json');
   }
 
+
   const getAliasFromConfig = (configPath:string):IgetAliasFromConfigRe => {
     try {
+
       const config = JSON.parse(readFileSync(configPath).toString()).compilerOptions || {};
+
+
       const { baseUrl = '', paths = {} } = config;
       const absoluteBaseUrl = resolve(appDirectory, baseUrl);
     //   why node_modules?? node_modules 不设置 webpackdevserver会出错！！！
@@ -34,7 +39,6 @@ export const getAliasAndModulesFromConfig = (appDirectory:string):IgetAliasFromC
         const value = resolve(absoluteBaseUrl, paths[item][0].replace('/*', '').replace('*', ''));
         alias[key] = value;
       });
-
       return {
         isTypeScript: hasTsConfig,
         alias,
@@ -52,5 +56,5 @@ export const getAliasAndModulesFromConfig = (appDirectory:string):IgetAliasFromC
     alias: {},
   };
 
-  return (hasTsConfig || hasTsConfig) ? getAliasFromConfig(hasTsConfig ? tsConfigPath : jsConfigPath) : config;
+  return (hasTsConfig || hasJsConfig) ? getAliasFromConfig(hasTsConfig ? tsConfigPath : jsConfigPath) : config;
 };

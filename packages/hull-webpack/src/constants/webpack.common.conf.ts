@@ -12,14 +12,15 @@ export const WEBPACK_COMMON_CONF:Configuration = {
     extensions: [
       '.web.mjs',
       '.mjs',
-      '.web.js',
-      '.js',
       '.web.ts',
       '.ts',
       '.web.tsx',
       '.tsx',
       '.json',
+      '.web.js',
+      '.js',
       '.web.jsx',
+      '.jsx',
     ],
   },
   module: {
