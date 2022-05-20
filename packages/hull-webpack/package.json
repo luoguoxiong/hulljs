@@ -1,6 +1,6 @@
 {
-  "name": "hull-webpack",
-  "version": "0.0.2",
+  "name": "@hulljs/webpack",
+  "version": "0.0.1",
   "description": "bull-webpack",
   "type": "commonjs",
   "author": "",
@@ -16,9 +16,10 @@
   "dependencies": {
     "@babel/core": "7.12.3",
     "@babel/register": "7.12.1",
+    "@hulljs/babel-preset-hull-app": "0.0.1",
     "@svgr/webpack": "^6.2.1",
     "babel-loader": "^8.2.3",
-    "babel-preset-hull": "0.0.1",
+    "babel-plugin-import": "^1.13.5",
     "cac": "^6.7.12",
     "chalk": "4.1.2",
     "css-loader": "^6.7.1",

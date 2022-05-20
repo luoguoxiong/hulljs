@@ -11,7 +11,6 @@ const build = async(opts:IBuildOptions, ciType:CITYPE) => {
 
     const configFnOrObj = await getUserConfig(appDirectory);
 
-
     let config;
     if(typeof configFnOrObj === 'function'){
       const resConf = configFnOrObj(env);
@@ -19,7 +18,7 @@ const build = async(opts:IBuildOptions, ciType:CITYPE) => {
     } else if(typeof configFnOrObj === 'object'){
       config = configFnOrObj;
     }else{
-      log.error('你设置easyBuild.js或你设置easyBuild.ts应该是函数或者对象！');
+      log.error('hull.conf.js或你设置hull.conf.ts应该是函数或者对象！');
       return;
     }
     const buildOpts:RunBuildOpts = {

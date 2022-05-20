@@ -1,5 +1,5 @@
 import { join } from 'path';
-import babel, { IGetBabelOptions } from 'babel-preset-hull';
+import babel, { IGetBabelOptions } from '@hulljs/babel-preset-hull-app';
 interface IRegisterBabelOpts {
     appDirectory:string;
     only:string[];

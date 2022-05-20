@@ -1,5 +1,0 @@
-declare module 'hyperquest'
-declare module 'tmp'
-declare module 'tar-pack'
-declare module 'fs-extra'
-declare module 'validate-npm-package-name'

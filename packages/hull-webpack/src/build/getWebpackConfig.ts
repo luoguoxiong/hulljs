@@ -9,14 +9,13 @@ import { getFileLoaderConfig, getJsLoaderConfig, getCssLoaderConfig } from './ge
 import { getAliasAndModulesFromConfig } from './modules';
 import { configTool } from './config';
 export const getWebpackConfig = async():Promise<Configuration> => {
-
   const buildConfig = configTool.getConfig();
 
   if(buildConfig){
     const { appDirectory, env, shouldUseSourceMap = false, outputPath,
       outputPublicPath, resolveAlias, entry, htmlPluginConfig,
       extraWebpackPlugins, extraModuleRules,
-      definePluginOptions = {}, isUseBundleAnalyzer = false } = buildConfig;
+      definePluginOptions = {}, isUseBundleAnalyzer = false, splitChunks = {} } = buildConfig;
 
     const { modules, alias, isTypeScript } = getAliasAndModulesFromConfig(appDirectory);
 
@@ -41,14 +40,15 @@ export const getWebpackConfig = async():Promise<Configuration> => {
         },
         cacheDirectory: path.resolve(appDirectory, `node_modules/.${isProduction ? 'prod' : 'dev'}_cache`),
       },
-      optimization: {
-      },
       resolve: {
         modules,
         alias: {
           ...resolveAlias,
           ...alias,
         },
+      },
+      optimization: {
+        splitChunks: isProduction ? splitChunks : {},
       },
       module: {
         strictExportPresence: true,

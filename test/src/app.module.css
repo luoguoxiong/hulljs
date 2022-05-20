@@ -1,8 +1,0 @@
-.test{
-    color: green;
-    background: url("@/src/static/index.png");
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    transition: all .5s;
-}

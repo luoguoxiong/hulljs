@@ -1,5 +1,5 @@
 {
-  "name": "babel-preset-hull",
+  "name": "@hulljs/babel-preset-hull-app",
   "version": "0.0.1",
   "description": "",
   "type": "commonjs",
