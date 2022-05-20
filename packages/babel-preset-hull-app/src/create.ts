@@ -1,5 +1,5 @@
 import path from 'path';
-import { PersentRe } from './index';
+import { PersentRe, IGetBabelOptions } from './index';
 export const persetForReact = (isProduction:boolean):PersentRe => ({
   presets: [
     [require.resolve('@babel/preset-react')],
@@ -20,19 +20,6 @@ export const persetForVue = ():PersentRe => ({
   plugins: [],
 });
 
-interface CommonPersetOptions{
-    target:'browser' | 'node';
-    type?:'amd' | 'umd' | 'systemjs' | 'commonjs' | 'cjs' | 'auto' | false;
-    nodeVersion?:number;
-    isTypeScript?:boolean;
-    isUseRunTime?:boolean;
-    lessInBabelMode?:boolean|{
-        paths?:any[];
-        plugins?:any[];
-    };
-}
-
-
 function transformImportLess2Css() {
   return {
     name: 'transform-import-less-to-css',
@@ -46,15 +33,17 @@ function transformImportLess2Css() {
     },
   };
 }
-export const presetForCommon = (opts:CommonPersetOptions):PersentRe => {
+export const presetForCommon = (opts:IGetBabelOptions):PersentRe => {
 
-  const { target, type, isTypeScript, lessInBabelMode, isUseRunTime } = opts;
+  const { target, type, isTypeScript, lessInBabelMode, isUseRunTime, projectType } = opts;
 
   const isBrowser = target === 'browser';
 
   return {
     presets: [
-      ...(isTypeScript ? [require.resolve('@babel/preset-typescript')] : []),
+      ...(isTypeScript ? [[require.resolve('@babel/preset-typescript'), {
+        allExtensions: projectType === 'vue',
+      }]] : []),
       [require.resolve('@babel/preset-env'), {
         useBuiltIns: 'entry',
         corejs: 3,

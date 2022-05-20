@@ -45,6 +45,8 @@
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
     "tsconfig-paths": "^4.0.0",
+    "vue": "^3.2.34",
+    "vue-loader": "^17.0.0",
     "webpack": "^5.72.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-dev-server": "^4.9.0",
