@@ -40,6 +40,8 @@ export interface SelfWebpackConfig {
     shouldUseSourceMap?:boolean;
     /** 额外的babel pugin */
     extraBabelPlugins?:any[];
+     /** 额外的babel Presets */
+    extraBabelPresets?:any[];
     /** fileSizeLimit 静态资源压缩为base64的大小限制*/
     fileSizeLimit?:number;
     /** htmlPluginConfig HtmlWebpackPlugin配置参数*/
@@ -54,6 +56,8 @@ export interface SelfWebpackConfig {
     extraWebpackPlugins?:WebpackPluginInstance[];
     /** extraModuleRules */
     extraModuleRules?:RuleSetRule[];
+    /** splitChunks */
+    splitChunks?:any;
 }
 
 export type IngetUserConfigRe = Promise<(env:ENV) => SelfWebpackConfig | SelfWebpackConfig>

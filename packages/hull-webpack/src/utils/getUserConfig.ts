@@ -8,6 +8,7 @@ export const getUserConfig = async(appDirectory:string):IngetUserConfigRe => {
       appDirectory,
       only: CONFIG_FILES,
     });
+
     const filePath = getExistFile({ appDirectory, files: CONFIG_FILES, returnRelative: false });
     return isDefault(await import(filePath || ''));
   } catch (error:any) {

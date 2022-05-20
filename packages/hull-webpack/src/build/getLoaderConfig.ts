@@ -1,4 +1,4 @@
-import { IGetBabelOptions } from 'babel-preset-hull';
+import { IGetBabelOptions } from '@hulljs/babel-preset-hull-app';
 import minCssExtract from 'mini-css-extract-plugin';
 import { getExistFile } from '../utils';
 import { configTool } from './config';
@@ -76,7 +76,7 @@ export const getFileLoaderConfig = () => {
 export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
   const config = configTool.getConfig();
   if(config){
-    const { appDirectory, projectType, extraBabelPlugins = [] } = config;
+    const { appDirectory, projectType, extraBabelPlugins = [], extraBabelPresets = [] } = config;
     const { isTypeScript, isProduction } = opts;
     const babelOptions:IGetBabelOptions = {
       target: 'browser',
@@ -96,9 +96,10 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
         options: {
           presets: [
             [
-              require.resolve('babel-preset-hull'),
+              require.resolve('@hulljs/babel-preset-hull-app'),
               babelOptions,
             ],
+            ...extraBabelPresets,
           ],
           plugins: extraBabelPlugins,
           babelrc: false,
@@ -115,10 +116,12 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
         options: {
           presets: [
             [
-              require.resolve('babel-preset-hull'),
+              require.resolve('@hulljs/babel-preset-hull-app'),
               babelOptions,
             ],
+            ...extraBabelPresets,
           ],
+          plugins: extraBabelPlugins,
           babelrc: false,
           configFile: false,
           compact: false,
@@ -182,6 +185,9 @@ export const getCssLoaderConfig = () => {
             loader: require.resolve(otherCssLoader),
             options: {
               sourceMap: true,
+              lessOptions: {
+                javascriptEnabled: true,
+              },
             },
           }
         );
