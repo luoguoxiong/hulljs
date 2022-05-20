@@ -15,18 +15,7 @@ export const getFileLoaderConfig = () => {
     const { fileSizeLimit } = config;
     return [
       {
-        test: [/\.avif$/],
-        type: 'asset',
-        mimetype: 'image/avif',
-        parser: {
-          dataUrlCondition: {
-            maxSize: fileSizeLimit,
-          },
-        },
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/,
-        exclude: /node_modules/,
+        test: [/\.avif|svg|jpe?g|png|gif$/],
         type: 'asset',
         parser: {
           dataUrlCondition: {
@@ -39,56 +28,26 @@ export const getFileLoaderConfig = () => {
         exclude: /node_modules/,
         type: 'asset',
       },
-      {
-        test: /\.svg$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: require.resolve('@svgr/webpack'),
-            options: {
-              prettier: false,
-              svgo: false,
-              svgoConfig: {
-                plugins: [{ removeViewBox: false }],
-              },
-              titleProp: true,
-              ref: true,
-            },
-          },
-          {
-            loader: require.resolve('file-loader'),
-            options: {
-              name: 'static/media/[name].[hash].[ext]',
-            },
-          },
-        ],
-        issuer: {
-          and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
-        },
-      },
     ];
   }
-
   return [];
-
 };
 
 export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
   const config = configTool.getConfig();
   if(config){
-    const { appDirectory, projectType, extraBabelPlugins = [], extraBabelPresets = [] } = config;
+    const { appDirectory, extraBabelPlugins = [], extraBabelPresets = [], projectType } = config;
     const { isTypeScript, isProduction } = opts;
     const babelOptions:IGetBabelOptions = {
       target: 'browser',
       isTypeScript,
-      projectType,
       type: 'auto',
+      projectType,
       isProduction,
       isUseRunTime: true,
     };
 
     return [
-      // 处理appDirectory
       {
         test: /\.(js|mjs|jsx|ts|tsx)$/,
         include: appDirectory,
@@ -106,26 +65,6 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
           configFile: false,
           cacheDirectory: true,
           compact: true,
-        },
-      },
-      // 处理appDirectory外的js
-      {
-        test: /\.(js|mjs)$/,
-        exclude: /@babel(?:\/|\\{1,2})runtime/,
-        loader: require.resolve('babel-loader'),
-        options: {
-          presets: [
-            [
-              require.resolve('@hulljs/babel-preset-hull-app'),
-              babelOptions,
-            ],
-            ...extraBabelPresets,
-          ],
-          plugins: extraBabelPlugins,
-          babelrc: false,
-          configFile: false,
-          compact: false,
-          cacheDirectory: true,
         },
       },
     ];

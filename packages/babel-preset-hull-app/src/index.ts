@@ -19,17 +19,9 @@ export interface PersentRe{
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (_context:any, options:IGetBabelOptions):PersentRe => {
 
-  const {
-    target, isTypeScript, type = 'auto', isProduction = false,
-    lessInBabelMode = false, projectType, isUseRunTime } = options;
+  const { isProduction = false, projectType } = options;
 
-  const presetCommon = presetForCommon({
-    target,
-    type,
-    lessInBabelMode,
-    isTypeScript,
-    isUseRunTime,
-  });
+  const presetCommon = presetForCommon(options);
 
   const presetReact = persetForReact(isProduction);
 

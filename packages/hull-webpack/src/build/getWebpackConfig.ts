@@ -3,6 +3,7 @@ import webpack, { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { VueLoaderPlugin } from 'vue-loader';
 import { WEBPACK_COMMON_CONF, WEBPACK_DEV_CONF, WEBPACK_PROD_CONF } from '../constants';
 import{ choosePort } from '../utils/usePort';
 import { getFileLoaderConfig, getJsLoaderConfig, getCssLoaderConfig } from './getLoaderConfig';
@@ -59,16 +60,17 @@ export const getWebpackConfig = async():Promise<Configuration> => {
             use: ['source-map-loader'],
           }] : []),
           {
-            oneOf: [
-              ...getFileLoaderConfig(),
-              ...getJsLoaderConfig({ isTypeScript, isProduction }),
-              ...getCssLoaderConfig(),
-              ...(extraModuleRules ? extraModuleRules : []),
-            ],
+            test: /\.vue$/,
+            loader: 'vue-loader',
           },
+          ...getFileLoaderConfig(),
+          ...getJsLoaderConfig({ isTypeScript, isProduction }),
+          ...getCssLoaderConfig(),
+          ...(extraModuleRules ? extraModuleRules : []),
         ],
       },
       plugins: [
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
           filename: 'index.html',
           cache: false,
