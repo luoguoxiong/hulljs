@@ -1,9 +1,5 @@
 import { join } from 'path';
 import babel, { IGetBabelOptions } from '@hulljs/babel-preset-hull-app';
-interface IRegisterBabelOpts {
-    appDirectory:string;
-    only:string[];
-}
 
 const slash = (input:string) => {
   const isExtendedLengthPath = /^\\\\\?\\/.test(input);
@@ -14,12 +10,15 @@ const slash = (input:string) => {
   return input.replace(/\\/g, '/');
 };
 
-export const registerBabel = function(opts:IRegisterBabelOpts):void {
-  const { appDirectory, only } = opts;
+export const registerHullAppBabel = function(appDirectory:string, only:string[], babelOpts:IGetBabelOptions):void {
   const babelOptions:IGetBabelOptions = {
+    target: 'node',
     isTypeScript: true,
-    projectType: 'node',
+    projectType: false,
+    type: 'cjs',
     isProduction: true,
+    isUseRunTime: true,
+    ...babelOpts,
   };
   require('@babel/register')({
     presets: [[babel, babelOptions]],

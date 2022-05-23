@@ -1,11 +1,8 @@
 import { presetForCommon, persetForVue, persetForReact } from './create';
 export interface IGetBabelOptions {
-    target:'browser' | 'node';
-    type?:'amd' | 'umd' | 'systemjs' | 'commonjs' | 'cjs' | 'auto' | false;
-    projectType:'react' | 'vue' | false;
+    projectType:'react' | 'vue' | 'node';
     isTypeScript?:boolean;
     isProduction?:boolean;
-    isUseRunTime?:boolean;
     lessInBabelMode?:boolean|{
       paths?:any[];
       plugins?:any[];

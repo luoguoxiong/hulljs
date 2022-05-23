@@ -38,13 +38,11 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
   if(config){
     const { appDirectory, extraBabelPlugins = [], extraBabelPresets = [], projectType } = config;
     const { isTypeScript, isProduction } = opts;
+
     const babelOptions:IGetBabelOptions = {
-      target: 'browser',
       isTypeScript,
-      type: 'auto',
       projectType,
       isProduction,
-      isUseRunTime: true,
     };
 
     return [
