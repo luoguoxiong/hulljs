@@ -1,15 +1,18 @@
 
-import { IBuildOptions, RunBuildOpts } from '../types';
-import { getUserConfig, log } from '../utils';
+import { log, getFileExport } from '@hulljs/utils';
+import { IBuildOptions, RunBuildOpts, IngetUserConfigRe } from '../types';
+import { CONFIG_FILES } from '../constants';
 import { getWebpackConfig } from './getWebpackConfig';
 import { startDevServer, startBuildPro, startProServer } from './startAction';
 import { configTool } from './config';
+
 type CITYPE = 'dev'| 'build' | 'server'
+
 const build = async(opts:IBuildOptions, ciType:CITYPE) => {
   try {
     const { appDirectory, env, analyzer, port } = opts;
 
-    const configFnOrObj = await getUserConfig(appDirectory);
+    const configFnOrObj = await getFileExport<IngetUserConfigRe>(appDirectory, CONFIG_FILES);
 
     let config;
     if(typeof configFnOrObj === 'function'){

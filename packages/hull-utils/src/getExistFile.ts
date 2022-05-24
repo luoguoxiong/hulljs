@@ -12,7 +12,7 @@ interface IGetExistFileRe{
     absFilePath:string;
 }
 
-export function getExistFile({ appDirectory, files = [], returnRelative = false }:IGetExistFile):IGetExistFileRe {
+export function getExistFile({ appDirectory, files = [] }:IGetExistFile):IGetExistFileRe {
   for (const file of files) {
     const absFilePath = join(appDirectory, file);
     if (existsSync(absFilePath)) {

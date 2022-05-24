@@ -1,6 +1,6 @@
-import chalk, { ChalkInstance }from 'chalk';
+import chalk, { ChalkFunction }from 'chalk';
 
-const curryLog = ( chalkInstans:ChalkInstance, logType?:string) => (msg:any) =>
+const curryLog = ( chalkInstans:ChalkFunction, logType?:string) => (msg:any) =>
   (logType ? console.log(chalkInstans(`${logType}: ${msg}`)) : console.log(chalkInstans(msg)));
 
 const colors = [
@@ -19,9 +19,9 @@ let index = 0;
 
 const getChalkInstance = () => {
   index = index % (colors.length - 1);
-  const color = colors[index] as keyof ChalkInstance;
+  const color = colors[index] as keyof ChalkFunction;
   index++;
-  return chalk[color] as ChalkInstance;
+  return chalk[color] as ChalkFunction;
 };
 
 

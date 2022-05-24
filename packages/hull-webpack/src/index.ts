@@ -2,7 +2,6 @@
 import fs from 'fs';
 import cac from 'cac';
 import build from './build';
-import { log } from './utils';
 import { IBuildOptions, SelfWebpackConfig } from './types';
 export { SelfWebpackConfig, IBuildOptions };
 const cli = cac();
@@ -22,9 +21,8 @@ cli
         analyzer: options.analyzer,
       };
       build(option, 'dev');
-    } catch (error) {
-      log.error(error);
-      process.exit(1);
+    } catch (error:any) {
+      throw Error(error);
     }
   });
 
@@ -39,9 +37,8 @@ cli
         analyzer: options.analyzer,
       };
       build(option, 'build');
-    } catch (error) {
-      log.error(error);
-      process.exit(1);
+    } catch (error:any) {
+      throw Error(error);
     }
   });
 
@@ -56,9 +53,8 @@ cli
         port: options.port || 5000,
       };
       build(option, 'server');
-    } catch (error) {
-      log.error(error);
-      process.exit(1);
+    } catch (error:any) {
+      throw Error(error);
     }
   });
 

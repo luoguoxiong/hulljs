@@ -58,6 +58,8 @@ export interface SelfWebpackConfig {
     extraModuleRules?:RuleSetRule[];
     /** splitChunks */
     splitChunks?:any;
+    sassLoaderOptions?:any;
+    lessLoaderOptions?:any;
 }
 
 export type IngetUserConfigRe = Promise<(env:ENV) => SelfWebpackConfig | SelfWebpackConfig>

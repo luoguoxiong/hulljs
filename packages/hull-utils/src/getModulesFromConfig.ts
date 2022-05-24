@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { existsSync, readFileSync } from 'fs';
-import { log } from '../utils';
+import { log } from '.';
 
 interface IgetAliasFromConfigRe {
     isTypeScript:boolean;
@@ -9,7 +9,7 @@ interface IgetAliasFromConfigRe {
 }
 
 // 从tsconfig.json 和jsconfig.json获取配置
-export const getAliasAndModulesFromConfig = (appDirectory:string):IgetAliasFromConfigRe => {
+export const getModulesFromConfig = (appDirectory:string):IgetAliasFromConfigRe => {
   const tsConfigPath = resolve(appDirectory, 'tsconfig.json');
   const jsConfigPath = resolve(appDirectory, 'jsconfig.json');
 
