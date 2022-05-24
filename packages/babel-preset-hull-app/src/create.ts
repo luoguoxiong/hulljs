@@ -17,10 +17,12 @@ export const persetForReact = (isProduction:boolean):PersentRe => ({
 
 export const persetForVue = ():PersentRe => ({
   presets: [],
-  plugins: [],
+  plugins: [
+    require.resolve('@vue/babel-plugin-jsx'),
+  ],
 });
 
-function transformImportLess2Css() {
+function transformImportLessToCss() {
   return {
     name: 'transform-import-less-to-css',
     visitor: {
@@ -35,9 +37,7 @@ function transformImportLess2Css() {
 }
 export const presetForCommon = (opts:IGetBabelOptions):PersentRe => {
 
-  const { target, type, isTypeScript, lessInBabelMode, isUseRunTime, projectType } = opts;
-
-  const isBrowser = target === 'browser';
+  const { isTypeScript, lessInBabelMode, projectType } = opts;
 
   return {
     presets: [
@@ -52,9 +52,9 @@ export const presetForCommon = (opts:IGetBabelOptions):PersentRe => {
     ],
     plugins: [
       /** node构建时使用 */
-      ...((type === 'cjs' && !isBrowser) ? [[require.resolve('@babel/plugin-transform-modules-commonjs'), { lazy: true }]] : []),
+      ...((projectType === 'node') ? [[require.resolve('@babel/plugin-transform-modules-commonjs'), { lazy: true }]] : []),
       /** less 文件转css */
-      ...(lessInBabelMode ? [[transformImportLess2Css]] : []),
+      ...(lessInBabelMode ? [[transformImportLessToCss]] : []),
       require.resolve('@babel/plugin-syntax-dynamic-import'),
       require.resolve('@babel/plugin-proposal-export-default-from'),
       require.resolve('@babel/plugin-proposal-export-namespace-from'),
@@ -63,14 +63,14 @@ export const presetForCommon = (opts:IGetBabelOptions):PersentRe => {
       require.resolve('@babel/plugin-proposal-optional-chaining'),
       [require.resolve('@babel/plugin-proposal-decorators'), { legacy: true }],
       [require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }],
-      ...(isUseRunTime ? [ [require.resolve('@babel/plugin-transform-runtime'), {
-        useESModules: isBrowser && type === false,
+      [require.resolve('@babel/plugin-transform-runtime'), {
+        useESModules: projectType !== 'node',
         version: require('@babel/runtime/package.json').version,
         /** 如果不设置absoluteRuntime，在ci调试环境会找不到@babel/runtime */
         absoluteRuntime: path.dirname(
           require.resolve('@babel/runtime/package.json')
         ),
-      }]] : []),
+      }],
     ],
   };
 };

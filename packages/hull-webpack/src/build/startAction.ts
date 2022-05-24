@@ -1,9 +1,8 @@
 import WebpackDevServer from 'webpack-dev-server';
 import webpack, { Configuration } from 'webpack';
 import rm from 'rimraf';
-import { choosePort, log } from '../utils';
+import { choosePort, log, startStaticServer } from '@hulljs/utils';
 import { RunBuildOpts } from '../types';
-import { startStaticServer } from '../utils/startStaticServer';
 
 
 export const startDevServer = async(webpackConfig:Configuration, buildOpts:RunBuildOpts) => {

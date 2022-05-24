@@ -6,12 +6,24 @@ interface IGetExistFile{
     files?:string[];
     returnRelative?:boolean;
 }
-export function getExistFile({ appDirectory, files = [], returnRelative = false }:IGetExistFile):string | false {
+
+interface IGetExistFileRe{
+    isOk:boolean;
+    absFilePath:string;
+}
+
+export function getExistFile({ appDirectory, files = [] }:IGetExistFile):IGetExistFileRe {
   for (const file of files) {
     const absFilePath = join(appDirectory, file);
     if (existsSync(absFilePath)) {
-      return returnRelative ? file : absFilePath;
+      return {
+        isOk: true,
+        absFilePath,
+      };
     }
   }
-  return false;
+  return {
+    isOk: false,
+    absFilePath: '',
+  };
 }

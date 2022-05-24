@@ -33,3 +33,4 @@ export const log = {
   free: (msg:string):void => curryLog(getChalkInstance())(msg),
 };
 
+

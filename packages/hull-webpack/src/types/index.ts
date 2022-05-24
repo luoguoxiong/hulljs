@@ -3,7 +3,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import { WebpackPluginInstance, RuleSetRule } from 'webpack';
 export type ENV = 'development' | 'production' | string
 
-export type ProjectType = 'react' | 'vue' | false;
+export type ProjectType = 'react' | 'vue' | 'node';
 
 export type RunBuildOpts = IBuildOptions & SelfWebpackConfig
 
@@ -58,6 +58,8 @@ export interface SelfWebpackConfig {
     extraModuleRules?:RuleSetRule[];
     /** splitChunks */
     splitChunks?:any;
+    sassLoaderOptions?:any;
+    lessLoaderOptions?:any;
 }
 
 export type IngetUserConfigRe = Promise<(env:ENV) => SelfWebpackConfig | SelfWebpackConfig>
