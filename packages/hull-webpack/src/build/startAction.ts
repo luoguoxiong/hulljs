@@ -5,13 +5,13 @@ import { choosePort, log, startStaticServer } from '@hulljs/utils';
 import { RunBuildOpts } from '../types';
 
 
-export const startDevServer = async(webpackConfig:Configuration, buildOpts:RunBuildOpts) => {
+export const startDevServer = async(webpackConfig: Configuration, buildOpts: RunBuildOpts) => {
   try {
     const compiler = webpack(webpackConfig);
 
     const port = await choosePort(buildOpts.port || 5000);
 
-    const config:WebpackDevServer.Configuration = {
+    const config: WebpackDevServer.Configuration = {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
@@ -28,16 +28,16 @@ export const startDevServer = async(webpackConfig:Configuration, buildOpts:RunBu
     devServer.startCallback(() => {
       log.success(`you service is running at http://localhost:${port}`);
     });
-  } catch (error:any) {
+  } catch (error: any) {
     throw Error(error);
   }
 };
 
-export const startBuildPro = async(webpackConfig:Configuration, buildOpts:RunBuildOpts, callback?:any) => {
+export const startBuildPro = async(webpackConfig: Configuration, buildOpts: RunBuildOpts, callback?: any) => {
   log.msg('building for production...');
   rm(
     buildOpts.outputPath,
-    (err:any) => {
+    (err: any) => {
       if (err) throw err;
       webpack(webpackConfig, (err, stats) => {
         if (err) throw err;
@@ -48,7 +48,7 @@ export const startBuildPro = async(webpackConfig:Configuration, buildOpts:RunBui
             children: true,
             chunks: false,
             chunkModules: false,
-          }) }\n\n`
+          }) }\n\n`,
         );
         if (stats && stats.hasErrors()) {
           log.error('Build failed with errors.\n');
@@ -57,12 +57,12 @@ export const startBuildPro = async(webpackConfig:Configuration, buildOpts:RunBui
         log.success('Webpack build complete.\n');
         callback && callback();
       });
-    }
+    },
   );
 };
 
 
-export const startProServer = async(webpackConfig:Configuration, buildOpts:RunBuildOpts) => {
+export const startProServer = async(webpackConfig: Configuration, buildOpts: RunBuildOpts) => {
   const runServer = () => {
     startStaticServer({
       assetsRoot: buildOpts.outputPath,

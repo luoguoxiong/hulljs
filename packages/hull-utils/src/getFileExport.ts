@@ -1,6 +1,6 @@
 import { isDefault, getExistFile, registerNodeCiBabel } from '.';
 
-export const getFileExport = async<T>(appDirectory:string, files:string[]):Promise<T> => {
+export const getFileExport = async<T>(appDirectory: string, files: string[]): Promise<T> => {
   try {
     registerNodeCiBabel(appDirectory, files);
     const { isOk, absFilePath } = getExistFile({ appDirectory, files: files, returnRelative: false });
@@ -9,7 +9,7 @@ export const getFileExport = async<T>(appDirectory:string, files:string[]):Promi
     }else{
       throw Error(`${appDirectory} isn't has any ${files.join('、')}`);
     }
-  } catch (error:any) {
+  } catch (error: any) {
     throw Error(error);
   }
 };

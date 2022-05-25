@@ -1,20 +1,20 @@
 import { presetForCommon, persetForVue, persetForReact } from './create';
 export interface IGetBabelOptions {
-    projectType:'react' | 'vue' | 'node';
-    isTypeScript?:boolean;
-    isProduction?:boolean;
-    lessInBabelMode?:boolean|{
-      paths?:any[];
-      plugins?:any[];
-    };
+  projectType: 'react' | 'vue' | 'node';
+  isTypeScript?: boolean;
+  isProduction?: boolean;
+  lessInBabelMode?: boolean|{
+    paths?: any[];
+    plugins?: any[];
+  };
 }
 export interface PersentRe{
-    presets:any[];
-    plugins:any[];
+  presets: any[];
+  plugins: any[];
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default (_context:any, options:IGetBabelOptions):PersentRe => {
+export default (_context: any, options: IGetBabelOptions): PersentRe => {
 
   const { isProduction = false, projectType } = options;
 

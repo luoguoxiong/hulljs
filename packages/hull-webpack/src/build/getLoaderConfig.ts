@@ -5,14 +5,14 @@ import { configTool } from './config';
 
 
 interface IngetJsLoaderConfig{
-    isProduction:boolean;
-    isTypeScript:boolean;
+  isProduction: boolean;
+  isTypeScript: boolean;
 }
 
 export const getFileLoaderConfig = () => {
   const config = configTool.getConfig();
 
-  const { fileSizeLimit } = config;
+  const { fileSizeLimit = 1000 } = config;
   return [
     {
       test: [/\.avif|svg|jpe?g|png|gif$/],
@@ -31,13 +31,13 @@ export const getFileLoaderConfig = () => {
   ];
 };
 
-export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
+export const getJsLoaderConfig = (opts: IngetJsLoaderConfig) => {
   const config = configTool.getConfig();
 
   const { appDirectory, extraBabelPlugins = [], extraBabelPresets = [], projectType } = config;
   const { isTypeScript, isProduction } = opts;
 
-  const babelOptions:IGetBabelOptions = {
+  const babelOptions: IGetBabelOptions = {
     isTypeScript,
     projectType,
     isProduction,
@@ -70,7 +70,7 @@ export const getJsLoaderConfig = (opts:IngetJsLoaderConfig) => {
 export const getCssLoaderConfig = () => {
   const config = configTool.getConfig();
 
-  const { env, shouldUseSourceMap, appDirectory, sassLoaderOptions = {}, lessLoaderOptions = {} } = config;
+  const { env, shouldUseSourceMap = false, appDirectory, sassLoaderOptions = {}, lessLoaderOptions = {} } = config;
 
   const isProduction = (env || '').includes('prod');
 
@@ -85,8 +85,8 @@ export const getCssLoaderConfig = () => {
   };
 
   const defaultSassOpts = {};
-  const getStyleLoaders = (isCssModule:boolean, otherCssLoader?:string, otherLoaderOpts?:any) => {
-    const loaders:any[] = [
+  const getStyleLoaders = (isCssModule: boolean, otherCssLoader?: string, otherLoaderOpts?: any) => {
+    const loaders: any[] = [
       isProduction ? minCssExtract.loader : require.resolve('style-loader'),
       {
         loader: require.resolve('css-loader'),
@@ -125,7 +125,7 @@ export const getCssLoaderConfig = () => {
             sourceMap: true,
             ...otherLoaderOpts,
           },
-        }
+        },
       );
     }
     return loaders;

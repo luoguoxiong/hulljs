@@ -1,6 +1,6 @@
 import chalk, { ChalkFunction }from 'chalk';
 
-const curryLog = ( chalkInstans:ChalkFunction, logType?:string) => (msg:any) =>
+const curryLog = ( chalkInstans: ChalkFunction, logType?: string) => (msg: any) =>
   (logType ? console.log(chalkInstans(`${logType}: ${msg}`)) : console.log(chalkInstans(msg)));
 
 const colors = [
@@ -30,7 +30,7 @@ export const log = {
   warn: curryLog( chalk.yellow, 'warn'),
   success: curryLog(chalk.green, 'success'),
   msg: curryLog(chalk.cyan),
-  free: (msg:string):void => curryLog(getChalkInstance())(msg),
+  free: (msg: string): void => curryLog(getChalkInstance())(msg),
 };
 
 
