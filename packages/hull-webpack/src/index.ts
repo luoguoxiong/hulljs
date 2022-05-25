@@ -12,7 +12,7 @@ cli
   .command('dev', 'Start dev server!')
   .option('--port <port>', 'dev server port')
   .option('--analyzer', 'is use BundleAnalyzer?')
-  .action((options:IBuildOptions) => {
+  .action((options: IBuildOptions) => {
     try {
       const option = {
         appDirectory: fs.realpathSync(process.cwd()),
@@ -21,7 +21,7 @@ cli
         analyzer: options.analyzer,
       };
       build(option, 'dev');
-    } catch (error:any) {
+    } catch (error: any) {
       throw Error(error);
     }
   });
@@ -29,7 +29,7 @@ cli
 cli
   .command('build', 'Build web app resource！')
   .option('--analyzer', 'is use BundleAnalyzer?')
-  .action((options:IBuildOptions) => {
+  .action((options: IBuildOptions) => {
     try {
       const option = {
         appDirectory: fs.realpathSync(process.cwd()),
@@ -37,7 +37,7 @@ cli
         analyzer: options.analyzer,
       };
       build(option, 'build');
-    } catch (error:any) {
+    } catch (error: any) {
       throw Error(error);
     }
   });
@@ -45,7 +45,7 @@ cli
 cli
   .command('server', 'Start static server for production app!')
   .option('--port <port>', 'static server port')
-  .action((options:IBuildOptions) => {
+  .action((options: IBuildOptions) => {
     try {
       const option = {
         appDirectory: fs.realpathSync(process.cwd()),
@@ -53,7 +53,7 @@ cli
         port: options.port || 5000,
       };
       build(option, 'server');
-    } catch (error:any) {
+    } catch (error: any) {
       throw Error(error);
     }
   });

@@ -1,5 +1,5 @@
 import { Configuration } from 'webpack';
-export const WEBPACK_DEV_CONF:Configuration = {
+export const WEBPACK_DEV_CONF: Configuration = {
   mode: 'development',
   output: {
     filename: 'static/js/bundle.js',

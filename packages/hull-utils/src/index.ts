@@ -8,5 +8,5 @@ export { createConfig } from './config';
 export { startStaticServer } from './startStaticServer';
 export { getModulesFromConfig } from './getModulesFromConfig';
 export { checkPort, choosePort } from './usePort';
-export const isDefault = <T>(obj:any):T => obj.default || obj;
+export const isDefault = <T>(obj: any): T => obj.default || obj;
 export const chalk = chalk1;

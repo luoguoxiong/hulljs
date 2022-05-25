@@ -8,7 +8,7 @@ import { configTool } from './config';
 
 type CITYPE = 'dev'| 'build' | 'server'
 
-const build = async(opts:IBuildOptions, ciType:CITYPE) => {
+const build = async(opts: IBuildOptions, ciType: CITYPE) => {
   try {
     const { appDirectory, env, analyzer, port } = opts;
 
@@ -24,7 +24,7 @@ const build = async(opts:IBuildOptions, ciType:CITYPE) => {
       log.error('hull.conf.js或你设置hull.conf.ts应该是函数或者对象！');
       return;
     }
-    const buildOpts:RunBuildOpts = {
+    const buildOpts: RunBuildOpts = {
       ...opts,
       ...config,
       isUseBundleAnalyzer: analyzer || config.isUseBundleAnalyzer,
@@ -42,7 +42,7 @@ const build = async(opts:IBuildOptions, ciType:CITYPE) => {
       default: return;
     }
 
-  } catch (error:any) {
+  } catch (error: any) {
     throw Error(error);
   }
 };

@@ -9,7 +9,7 @@ import { WEBPACK_COMMON_CONF, WEBPACK_DEV_CONF, WEBPACK_PROD_CONF } from '../con
 import { getFileLoaderConfig, getJsLoaderConfig, getCssLoaderConfig } from './getLoaderConfig';
 import { configTool } from './config';
 
-export const getWebpackConfig = async():Promise<Configuration> => {
+export const getWebpackConfig = async(): Promise<Configuration> => {
   const buildConfig = configTool.getConfig();
 
   const { appDirectory, env, shouldUseSourceMap = false, outputPath,
@@ -25,7 +25,7 @@ export const getWebpackConfig = async():Promise<Configuration> => {
 
   const devtool = isProduction ? (shouldUseSourceMap ? 'source-map' : false) : 'cheap-module-source-map';
 
-  const config:Configuration = {
+  const config: Configuration = {
     devtool,
     context: appDirectory,
     entry,

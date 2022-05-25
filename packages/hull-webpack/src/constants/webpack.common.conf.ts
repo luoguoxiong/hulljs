@@ -1,6 +1,6 @@
 import webpack, { Configuration } from 'webpack';
 import WebpackBar from 'webpackbar';
-export const WEBPACK_COMMON_CONF:Configuration = {
+export const WEBPACK_COMMON_CONF: Configuration = {
   target: 'web',
   infrastructureLogging: {
     level: 'none',

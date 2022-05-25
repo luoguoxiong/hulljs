@@ -1,7 +1,7 @@
 import { join } from 'path';
 import babel, { IGetBabelOptions } from '@hulljs/babel-preset-hull-app';
 
-const slash = (input:string) => {
+const slash = (input: string) => {
   const isExtendedLengthPath = /^\\\\\?\\/.test(input);
 
   if (isExtendedLengthPath) {
@@ -10,8 +10,8 @@ const slash = (input:string) => {
   return input.replace(/\\/g, '/');
 };
 
-export const registerNodeCiBabel = function(appDirectory:string, only:string[]):void {
-  const babelOptions:IGetBabelOptions = {
+export const registerNodeCiBabel = function(appDirectory: string, only: string[]): void {
+  const babelOptions: IGetBabelOptions = {
     isTypeScript: true,
     projectType: 'node',
     isProduction: true,

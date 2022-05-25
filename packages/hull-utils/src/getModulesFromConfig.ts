@@ -3,13 +3,13 @@ import { existsSync, readFileSync } from 'fs';
 import { log } from '.';
 
 interface IgetAliasFromConfigRe {
-    isTypeScript:boolean;
-    alias:Record<string, string>;
-    modules:string[];
+  isTypeScript: boolean;
+  alias: Record<string, string>;
+  modules: string[];
 }
 
 // 从tsconfig.json 和jsconfig.json获取配置
-export const getModulesFromConfig = (appDirectory:string):IgetAliasFromConfigRe => {
+export const getModulesFromConfig = (appDirectory: string): IgetAliasFromConfigRe => {
   const tsConfigPath = resolve(appDirectory, 'tsconfig.json');
   const jsConfigPath = resolve(appDirectory, 'jsconfig.json');
 
@@ -22,7 +22,7 @@ export const getModulesFromConfig = (appDirectory:string):IgetAliasFromConfigRe 
   }
 
 
-  const getAliasFromConfig = (configPath:string):IgetAliasFromConfigRe => {
+  const getAliasFromConfig = (configPath: string): IgetAliasFromConfigRe => {
     try {
 
       const config = JSON.parse(readFileSync(configPath).toString()).compilerOptions || {};
@@ -30,9 +30,9 @@ export const getModulesFromConfig = (appDirectory:string):IgetAliasFromConfigRe 
 
       const { baseUrl = '', paths = {} } = config;
       const absoluteBaseUrl = resolve(appDirectory, baseUrl);
-    //   why node_modules?? node_modules 不设置 webpackdevserver会出错！！！
+      //   why node_modules?? node_modules 不设置 webpackdevserver会出错！！！
       const modules = [resolve(appDirectory, 'node_modules'), absoluteBaseUrl, 'node_modules'];
-      const alias:Record<string, string> = {};
+      const alias: Record<string, string> = {};
 
       Object.keys(paths).forEach((item) => {
         const key = item.replace('/*', '');
@@ -44,15 +44,15 @@ export const getModulesFromConfig = (appDirectory:string):IgetAliasFromConfigRe 
         alias,
         modules,
       };
-    } catch (error:any) {
+    } catch (error: any) {
       log.error(error);
       throw new Error(error);
     }
   };
 
-  const config:IgetAliasFromConfigRe = {
+  const config: IgetAliasFromConfigRe = {
     isTypeScript: false,
-    modules: [],
+    modules: ['node_modules', resolve(appDirectory, 'node_modules')],
     alias: {},
   };
 

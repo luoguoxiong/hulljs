@@ -1,6 +1,6 @@
 import path from 'path';
 import { PersentRe, IGetBabelOptions } from './index';
-export const persetForReact = (isProduction:boolean):PersentRe => ({
+export const persetForReact = (isProduction: boolean): PersentRe => ({
   presets: [
     [require.resolve('@babel/preset-react')],
   ],
@@ -15,7 +15,7 @@ export const persetForReact = (isProduction:boolean):PersentRe => ({
   ],
 });
 
-export const persetForVue = ():PersentRe => ({
+export const persetForVue = (): PersentRe => ({
   presets: [],
   plugins: [
     require.resolve('@vue/babel-plugin-jsx'),
@@ -26,7 +26,7 @@ function transformImportLessToCss() {
   return {
     name: 'transform-import-less-to-css',
     visitor: {
-      ImportDeclaration(path:any) {
+      ImportDeclaration(path: any) {
         const re = /\.less$/;
         if(re.test(path.node.source.value)){
           path.node.source.value = path.node.source.value.replace(re, '.css');
@@ -35,7 +35,7 @@ function transformImportLessToCss() {
     },
   };
 }
-export const presetForCommon = (opts:IGetBabelOptions):PersentRe => {
+export const presetForCommon = (opts: IGetBabelOptions): PersentRe => {
 
   const { isTypeScript, lessInBabelMode, projectType } = opts;
 
@@ -68,7 +68,7 @@ export const presetForCommon = (opts:IGetBabelOptions):PersentRe => {
         version: require('@babel/runtime/package.json').version,
         /** 如果不设置absoluteRuntime，在ci调试环境会找不到@babel/runtime */
         absoluteRuntime: path.dirname(
-          require.resolve('@babel/runtime/package.json')
+          require.resolve('@babel/runtime/package.json'),
         ),
       }],
     ],
