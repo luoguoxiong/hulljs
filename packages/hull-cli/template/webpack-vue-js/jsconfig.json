@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "paths": {
+      "@/src/*": ["./src/*"]
+    },
+    "allowJs": true,
+    "importsNotUsedAsValues": "preserve"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
