@@ -1,6 +1,6 @@
 import path from 'path';
-import { SelfWebpackConfig } from '@hulljs/webpack';
-export default (env: any): SelfWebpackConfig => {
+import { BuildConfig } from '@hulljs/webpack';
+export default (env: any): BuildConfig => {
   console.log('env:', env);
   const config = {
     projectType: 'vue',

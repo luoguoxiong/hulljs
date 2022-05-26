@@ -24,9 +24,5 @@
     "dumi": "^1.1.42",
     "lerna": "^4.0.0"
   },
-  "browserslist": [],
-  "dependencies": {
-    "postcss-preset-env": "^7.5.0",
-    "webpackbar": "^5.0.2"
-  }
+  "browserslist": []
 }

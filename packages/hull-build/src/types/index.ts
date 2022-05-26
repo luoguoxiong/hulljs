@@ -1,12 +1,15 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import { WebpackPluginInstance, RuleSetRule } from 'webpack';
+import { UserConfig, BuildOptions } from 'vite';
+
+type ViteExtraBuildOptions = Omit<BuildOptions, 'outDir' | 'assetsInlineLimit' | 'sourcemap' | 'assetsDir'>;
+
 export type ENV = 'development' | 'production' | string
 
 export type ProjectType = 'react' | 'vue' | 'node';
 
-export type RunBuildOpts = IBuildOptions & SelfWebpackConfig
-
+export type RunBuildOpts = IBuildOptions & BuildConfig
 
 /** 构建参数配置 */
 export interface IBuildOptions{
@@ -21,11 +24,15 @@ export interface IBuildOptions{
 }
 
 /** 自定义Webpack配置 */
-export interface SelfWebpackConfig {
+export interface BuildConfig {
+  /** 构建工具 */
+  buildTool?: 'webpack'|'vite';
+  /** vite其他构建参数 */
+  viteExtraBuildOptions: ViteExtraBuildOptions;
   /** 项目类型 react、vue */
   projectType: ProjectType;
   /** entry */
-  entry: any;
+  entry: string;
   /** output.path */
   outputPath: string;
   /** output.publicPath */
@@ -58,5 +65,7 @@ export interface SelfWebpackConfig {
   lessLoaderOptions?: any;
 }
 
-export type IngetUserConfigRe = Promise<(env: ENV) => SelfWebpackConfig | SelfWebpackConfig>
+export type IngetUserConfigRe = Promise<(env: ENV) => BuildConfig | BuildConfig>
+
+export type ViteConfig = UserConfig
 

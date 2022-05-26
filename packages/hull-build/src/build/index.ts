@@ -3,7 +3,9 @@ import { log, getFileExport } from '@hulljs/utils';
 import { IBuildOptions, RunBuildOpts, IngetUserConfigRe } from '../types';
 import { CONFIG_FILES } from '../constants';
 import { getWebpackConfig } from './getWebpackConfig';
-import { startDevServer, startBuildPro, startProServer } from './startAction';
+import { getViteConfig } from './getViteConfig';
+import * as webpackDo from './webpackAction';
+import * as viteDo from './viteAction';
 import { configTool } from './config';
 
 type CITYPE = 'dev'| 'build' | 'server'
@@ -21,9 +23,10 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
     } else if(typeof configFnOrObj === 'object'){
       config = configFnOrObj;
     }else{
-      log.error('hull.conf.js或你设置hull.conf.ts应该是函数或者对象！');
+      log.error('hull.conf export is a funtion or object！');
       return;
     }
+    config.buildTool = config.buildTool || 'webpack';
     const buildOpts: RunBuildOpts = {
       ...opts,
       ...config,
@@ -33,13 +36,22 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
 
     configTool.setConfig(buildOpts);
 
-    const webpackConf = await getWebpackConfig();
-
-    switch (ciType){
-      case 'dev': await startDevServer(webpackConf, buildOpts);break;
-      case 'build': await startBuildPro(webpackConf, buildOpts);break;
-      case 'server':await startProServer(webpackConf, buildOpts);break;
-      default: return;
+    if(buildOpts.buildTool === 'webpack'){
+      const webpackConf = await getWebpackConfig();
+      switch (ciType){
+        case 'dev': await webpackDo.startDevServer(webpackConf, buildOpts);break;
+        case 'build': await webpackDo.startBuildPro(webpackConf, buildOpts);break;
+        case 'server':await webpackDo.startProServer(webpackConf, buildOpts);break;
+        default: return;
+      }
+    }else{
+      const viteConf = await getViteConfig();
+      switch (ciType){
+        case 'dev': await viteDo.startDevServer(viteConf, buildOpts);break;
+        case 'build': await viteDo.startBuildPro(viteConf, buildOpts);break;
+        case 'server':await viteDo.startProServer(viteConf, buildOpts);break;
+        default: return;
+      }
     }
 
   } catch (error: any) {

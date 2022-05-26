@@ -1,5 +1,5 @@
 declare module 'source-map-loader'
 declare module 'webpack-bundle-analyzer'
-declare module 'detect-port-alt'
 declare module 'rimraf'
 declare module 'koa-static'
+declare module 'webpackbar'

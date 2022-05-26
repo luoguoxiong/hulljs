@@ -2,8 +2,8 @@
 import fs from 'fs';
 import cac from 'cac';
 import build from './build';
-import { IBuildOptions, SelfWebpackConfig } from './types';
-export { SelfWebpackConfig, IBuildOptions };
+import { IBuildOptions, BuildConfig } from './types';
+export { BuildConfig, IBuildOptions };
 const cli = cac();
 
 cli.version(require('../package.json').version);

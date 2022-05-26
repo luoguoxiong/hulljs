@@ -1,9 +1,9 @@
 import path from 'path';
-import { SelfWebpackConfig } from '@hulljs/webpack';
+import { BuildConfig } from '@hulljs/webpack';
 
-export default (env:string):SelfWebpackConfig => {
+export default (env:string):BuildConfig => {
   console.log('env:', env);
-  const config:SelfWebpackConfig = {
+  const config:BuildConfig = {
     projectType: 'react',
     entry: path.resolve(__dirname, './src/index'),
     outputPath: path.resolve(__dirname, './build'),
