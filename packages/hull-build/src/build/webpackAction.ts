@@ -61,7 +61,6 @@ export const startBuildPro = async(webpackConfig: Configuration, buildOpts: RunB
   );
 };
 
-
 export const startProServer = async(webpackConfig: Configuration, buildOpts: RunBuildOpts) => {
   const runServer = () => {
     startStaticServer({

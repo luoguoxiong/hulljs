@@ -1,12 +1,12 @@
 {
-  "name": "@hulljs/webpack",
+  "name": "@hulljs/build",
   "version": "0.0.1",
-  "description": "bull-webpack",
+  "description": "hull-build",
   "type": "commonjs",
   "author": "",
   "license": "ISC",
   "bin": {
-    "hull-webpack": "./dist/index.js"
+    "hull-build": "./dist/index.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.js",
@@ -34,6 +34,7 @@
     "source-map-loader": "^3.0.1",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
+    "vite": "^2.9.9",
     "vue": "^3.2.34",
     "vue-loader": "^17.0.0",
     "webpack": "^5.72.0",
