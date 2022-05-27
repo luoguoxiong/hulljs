@@ -1,7 +1,10 @@
 import { build, createServer } from 'vite';
 import { RunBuildOpts, ViteConfig } from '../types';
 
-export const startDevServer = async(viteConfig: ViteConfig, buildOpts: RunBuildOpts) => {};
+export const startDevServer = async(viteConfig: ViteConfig, buildOpts: RunBuildOpts) => {
+  const server = await createServer(viteConfig);
+  await server.listen();
+};
 
 
 export const startBuildPro = async(viteConfig: ViteConfig, buildOpts: RunBuildOpts) => {};

@@ -1,6 +1,6 @@
 import { presetForCommon, persetForVue, persetForReact } from './create';
 export interface IGetBabelOptions {
-  projectType: 'react' | 'vue' | 'node';
+  projectType: 'react' | 'vue3' | 'node';
   isTypeScript?: boolean;
   isProduction?: boolean;
   lessInBabelMode?: boolean|{
@@ -26,12 +26,12 @@ export default (_context: any, options: IGetBabelOptions): PersentRe => {
 
   const plugins = [
     ...(projectType === 'react' ? presetReact.plugins : []),
-    ...(projectType === 'vue' ? persetVue.plugins : []),
+    ...(projectType === 'vue3' ? persetVue.plugins : []),
     ...presetCommon.plugins,
   ];
   const presets = [
     ...(projectType === 'react' ? presetReact.presets : []),
-    ...(projectType === 'vue' ? persetVue.presets : []),
+    ...(projectType === 'vue3' ? persetVue.presets : []),
     ...presetCommon.presets,
   ];
 
