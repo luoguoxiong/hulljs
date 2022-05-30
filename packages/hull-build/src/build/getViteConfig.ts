@@ -3,7 +3,9 @@ import{ getModulesFromConfig } from '@hulljs/utils';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import { visualizer } from 'rollup-plugin-visualizer';
 import legacy from '@vitejs/plugin-legacy';
-import htmlPlugin from 'vite-plugin-html-template';
+import { createHtmlPlugin } from '@hulljs/vite-plugin-html';
+// import { createHtmlPlugin } from 'vite-plugin-html';
+import viteBabelPlugins from '@hulljs/vite-plugin-babel-plugins';
 import { ViteConfig, DevServer } from '../types';
 import { configTool } from './config';
 
@@ -11,7 +13,7 @@ export const getViteConfig = (): ViteConfig => {
   const buildConfig = configTool.getConfig();
 
   const { appDirectory, env, lessLoaderOptions = {}, sassLoaderOptions = {},
-    shouldUseSourceMap = false, fileSizeLimit = 1000, viteExtraBuildOptions, proxy = {} } = buildConfig;
+    shouldUseSourceMap = false, fileSizeLimit = 1000, viteExtraBuildOptions = [], proxy = {}, htmlTemplatePath, extraBabelPlugins } = buildConfig;
 
   const isProduction = (env || '').includes('prod');
 
@@ -19,22 +21,28 @@ export const getViteConfig = (): ViteConfig => {
 
   const isUseSourceMap = isProduction ? shouldUseSourceMap : false;
   const devServer = buildConfig.devServer as DevServer;
+
+  const reactPlugins = [
+    reactRefresh(),
+  ];
   return {
     root: buildConfig.appDirectory,
     base: buildConfig.outputPublicPath,
     define: buildConfig.definePluginOptions,
-    mode: isProduction ? 'development' : 'production',
+    mode: isProduction ? 'production' : 'development',
     publicDir: false,
     plugins: [
-      ...[
-        reactRefresh(),
-        visualizer(),
-        legacy(),
-        htmlPlugin({
-          entry: path.resolve(appDirectory, './src/index.tsx'),
-        //   template: path.resolve(__dirname, '/public/index.html'),
-        }),
-      ],
+      createHtmlPlugin({
+        minify: false,
+        entry: buildConfig.entry,
+        template: htmlTemplatePath || './static/index.html',
+      }),
+      ...reactPlugins,
+      visualizer(),
+      legacy(),
+      viteBabelPlugins(
+        extraBabelPlugins
+      ),
     ],
     resolve: {
       alias,
@@ -84,6 +92,7 @@ export const getViteConfig = (): ViteConfig => {
       port: devServer.port,
       https: devServer.https,
       host: true,
+      open: true,
       proxy,
     },
   };

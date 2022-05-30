@@ -13,7 +13,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
   const buildConfig = configTool.getConfig();
 
   const { appDirectory, env, shouldUseSourceMap = false, outputPath,
-    outputPublicPath, resolveAlias, entry, htmlPluginConfig,
+    outputPublicPath, resolveAlias, entry, htmlTemplatePath,
     extraWebpackPlugins, extraModuleRules,
     definePluginOptions = {}, isUseBundleAnalyzer = false, splitChunks = {} } = buildConfig;
 
@@ -74,9 +74,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
         filename: 'index.html',
         cache: false,
         minify: isProduction,
-        template: path.join(__dirname, '../../public/index.html'),
-        favicon: path.join(__dirname, '../../public/favicon.ico'),
-        ...htmlPluginConfig,
+        template: htmlTemplatePath || path.join(__dirname, '../../public/index.html'),
       }),
       new webpack.DefinePlugin({
         ...definePluginOptions,

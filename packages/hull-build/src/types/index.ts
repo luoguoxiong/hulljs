@@ -51,8 +51,8 @@ export interface BuildConfig {
   extraBabelPresets?: any[];
   /** fileSizeLimit 静态资源压缩为base64的大小限制 */
   fileSizeLimit?: number;
-  /** htmlPluginConfig HtmlWebpackPlugin配置参数 */
-  htmlPluginConfig?: HtmlWebpackPlugin.Options;
+  /** html模板位置 */
+  htmlTemplatePath: string;
   /** webpackDefinePluginOptions */
   definePluginOptions?: Record<string, any>;
   /** 是否使用BundleAnalyzer打包分析器 */

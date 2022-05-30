@@ -1,0 +1,19 @@
+{
+  "name": "@hulljs/vite-plugin-babel-plugins",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "description": "vite 使用babel plugins",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.js",
+  "scripts": {
+    "build": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.18.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  }
+}
