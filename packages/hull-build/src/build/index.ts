@@ -26,12 +26,15 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
       log.error('hull.conf export is a funtion or object！');
       return;
     }
-    config.buildTool = config.buildTool || 'webpack';
+
     const buildOpts: RunBuildOpts = {
       ...opts,
       ...config,
       isUseBundleAnalyzer: analyzer || config.isUseBundleAnalyzer,
-      port: port || (config.devServer || {}).port || 5000,
+      devServer: {
+        port: port || (config.devServer || {}).port || 8080,
+        https: false,
+      },
     };
 
     configTool.setConfig(buildOpts);

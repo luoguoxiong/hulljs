@@ -23,6 +23,5 @@
     "@tools-list/eslint-config-self": "0.1.0",
     "dumi": "^1.1.42",
     "lerna": "^4.0.0"
-  },
-  "browserslist": []
+  }
 }

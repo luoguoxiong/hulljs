@@ -2,7 +2,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import webpack, { Configuration } from 'webpack';
 import rm from 'rimraf';
 import { choosePort, log, startStaticServer } from '@hulljs/utils';
-import { RunBuildOpts } from '../types';
+import { RunBuildOpts, DevServer } from '../types';
 
 
 export const startDevServer = async(webpackConfig: Configuration, buildOpts: RunBuildOpts) => {
@@ -11,6 +11,8 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Run
 
     const port = await choosePort(buildOpts.port || 5000);
 
+    const devServer = buildOpts.devServer as DevServer;
+
     const config: WebpackDevServer.Configuration = {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -18,14 +20,16 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Run
         'Access-Control-Allow-Headers': '*',
       },
       hot: true,
+      allowedHosts: 'all',
       historyApiFallback: true,
       open: true,
-      ...buildOpts.devServer,
-      port,
+      proxy: buildOpts.proxy,
+      port: devServer.port,
+      https: devServer.https,
     };
-    const devServer = new WebpackDevServer(config, compiler);
+    const devService = new WebpackDevServer(config, compiler);
 
-    devServer.startCallback(() => {
+    devService.startCallback(() => {
       log.success(`you service is running at http://localhost:${port}`);
     });
   } catch (error: any) {

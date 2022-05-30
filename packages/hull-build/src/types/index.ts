@@ -1,5 +1,4 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import WebpackDevServer from 'webpack-dev-server';
 import { WebpackPluginInstance, RuleSetRule } from 'webpack';
 import { UserConfig, BuildOptions } from 'vite';
 
@@ -7,9 +6,14 @@ type ViteExtraBuildOptions = Omit<BuildOptions, 'outDir' | 'assetsInlineLimit' |
 
 export type ENV = 'development' | 'production' | string
 
-export type ProjectType = 'react' | 'vue' | 'node';
+export type ProjectType = 'react' | 'vue3' | 'node';
 
 export type RunBuildOpts = IBuildOptions & BuildConfig
+
+export interface DevServer{
+  port: number;
+  https: boolean;
+}
 
 /** 构建参数配置 */
 export interface IBuildOptions{
@@ -28,8 +32,8 @@ export interface BuildConfig {
   /** 构建工具 */
   buildTool?: 'webpack'|'vite';
   /** vite其他构建参数 */
-  viteExtraBuildOptions: ViteExtraBuildOptions;
-  /** 项目类型 react、vue */
+  viteExtraBuildOptions?: ViteExtraBuildOptions;
+  /** 项目类型 react、vue3 */
   projectType: ProjectType;
   /** entry */
   entry: string;
@@ -47,14 +51,14 @@ export interface BuildConfig {
   extraBabelPresets?: any[];
   /** fileSizeLimit 静态资源压缩为base64的大小限制 */
   fileSizeLimit?: number;
-  /** htmlPluginConfig HtmlWebpackPlugin配置参数 */
-  htmlPluginConfig?: HtmlWebpackPlugin.Options;
+  /** html模板位置 */
+  htmlTemplatePath: string;
   /** webpackDefinePluginOptions */
   definePluginOptions?: Record<string, any>;
   /** 是否使用BundleAnalyzer打包分析器 */
   isUseBundleAnalyzer?: boolean;
   /** WebpackDevServer 配置 */
-  devServer?: WebpackDevServer.Configuration;
+  devServer?: DevServer;
   /** extraWebpackPlugins */
   extraWebpackPlugins?: WebpackPluginInstance[];
   /** extraModuleRules */
@@ -63,6 +67,7 @@ export interface BuildConfig {
   splitChunks?: any;
   sassLoaderOptions?: any;
   lessLoaderOptions?: any;
+  proxy?: Record<string, any>;
 }
 
 export type IngetUserConfigRe = Promise<(env: ENV) => BuildConfig | BuildConfig>

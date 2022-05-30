@@ -13,7 +13,7 @@ toc: menu
 
 - Type: `string`
 - Default: `react`
-可选 `react`、`vue`
+可选 `react`、`vue3`
 约定项目构建规则
 
 ## entry
