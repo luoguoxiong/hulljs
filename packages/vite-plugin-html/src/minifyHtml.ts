@@ -1,8 +1,11 @@
 import type { PluginOption } from 'vite';
 import type { Options as MinifyOptions } from 'html-minifier-terser';
 import { minify as minifyFn } from 'html-minifier-terser';
+import { createFilter } from '@rollup/pluginutils';
 import type { UserOptions } from './typing';
-import { htmlFilter } from './utils/createHtmlFilter';
+
+export const htmlFilter = createFilter(['**/*.html']);
+
 
 function getOptions(minify: boolean): MinifyOptions {
   return {

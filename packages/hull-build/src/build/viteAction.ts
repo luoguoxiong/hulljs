@@ -14,7 +14,6 @@ export const startBuildPro = async(viteConfig: ViteConfig, buildOpts: RunBuildOp
 
 export const startProServer = async(viteConfig: ViteConfig, buildOpts: RunBuildOpts) => {
   await startBuildPro(viteConfig, buildOpts);
-  console.log('outputPath', buildOpts.outputPath);
 
   startStaticServer({
     assetsRoot: buildOpts.outputPath,

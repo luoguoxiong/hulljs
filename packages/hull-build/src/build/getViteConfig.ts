@@ -4,8 +4,9 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import { visualizer } from 'rollup-plugin-visualizer';
 import legacy from '@vitejs/plugin-legacy';
 import { createHtmlPlugin } from '@hulljs/vite-plugin-html';
-// import { createHtmlPlugin } from 'vite-plugin-html';
 import viteBabelPlugins from '@hulljs/vite-plugin-babel-plugins';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import vue from '@vitejs/plugin-vue';
 import { ViteConfig, DevServer } from '../types';
 import { configTool } from './config';
 
@@ -13,18 +14,23 @@ export const getViteConfig = (): ViteConfig => {
   const buildConfig = configTool.getConfig();
 
   const { appDirectory, env, lessLoaderOptions = {}, sassLoaderOptions = {},
-    shouldUseSourceMap = false, fileSizeLimit = 1000, viteExtraBuildOptions = [], proxy = {}, htmlTemplatePath, extraBabelPlugins } = buildConfig;
+    shouldUseSourceMap = false, fileSizeLimit = 1000, projectType, isUseBundleAnalyzer, viteExtraBuildOptions = [], proxy = {}, htmlTemplatePath, extraBabelPlugins } = buildConfig;
 
   const isProduction = (env || '').includes('prod');
 
   const { alias } = getModulesFromConfig(appDirectory);
 
   const isUseSourceMap = isProduction ? shouldUseSourceMap : false;
+
   const devServer = buildConfig.devServer as DevServer;
 
-  const reactPlugins = [
+  const projectPlugins = projectType === 'react' ? [
     reactRefresh(),
+  ] : [
+    vueJsx({}),
+    vue({}),
   ];
+
   return {
     root: buildConfig.appDirectory,
     base: buildConfig.outputPublicPath,
@@ -33,12 +39,11 @@ export const getViteConfig = (): ViteConfig => {
     publicDir: false,
     plugins: [
       createHtmlPlugin({
-        minify: false,
+        minify: isProduction,
         entry: buildConfig.entry,
         template: htmlTemplatePath || './static/index.html',
       }),
-      ...reactPlugins,
-      visualizer(),
+      ...projectPlugins,
       legacy(),
       viteBabelPlugins(
         extraBabelPlugins
@@ -85,6 +90,14 @@ export const getViteConfig = (): ViteConfig => {
       ...viteExtraBuildOptions,
       outDir: buildConfig.outputPath,
       assetsInlineLimit: fileSizeLimit,
+      rollupOptions: {
+        plugins: [
+          ...isUseBundleAnalyzer ? [ visualizer({
+            filename: path.resolve(appDirectory, './visualizer.html'),
+            open: true,
+          })] : [],
+        ],
+      },
       sourcemap: isProduction ? isUseSourceMap : 'inline',
       assetsDir: 'static',
     },

@@ -18,21 +18,7 @@ export interface InjectOptions {
   ejsOptions?: EJSOptions;
 }
 
-export interface PageOption {
-  filename: string;
-  template: string;
-  entry?: string;
-  injectOptions?: InjectOptions;
-}
-
-export type Pages = PageOption[]
-
 export interface UserOptions {
-  /**
-   * @description Page options
-   */
-  pages?: Pages;
-
   /**
    * @description Minimize options
    */
