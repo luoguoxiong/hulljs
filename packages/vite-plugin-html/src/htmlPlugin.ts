@@ -8,11 +8,9 @@ import fg from 'fast-glob';
 import consola from 'consola';
 import { dim } from 'colorette';
 import history from 'connect-history-api-fallback';
-import { isDirEmpty, loadEnv } from './utils';
-import type { InjectOptions, PageOption, Pages, UserOptions } from './typing';
+import type { InjectOptions, UserOptions } from './typing';
 
 const DEFAULT_TEMPLATE = 'index.html';
-const ignoreDirs = ['.', '', '/'];
 
 const bodyInjectRE = /<\/body>/;
 
@@ -20,23 +18,24 @@ export function createPlugin(userOptions: UserOptions = {}): PluginOption {
   const {
     entry,
     template = DEFAULT_TEMPLATE,
-    pages = [],
     verbose = false,
   } = userOptions;
 
   let viteConfig: ResolvedConfig;
-  let env: Record<string, any> = {};
 
   return {
-    name: 'vite:html',
+    name: 'vite:vite-plugin-html',
     enforce: 'pre',
     configResolved(resolvedConfig) {
+      const relativePathTemplate = path.relative(resolvedConfig.root, template);
+      if(relativePathTemplate.startsWith('..')){
+        throw (`[vite:vite-plugin-html]:template path "${template}" is out of ${resolvedConfig.root}.`);
+      }
       viteConfig = resolvedConfig;
-      env = loadEnv(viteConfig.mode, viteConfig.root, '');
     },
-    config(conf) {
-      const input = createInput(userOptions, conf as unknown as ResolvedConfig);
 
+    config() {
+      const input = createInput(userOptions);
       if (input) {
         return {
           build: {
@@ -48,71 +47,23 @@ export function createPlugin(userOptions: UserOptions = {}): PluginOption {
       }
     },
 
-    // tochange it
     configureServer(server) {
-      let _pages: { filename: string; template: string }[] = [];
-      const rewrites: { from: RegExp; to: any }[] = [];
-      if (!isMpa(viteConfig)) {
-        const template = userOptions.template || DEFAULT_TEMPLATE;
-        const filename = DEFAULT_TEMPLATE;
-        _pages.push({
-          filename,
-          template,
-        });
-      } else {
-        _pages = pages.map((page) => ({
-          filename: page.filename || DEFAULT_TEMPLATE,
-          template: page.template || DEFAULT_TEMPLATE,
-        }));
-      }
-      const proxy = viteConfig.server?.proxy ?? {};
-      const baseUrl = viteConfig.base ?? '/';
-      const keys = Object.keys(proxy);
-
-      console.log(_pages);
-
-      let indexPage: any = null;
-      for (const page of _pages) {
-        if (page.filename !== 'index.html') {
-          rewrites.push(createRewire(page.template, page, baseUrl, keys));
-        } else {
-          indexPage = page;
-        }
-      }
-
-      // ensure order
-      if (indexPage) {
-        rewrites.push(createRewire('', indexPage, baseUrl, keys));
-      }
-
       server.middlewares.use(
         history({
-          disableDotRule: undefined,
+          index: `/${path.relative(viteConfig.root, template)}`,
           htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
-          rewrites: rewrites,
-        }),
+        }) as any
       );
     },
 
     transformIndexHtml: {
       enforce: 'pre',
-      async transform(html, ctx) {
-        const url = ctx.filename;
-        console.log('url', ctx);
-        const base = viteConfig.base;
-        console.log('excludeBaseUrl', base);
-        const excludeBaseUrl = url.replace(base, '/');
-        console.log('excludeBaseUrl', excludeBaseUrl);
-
-        const htmlName = path.relative(process.cwd(), excludeBaseUrl);
-
-        const page = getPage(userOptions, htmlName, viteConfig);
-        const { injectOptions = {} } = page;
+      async transform(html) {
+        const injectOptions = userOptions.inject || {};
         const _html = await renderHtml(html, {
           injectOptions,
           viteConfig,
-          env,
-          entry: page.entry || entry,
+          entry,
           verbose,
         });
         const { tags = [] } = injectOptions;
@@ -123,6 +74,7 @@ export function createPlugin(userOptions: UserOptions = {}): PluginOption {
         };
       },
     },
+
     async closeBundle(){
       const cwd = path.resolve(viteConfig.root, viteConfig.build.outDir);
       const htmlFiles = await fg(
@@ -130,49 +82,24 @@ export function createPlugin(userOptions: UserOptions = {}): PluginOption {
         { cwd: path.resolve(cwd), absolute: true },
       );
       await Promise.all(
-        htmlFiles.map((file) =>
+        htmlFiles.map((file) => {
           fs.move(file, path.resolve(cwd, path.basename(file)), {
             overwrite: true,
-          }),
-        ),
+          });
+        }),
       );
     },
   };
 }
 
 export function createInput(
-  { pages = [], template = DEFAULT_TEMPLATE }: UserOptions,
-  viteConfig: ResolvedConfig,
+  { template = DEFAULT_TEMPLATE }: UserOptions,
 ) {
-  const input: Record<string, string> = {};
-  if (isMpa(viteConfig) || pages?.length) {
-    const templates = pages.map((page) => page.template);
-    templates.forEach((temp) => {
-      let dirName = path.dirname(temp);
-      const file = path.basename(temp);
-
-      dirName = dirName.replace(/\s+/g, '').replace(/\//g, '-');
-
-      const key =
-        dirName === '.' || dirName === 'public' || !dirName
-          ? file.replace(/\.html/, '')
-          : dirName;
-      input[key] = path.resolve(viteConfig.root, temp);
-    });
-
-    return input;
-  } else {
-    const dir = path.dirname(template);
-    if (ignoreDirs.includes(dir)) {
-      return undefined;
-    } else {
-      const file = path.basename(template);
-      const key = file.replace(/\.html/, '');
-      return {
-        [key]: path.resolve(viteConfig.root, template),
-      };
-    }
-  }
+  const file = path.basename(template);
+  const key = file.replace(/\.html/, '');
+  return {
+    [key]: template,
+  };
 }
 
 export async function renderHtml(
@@ -180,18 +107,15 @@ export async function renderHtml(
   config: {
     injectOptions: InjectOptions;
     viteConfig: ResolvedConfig;
-    env: Record<string, any>;
     entry?: string;
     verbose?: boolean;
   },
 ) {
-  const { injectOptions, viteConfig, env, entry, verbose } = config;
+  const { injectOptions, viteConfig, entry, verbose } = config;
   const { data, ejsOptions } = injectOptions;
 
   const ejsData: Record<string, any> = {
-    ...(viteConfig?.env ?? {}),
     ...(viteConfig?.define ?? {}),
-    ...(env || {}),
     ...data,
   };
   let result = await render(html, ejsData, ejsOptions);
@@ -206,25 +130,6 @@ export async function renderHtml(
     );
   }
   return result;
-}
-
-export function getPage(
-  { pages = [], entry, template = DEFAULT_TEMPLATE, inject = {} }: UserOptions,
-  name: string,
-  viteConfig: ResolvedConfig,
-) {
-  let page: PageOption;
-  if (isMpa(viteConfig) || pages?.length) {
-    page = getPageConfig(name, pages, DEFAULT_TEMPLATE);
-  } else {
-    page = createSpaPage(entry, template, inject);
-  }
-  return page;
-}
-
-function isMpa(viteConfig: ResolvedConfig) {
-  const input = viteConfig?.build?.rollupOptions?.input ?? undefined;
-  return typeof input !== 'string' && Object.keys(input || {}).length > 1;
 }
 
 export function removeEntryScript(html: string, verbose = false) {
@@ -246,76 +151,4 @@ export function removeEntryScript(html: string, verbose = false) {
     )} is deleted. You may also delete it from the index.html.
         `);
   return root.toString();
-}
-
-export function createSpaPage(
-  entry: string | undefined,
-  template: string,
-  inject: InjectOptions = {},
-): PageOption {
-  return {
-    entry,
-    filename: 'index.html',
-    template: template,
-    injectOptions: inject,
-  };
-}
-
-export function getPageConfig(
-  htmlName: string,
-  pages: Pages,
-  defaultPage: string,
-): PageOption {
-  const defaultPageOption: PageOption = {
-    filename: defaultPage,
-    template: `./${defaultPage}`,
-  };
-
-  const page = pages.filter((page) => path.resolve(`/${ page.template}`) === path.resolve(`/${ htmlName}`))?.[0];
-  return page ?? defaultPageOption ?? undefined;
-}
-
-export function getHtmlInPages(page: PageOption, root: string) {
-  const htmlPath = getHtmlPath(page, root);
-
-  return readHtml(htmlPath);
-}
-
-export function getHtmlPath(page: PageOption, root: string) {
-  const { template } = page;
-  const templatePath = template.startsWith('.') ? template : `./${template}`;
-  return path.resolve(root, templatePath);
-}
-
-export async function readHtml(path: string) {
-  if (!fs.pathExistsSync(path)) {
-    throw new Error(`html is not exist in ${path}`);
-  }
-  return await fs.readFile(path).then((buffer) => buffer.toString());
-}
-
-function createRewire(
-  reg: string,
-  page: any,
-  baseUrl: string,
-  proxyUrlKeys: string[],
-) {
-  return {
-    from: new RegExp(`^/${reg}*`),
-    to({ parsedUrl }: any) {
-      const pathname: string = parsedUrl.pathname;
-
-      const excludeBaseUrl = pathname.replace(baseUrl, '/');
-
-      const template = path.resolve(baseUrl, page.template);
-
-      if (excludeBaseUrl === '/') {
-        return template;
-      }
-      const isApiUrl = proxyUrlKeys.some((item) =>
-        pathname.startsWith(path.resolve(baseUrl, item)),
-      );
-      return isApiUrl ? excludeBaseUrl : template;
-    },
-  };
 }
