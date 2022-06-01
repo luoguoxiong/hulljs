@@ -4,102 +4,69 @@ import { normalizePath } from 'vite';
 import { parse } from 'node-html-parser';
 import fs from 'fs-extra';
 import path from 'pathe';
-import fg from 'fast-glob';
-import consola from 'consola';
-import { dim } from 'colorette';
 import history from 'connect-history-api-fallback';
 import type { InjectOptions, UserOptions } from './typing';
 
-const DEFAULT_TEMPLATE = 'index.html';
 
 const bodyInjectRE = /<\/body>/;
 
-export function createPlugin(userOptions: UserOptions = {}): PluginOption {
+export function createPlugin(userOptions: UserOptions): PluginOption {
   const {
     entry,
-    template = DEFAULT_TEMPLATE,
-    verbose = false,
+    template,
   } = userOptions;
 
   let viteConfig: ResolvedConfig;
 
-  return {
-    name: 'vite:vite-plugin-html',
-    enforce: 'pre',
-    configResolved(resolvedConfig) {
-      const relativePathTemplate = path.relative(resolvedConfig.root, template);
-      if(relativePathTemplate.startsWith('..')){
-        throw (`[vite:vite-plugin-html]:template path "${template}" is out of ${resolvedConfig.root}.`);
-      }
-      viteConfig = resolvedConfig;
-    },
+  let isInRoot = false;
 
-    config() {
-      const input = createInput(userOptions);
-      if (input) {
-        return {
-          build: {
-            rollupOptions: {
-              input,
-            },
-          },
-        };
-      }
-    },
-
-    configureServer(server) {
-      server.middlewares.use(
-        history({
-          index: `/${path.relative(viteConfig.root, template)}`,
-          htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
-        }) as any
-      );
-    },
-
-    transformIndexHtml: {
+  try {
+    return {
+      name: 'vite:vite-plugin-html',
       enforce: 'pre',
-      async transform(html) {
-        const injectOptions = userOptions.inject || {};
-        const _html = await renderHtml(html, {
-          injectOptions,
-          viteConfig,
-          entry,
-          verbose,
-        });
-        const { tags = [] } = injectOptions;
-
-        return {
-          html: _html,
-          tags: tags,
-        };
+      configResolved(resolvedConfig) {
+        viteConfig = resolvedConfig;
+        isInRoot = fs.existsSync(path.join(resolvedConfig.root, 'index.html'));
+        if(!isInRoot && viteConfig.command === 'build' ){
+          fs.copyFile(template, path.join(resolvedConfig.root, 'index.html'));
+        }
       },
-    },
 
-    async closeBundle(){
-      const cwd = path.resolve(viteConfig.root, viteConfig.build.outDir);
-      const htmlFiles = await fg(
-        [cwd].map((dir) => `${dir}/**/*.html`),
-        { cwd: path.resolve(cwd), absolute: true },
-      );
-      await Promise.all(
-        htmlFiles.map((file) => {
-          fs.move(file, path.resolve(cwd, path.basename(file)), {
-            overwrite: true,
+      configureServer(server) {
+        server.middlewares.use(
+          history({
+            index: `/${path.relative(viteConfig.root, template)}`,
+            htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
+          }) as any,
+        );
+      },
+
+      transformIndexHtml: {
+        enforce: 'pre',
+        async transform(html) {
+          const injectOptions = userOptions.inject || {};
+          const _html = await renderHtml(html, {
+            injectOptions,
+            viteConfig,
+            entry,
           });
-        }),
-      );
-    },
-  };
-}
 
-export function createInput(
-  { template = DEFAULT_TEMPLATE }: UserOptions,
-) {
-  const file = path.basename(template);
-  const key = file.replace(/\.html/, '');
-  return {
-    [key]: template,
-  };
+          return {
+            html: _html,
+            tags: [],
+          };
+        },
+      },
+
+      async closeBundle(){
+        if(!isInRoot){
+          fs.removeSync(path.join(viteConfig.root, 'index.html'));
+        }
+      },
+    };
+  } catch (error: any) {
+    throw Error(error);
+  }
 }
 
 export async function renderHtml(
@@ -108,20 +75,21 @@ export async function renderHtml(
     injectOptions: InjectOptions;
     viteConfig: ResolvedConfig;
     entry?: string;
-    verbose?: boolean;
   },
 ) {
-  const { injectOptions, viteConfig, entry, verbose } = config;
-  const { data, ejsOptions } = injectOptions;
+  const { injectOptions, entry } = config;
 
   const ejsData: Record<string, any> = {
-    ...(viteConfig?.define ?? {}),
-    ...data,
+    htmlWebpackPlugin: {
+      options: {
+        ...injectOptions,
+      },
+    },
   };
-  let result = await render(html, ejsData, ejsOptions);
+  let result = await render(html, ejsData);
 
   if (entry) {
-    result = removeEntryScript(result, verbose);
+    result = removeEntryScript(result );
     result = result.replace(
       bodyInjectRE,
       `<script type="module" src="${normalizePath(
@@ -132,7 +100,7 @@ export async function renderHtml(
   return result;
 }
 
-export function removeEntryScript(html: string, verbose = false) {
+export function removeEntryScript(html: string) {
   if (!html) {
     return html;
   }
@@ -144,11 +112,5 @@ export function removeEntryScript(html: string, verbose = false) {
     removedNode.push(item.toString());
     item.parentNode.removeChild(item);
   });
-  verbose &&
-    removedNode.length &&
-    consola.warn(`vite-plugin-html: Since you have already configured entry, ${dim(
-      removedNode.toString(),
-    )} is deleted. You may also delete it from the index.html.
-        `);
   return root.toString();
 }

@@ -41,9 +41,10 @@ export const presetForCommon = (opts: IGetBabelOptions): PersentRe => {
 
   return {
     presets: [
-      ...(isTypeScript ? [[require.resolve('@babel/preset-typescript'), {
-        allExtensions: projectType === 'vue3',
-      }]] : []),
+      ...(isTypeScript ? [[require.resolve('@babel/preset-typescript'),
+        {
+          allExtensions: projectType === 'vue3',
+        }]] : []),
       [require.resolve('@babel/preset-env'), {
         useBuiltIns: 'entry',
         corejs: 3,

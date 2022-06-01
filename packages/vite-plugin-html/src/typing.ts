@@ -1,22 +1,8 @@
-import type { Options as EJSOptions } from 'ejs';
 import type { Options as MinifyOptions } from 'html-minifier-terser';
-import type { HtmlTagDescriptor } from 'vite';
 
 export type Entry = string | Record<string, string>
 
-export interface InjectOptions {
-  /**
-   *  @description Data injected into the html template
-   */
-  data?: Record<string, any>;
-
-  tags?: HtmlTagDescriptor[];
-
-  /**
-   * @description esj options configuration
-   */
-  ejsOptions?: EJSOptions;
-}
+export type InjectOptions = Record<string, string>
 
 export interface UserOptions {
   /**
@@ -27,12 +13,12 @@ export interface UserOptions {
   /**
    * page entry
    */
-  entry?: string;
+  entry: string;
 
   /**
    * template path
    */
-  template?: string;
+  template: string;
 
   /**
    * @description inject options

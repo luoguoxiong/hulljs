@@ -1,18 +1,18 @@
 import { build, createServer } from 'vite';
-import { choosePort, log, startStaticServer } from '@hulljs/utils';
-import { RunBuildOpts, ViteConfig } from '../types';
-export const startDevServer = async(viteConfig: ViteConfig, buildOpts: RunBuildOpts) => {
+import { startStaticServer } from '@hulljs/utils';
+import { RequiredBuildOpts, ViteConfig } from '../types';
+export const startDevServer = async(viteConfig: ViteConfig, buildOpts: RequiredBuildOpts) => {
   const server = await createServer(viteConfig);
   await server.listen();
 };
 
 
-export const startBuildPro = async(viteConfig: ViteConfig, buildOpts: RunBuildOpts) => {
+export const startBuildPro = async(viteConfig: ViteConfig, buildOpts: RequiredBuildOpts) => {
   await build(viteConfig);
 };
 
 
-export const startProServer = async(viteConfig: ViteConfig, buildOpts: RunBuildOpts) => {
+export const startProServer = async(viteConfig: ViteConfig, buildOpts: RequiredBuildOpts) => {
   await startBuildPro(viteConfig, buildOpts);
 
   startStaticServer({

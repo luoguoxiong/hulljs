@@ -12,18 +12,16 @@ import { configTool } from './config';
 export const getWebpackConfig = async(): Promise<Configuration> => {
   const buildConfig = configTool.getConfig();
 
-  const { appDirectory, env, shouldUseSourceMap = false, outputPath,
-    outputPublicPath, resolveAlias, entry, htmlTemplatePath,
+  const { appDirectory, shouldUseSourceMap, outputPath,
+    outputPublicPath, resolveAlias, entry, htmlPligunOpts,
     extraWebpackPlugins, extraModuleRules,
-    definePluginOptions = {}, isUseBundleAnalyzer = false, splitChunks = {} } = buildConfig;
+    definePluginOptions, isUseBundleAnalyzer, splitChunks, isProd } = buildConfig;
 
   const { modules, alias, isTypeScript } = getModulesFromConfig(appDirectory);
 
-  const isProduction = (env || '').includes('prod');
+  const isUseSourceMap = isProd ? shouldUseSourceMap : false;
 
-  const isUseSourceMap = isProduction ? shouldUseSourceMap : false;
-
-  const devtool = isProduction ? (shouldUseSourceMap ? 'source-map' : false) : 'cheap-module-source-map';
+  const devtool = isProd ? (shouldUseSourceMap ? 'source-map' : false) : 'cheap-module-source-map';
 
   const config: Configuration = {
     devtool,
@@ -38,7 +36,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
       buildDependencies: {
         config: [__filename],
       },
-      cacheDirectory: path.resolve(appDirectory, `node_modules/.${isProduction ? 'prod' : 'dev'}_cache`),
+      cacheDirectory: path.resolve(appDirectory, `node_modules/.${isProd ? 'prod' : 'dev'}_cache`),
     },
     resolve: {
       modules,
@@ -48,7 +46,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
       },
     },
     optimization: {
-      splitChunks: isProduction ? splitChunks : {},
+      splitChunks: isProd ? splitChunks : {},
     },
     module: {
       strictExportPresence: true,
@@ -63,7 +61,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
           loader: 'vue-loader',
         },
         ...getFileLoaderConfig(),
-        ...getJsLoaderConfig({ isTypeScript, isProduction }),
+        ...getJsLoaderConfig({ isTypeScript, isProduction: isProd }),
         ...getCssLoaderConfig(),
         ...(extraModuleRules ? extraModuleRules : []),
       ],
@@ -73,17 +71,18 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
       new HtmlWebpackPlugin({
         filename: 'index.html',
         cache: false,
-        minify: isProduction,
-        template: htmlTemplatePath || path.join(__dirname, '../../public/index.html'),
+        minify: isProd,
+        template: htmlPligunOpts?.template || path.join(__dirname, '../../public/index.html'),
+        ...htmlPligunOpts?.inject,
       }),
       new webpack.DefinePlugin({
         ...definePluginOptions,
-        'DEBUG': !isProduction,
+        'DEBUG': !isProd,
       }),
       ...(isUseBundleAnalyzer ? [new BundleAnalyzerPlugin({ analyzerPort: await choosePort(8888) })] : []),
       ...(extraWebpackPlugins ? extraWebpackPlugins : []),
     ],
   };
 
-  return merge(isProduction ? WEBPACK_PROD_CONF : WEBPACK_DEV_CONF, WEBPACK_COMMON_CONF, config);
+  return merge(isProd ? WEBPACK_PROD_CONF : WEBPACK_DEV_CONF, WEBPACK_COMMON_CONF, config);
 };

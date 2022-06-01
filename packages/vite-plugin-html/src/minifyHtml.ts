@@ -39,7 +39,7 @@ export async function minifyHtml(
 
 export function createMinifyHtmlPlugin({
   minify = true,
-}: UserOptions = {}): PluginOption {
+}: any): PluginOption {
   return {
     name: 'vite:minify-html',
     // apply: 'build',

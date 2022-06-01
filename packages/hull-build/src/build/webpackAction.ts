@@ -2,16 +2,16 @@ import WebpackDevServer from 'webpack-dev-server';
 import webpack, { Configuration } from 'webpack';
 import rm from 'rimraf';
 import { choosePort, log, startStaticServer } from '@hulljs/utils';
-import { RunBuildOpts, DevServer } from '../types';
+import { DevServer, RequiredBuildOpts } from '../types';
 
 
-export const startDevServer = async(webpackConfig: Configuration, buildOpts: RunBuildOpts) => {
+export const startDevServer = async(webpackConfig: Configuration, buildOpts: RequiredBuildOpts) => {
   try {
     const compiler = webpack(webpackConfig);
 
-    const port = await choosePort(buildOpts.port || 5000);
-
     const devServer = buildOpts.devServer as DevServer;
+
+    const port = await choosePort(devServer.port || 5000);
 
     const config: WebpackDevServer.Configuration = {
       headers: {
@@ -24,7 +24,7 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Run
       historyApiFallback: true,
       open: true,
       proxy: buildOpts.proxy,
-      port: devServer.port,
+      port: port,
       https: devServer.https,
     };
     const devService = new WebpackDevServer(config, compiler);
@@ -37,7 +37,7 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Run
   }
 };
 
-export const startBuildPro = async(webpackConfig: Configuration, buildOpts: RunBuildOpts, callback?: any) => {
+export const startBuildPro = async(webpackConfig: Configuration, buildOpts: RequiredBuildOpts, callback?: any) => {
   log.msg('building for production...');
   rm(
     buildOpts.outputPath,
@@ -65,7 +65,7 @@ export const startBuildPro = async(webpackConfig: Configuration, buildOpts: RunB
   );
 };
 
-export const startProServer = async(webpackConfig: Configuration, buildOpts: RunBuildOpts) => {
+export const startProServer = async(webpackConfig: Configuration, buildOpts: RequiredBuildOpts) => {
   const runServer = () => {
     startStaticServer({
       assetsRoot: buildOpts.outputPath,

@@ -13,40 +13,41 @@ import { configTool } from './config';
 export const getViteConfig = (): ViteConfig => {
   const buildConfig = configTool.getConfig();
 
-  const { appDirectory, env, lessLoaderOptions = {}, sassLoaderOptions = {},
-    shouldUseSourceMap = false, fileSizeLimit = 1000, projectType, isUseBundleAnalyzer, viteExtraBuildOptions = [], proxy = {}, htmlTemplatePath, extraBabelPlugins } = buildConfig;
-
-  const isProduction = (env || '').includes('prod');
+  const { appDirectory, lessLoaderOptions, sassLoaderOptions,
+    shouldUseSourceMap, fileSizeLimit, projectType, isUseBundleAnalyzer,
+    viteExtraBuildOptions, proxy, htmlPligunOpts, extraBabelPlugins, isProd } = buildConfig;
 
   const { alias } = getModulesFromConfig(appDirectory);
 
-  const isUseSourceMap = isProduction ? shouldUseSourceMap : false;
+  const isUseSourceMap = isProd ? shouldUseSourceMap : false;
 
   const devServer = buildConfig.devServer as DevServer;
 
-  const projectPlugins = projectType === 'react' ? [
-    reactRefresh(),
-  ] : [
-    vueJsx({}),
-    vue({}),
-  ];
+  const projectPlugins = projectType === 'react'
+    ? [
+      reactRefresh(),
+    ] : [
+      vueJsx({}),
+      vue({}),
+    ];
 
   return {
     root: buildConfig.appDirectory,
     base: buildConfig.outputPublicPath,
     define: buildConfig.definePluginOptions,
-    mode: isProduction ? 'production' : 'development',
+    mode: isProd ? 'production' : 'development',
     publicDir: false,
     plugins: [
       createHtmlPlugin({
-        minify: isProduction,
+        minify: isProd,
         entry: buildConfig.entry,
-        template: htmlTemplatePath || './static/index.html',
+        template: htmlPligunOpts ? htmlPligunOpts.template : '',
+        inject: htmlPligunOpts?.inject,
       }),
       ...projectPlugins,
       legacy(),
       viteBabelPlugins(
-        extraBabelPlugins
+        extraBabelPlugins,
       ),
     ],
     resolve: {
@@ -98,7 +99,7 @@ export const getViteConfig = (): ViteConfig => {
           })] : [],
         ],
       },
-      sourcemap: isProduction ? isUseSourceMap : 'inline',
+      sourcemap: isProd ? isUseSourceMap : 'inline',
       assetsDir: 'static',
     },
     server: {

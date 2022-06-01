@@ -7,15 +7,14 @@ import { getViteConfig } from './getViteConfig';
 import * as webpackDo from './webpackAction';
 import * as viteDo from './viteAction';
 import { configTool } from './config';
+import { defineConfig } from './defineConfig';
 
 type CITYPE = 'dev'| 'build' | 'server'
 
 const build = async(opts: IBuildOptions, ciType: CITYPE) => {
   try {
     const { appDirectory, env, analyzer, port } = opts;
-
     const configFnOrObj = await getFileExport<IngetUserConfigRe>(appDirectory, CONFIG_FILES);
-
     let config;
     if(typeof configFnOrObj === 'function'){
       const resConf = configFnOrObj(env);
@@ -30,29 +29,32 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
     const buildOpts: RunBuildOpts = {
       ...opts,
       ...config,
-      isUseBundleAnalyzer: analyzer || config.isUseBundleAnalyzer,
+      isUseBundleAnalyzer: !!(analyzer || config.isUseBundleAnalyzer),
       devServer: {
         port: port || (config.devServer || {}).port || 8080,
-        https: false,
+        https: !!(config.devServer || {}).https,
       },
+      isProd: env.includes('prod'),
     };
 
-    configTool.setConfig(buildOpts);
+    const defindBuildOpts = defineConfig(buildOpts);
+
+    configTool.setConfig(defindBuildOpts);
 
     if(buildOpts.buildTool === 'webpack'){
       const webpackConf = await getWebpackConfig();
       switch (ciType){
-        case 'dev': await webpackDo.startDevServer(webpackConf, buildOpts);break;
-        case 'build': await webpackDo.startBuildPro(webpackConf, buildOpts);break;
-        case 'server':await webpackDo.startProServer(webpackConf, buildOpts);break;
+        case 'dev': await webpackDo.startDevServer(webpackConf, defindBuildOpts);break;
+        case 'build': await webpackDo.startBuildPro(webpackConf, defindBuildOpts);break;
+        case 'server':await webpackDo.startProServer(webpackConf, defindBuildOpts);break;
         default: return;
       }
     }else{
       const viteConf = await getViteConfig();
       switch (ciType){
-        case 'dev': await viteDo.startDevServer(viteConf, buildOpts);break;
-        case 'build': await viteDo.startBuildPro(viteConf, buildOpts);break;
-        case 'server':await viteDo.startProServer(viteConf, buildOpts);break;
+        case 'dev': await viteDo.startDevServer(viteConf, defindBuildOpts);break;
+        case 'build': await viteDo.startBuildPro(viteConf, defindBuildOpts);break;
+        case 'server':await viteDo.startProServer(viteConf, defindBuildOpts);break;
         default: return;
       }
     }
