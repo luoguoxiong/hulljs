@@ -16,7 +16,6 @@ export const getModulesFromConfig = (appDirectory: string): IgetAliasFromConfigR
   const hasTsConfig = existsSync(tsConfigPath);
   const hasJsConfig = existsSync(jsConfigPath);
 
-
   if(hasTsConfig && hasJsConfig){
     log.warn('同时存在 tsconfig.json 和 jsconfig.json,优先使用tsconfig.json');
   }

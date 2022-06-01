@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-html",
+  "name": "@hulljs/vite-plugin-html",
   "version": "0.0.1",
   "description": "vite-plugin-html",
   "bin": {
@@ -12,13 +12,8 @@
   },
   "dependencies": {
     "@rollup/pluginutils": "^4.2.0",
-    "colorette": "^2.0.16",
     "connect-history-api-fallback": "^1.6.0",
-    "consola": "^2.15.3",
-    "dotenv": "^16.0.0",
-    "dotenv-expand": "^8.0.2",
     "ejs": "^3.1.6",
-    "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
     "html-minifier-terser": "^6.1.0",
     "node-html-parser": "^5.3.3",

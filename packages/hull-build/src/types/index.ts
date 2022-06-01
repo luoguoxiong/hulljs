@@ -1,4 +1,3 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { WebpackPluginInstance, RuleSetRule } from 'webpack';
 import { UserConfig, BuildOptions } from 'vite';
 
@@ -10,9 +9,11 @@ export type ProjectType = 'react' | 'vue3' | 'node';
 
 export type RunBuildOpts = IBuildOptions & BuildConfig
 
+export type RequiredBuildOpts = Required<RunBuildOpts>
+
 export interface DevServer{
   port: number;
-  https: boolean;
+  https?: boolean;
 }
 
 /** 构建参数配置 */
@@ -25,34 +26,39 @@ export interface IBuildOptions{
   port?: number | string | any;
   /** 是否使用BundleAnalyzer打包分析器 */
   analyzer?: boolean;
+  /** 是否是生产环境 */
+  isProd?: boolean;
+  /** 构建工具 */
+  buildTool?: 'webpack'|'vite';
 }
 
 /** 自定义Webpack配置 */
 export interface BuildConfig {
   /** 构建工具 */
   buildTool?: 'webpack'|'vite';
-  /** vite其他构建参数 */
-  viteExtraBuildOptions?: ViteExtraBuildOptions;
   /** 项目类型 react、vue3 */
   projectType: ProjectType;
   /** entry */
   entry: string;
   /** output.path */
-  outputPath: string;
+  outputPath?: string;
   /** output.publicPath */
-  outputPublicPath: string;
+  outputPublicPath?: string;
   /** resolve.alias */
   resolveAlias?: Record<string, string>;
   /** 是否使用SourceMap */
   shouldUseSourceMap?: boolean;
-  /** 额外的babel pugin */
-  extraBabelPlugins?: any[];
   /** 额外的babel Presets */
   extraBabelPresets?: any[];
   /** fileSizeLimit 静态资源压缩为base64的大小限制 */
   fileSizeLimit?: number;
-  /** html模板位置 */
-  htmlTemplatePath: string;
+  /** html模板配置 */
+  htmlPligunOpts?: {
+    /** html模板路径 */
+    template: string;
+    /** html 模板插入数据 */
+    inject?: Record<string, string>;
+  };
   /** webpackDefinePluginOptions */
   definePluginOptions?: Record<string, any>;
   /** 是否使用BundleAnalyzer打包分析器 */
@@ -68,6 +74,10 @@ export interface BuildConfig {
   sassLoaderOptions?: any;
   lessLoaderOptions?: any;
   proxy?: Record<string, any>;
+  /** 额外的babel pugin */
+  extraBabelPlugins?: any[];
+  /** vite其他构建参数 */
+  viteExtraBuildOptions?: ViteExtraBuildOptions;
 }
 
 export type IngetUserConfigRe = Promise<(env: ENV) => BuildConfig | BuildConfig>

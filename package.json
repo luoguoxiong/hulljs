@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/luoguoxiong/build-tools#readme",
   "devDependencies": {
-    "@tools-list/eslint-config-self": "0.1.0",
     "dumi": "^1.1.42",
     "lerna": "^4.0.0"
-  }
+  },
+  "__npminstall_done": false
 }

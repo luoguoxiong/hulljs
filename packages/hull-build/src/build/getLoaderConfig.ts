@@ -9,6 +9,7 @@ interface IngetJsLoaderConfig{
   isTypeScript: boolean;
 }
 
+
 export const getFileLoaderConfig = () => {
   const config = configTool.getConfig();
 
@@ -47,6 +48,7 @@ export const getJsLoaderConfig = (opts: IngetJsLoaderConfig) => {
     {
       test: /\.(js|mjs|jsx|ts|tsx)$/,
       include: appDirectory,
+      exclude: /node_modules/,
       loader: require.resolve('babel-loader'),
       options: {
         presets: [

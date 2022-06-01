@@ -1,4 +1,4 @@
 import { createConfig } from '@hulljs/utils';
-import { RunBuildOpts } from '../types';
+import { RequiredBuildOpts } from '../types';
 
-export const configTool = createConfig<RunBuildOpts>();
+export const configTool = createConfig<RequiredBuildOpts>();
