@@ -13,6 +13,9 @@
   "dependencies": {
     "@babel/core": "^7.18.2"
   },
+  "peerDependencies": {
+    "vite": ">=2.0.0"
+  },
   "devDependencies": {
     "typescript": "^4.6.4"
   }

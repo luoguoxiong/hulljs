@@ -1,7 +1,6 @@
 import { transform } from '@babel/core';
-
-
-function useViteBabelPlugins(plugins?: any[]) {
+import type { PluginOption } from 'vite';
+function useViteBabelPlugins(plugins?: any[]): PluginOption {
 
   return {
     name: 'vite-plugin-babel-plugins',
@@ -10,14 +9,14 @@ function useViteBabelPlugins(plugins?: any[]) {
 
       if (/\.(js|mjs|jsx|ts|tsx)$/.test(id) && !/node_modules\/vite/.test(id)) {
         plugins = plugins || [];
-        const result = transform(code, {
+        const result = await transform(code, {
           ast: true,
           plugins,
           sourceFileName: id,
         }) as babel.BabelFileResult;
 
         return {
-          code: result.code,
+          code: result.code as string,
           map: result.map,
         };
       }

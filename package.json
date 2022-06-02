@@ -1,7 +1,7 @@
 {
   "name": "hulljs",
   "version": "0.0.1",
-  "description": "build-tools",
+  "description": "hulljs",
   "main": "index.js",
   "scripts": {
     "start": "dumi dev",
@@ -11,16 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luoguoxiong/build-tools.git"
+    "url": "git+https://github.com/luoguoxiong/hulljs.git"
   },
   "author": "luoguoxiong",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/luoguoxiong/build-tools/issues"
+    "url": "https://github.com/luoguoxiong/hulljs/issues"
   },
-  "homepage": "https://github.com/luoguoxiong/build-tools#readme",
+  "homepage": "https://github.com/luoguoxiong/hulljs#readme",
   "devDependencies": {
-    "dumi": "^1.1.42",
     "lerna": "^4.0.0"
   },
   "__npminstall_done": false
