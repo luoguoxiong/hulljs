@@ -11,7 +11,7 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Req
 
     const devServer = buildOpts.devServer as DevServer;
 
-    const port = await choosePort(devServer.port || 5000);
+    const port = await choosePort(devServer.port);
 
     const config: WebpackDevServer.Configuration = {
       headers: {
@@ -24,21 +24,20 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Req
       historyApiFallback: true,
       open: true,
       proxy: buildOpts.proxy,
-      port: port,
+      port,
       https: devServer.https,
     };
     const devService = new WebpackDevServer(config, compiler);
 
-    devService.startCallback(() => {
-      log.success(`you service is running at http://localhost:${port}`);
-    });
+    await devService.start();
+    log.success(`you service is running at http://localhost:${port}`);
   } catch (error: any) {
     throw Error(error);
   }
 };
 
 export const startBuildPro = async(webpackConfig: Configuration, buildOpts: RequiredBuildOpts, callback?: any) => {
-  log.msg('building for production...');
+  log.msg('webpack building for production...');
   rm(
     buildOpts.outputPath,
     (err: any) => {

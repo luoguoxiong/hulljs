@@ -7,14 +7,14 @@ import { VueLoaderPlugin } from 'vue-loader';
 import{ choosePort, getModulesFromConfig } from '@hulljs/utils';
 import { WEBPACK_COMMON_CONF, WEBPACK_DEV_CONF, WEBPACK_PROD_CONF } from '../constants';
 import { getFileLoaderConfig, getJsLoaderConfig, getCssLoaderConfig } from './getLoaderConfig';
-import { configTool } from './config';
+import { configTool } from './defineConfig';
 
 export const getWebpackConfig = async(): Promise<Configuration> => {
   const buildConfig = configTool.getConfig();
 
   const { appDirectory, shouldUseSourceMap, outputPath,
     outputPublicPath, resolveAlias, entry, htmlPligunOpts,
-    extraWebpackPlugins, extraModuleRules,
+    extraWebpackPlugins, extraModuleRules, projectType,
     definePluginOptions, isUseBundleAnalyzer, splitChunks, isProd } = buildConfig;
 
   const { modules, alias, isTypeScript } = getModulesFromConfig(appDirectory);
@@ -67,7 +67,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
       ],
     },
     plugins: [
-      new VueLoaderPlugin(),
+      ...(projectType === 'vue3' ? [new VueLoaderPlugin()] : []),
       new HtmlWebpackPlugin({
         filename: 'index.html',
         cache: false,

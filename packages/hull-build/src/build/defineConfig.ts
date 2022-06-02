@@ -1,6 +1,9 @@
 import path from 'path';
 import Ajv from 'ajv';
+import { createConfig } from '@hulljs/utils';
 import { RunBuildOpts, RequiredBuildOpts } from '../types';
+
+export const configTool = createConfig<RequiredBuildOpts>();
 
 const defaultConfig: RequiredBuildOpts = {
   appDirectory: process.cwd(),
@@ -117,12 +120,14 @@ const schema = {
 
 export const defineConfig = (opts: RunBuildOpts): RequiredBuildOpts => {
   const config = Object.assign( defaultConfig, opts);
+  const ajv = new Ajv();
   const validate = ajv.compile(schema);
 
   const valid = validate(config);
+
   if (!valid) {
     throw validate.errors;
   }
+  configTool.setConfig(config);
   return config;
 };
-const ajv = new Ajv();

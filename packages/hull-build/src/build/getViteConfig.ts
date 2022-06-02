@@ -7,9 +7,10 @@ import { createHtmlPlugin } from '@hulljs/vite-plugin-html';
 import viteBabelPlugins from '@hulljs/vite-plugin-babel-plugins';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vue from '@vitejs/plugin-vue';
+import { getExistFile } from '@hulljs/utils';
+import postcssPreset from 'postcss-preset-env';
 import { ViteConfig, DevServer } from '../types';
-import { configTool } from './config';
-
+import { configTool } from './defineConfig';
 export const getViteConfig = (): ViteConfig => {
   const buildConfig = configTool.getConfig();
 
@@ -23,10 +24,11 @@ export const getViteConfig = (): ViteConfig => {
 
   const devServer = buildConfig.devServer as DevServer;
 
+  const { isOk, absFilePath } = getExistFile({ appDirectory, files: ['postcss.config.js', 'postcss.config.cjs'] });
+
   const projectPlugins = projectType === 'react'
-    ? [
-      reactRefresh(),
-    ] : [
+    ? [ reactRefresh() ]
+    : [
       vueJsx({}),
       vue({}),
     ];
@@ -47,7 +49,7 @@ export const getViteConfig = (): ViteConfig => {
       ...projectPlugins,
       legacy(),
       viteBabelPlugins(
-        extraBabelPlugins,
+        extraBabelPlugins || [],
       ),
     ],
     resolve: {
@@ -83,6 +85,17 @@ export const getViteConfig = (): ViteConfig => {
           javascriptEnabled: true,
           ...sassLoaderOptions,
         },
+      },
+      postcss: {
+        // config: isOk ? absFilePath : false,
+        plugins: [
+          postcssPreset({
+            autoprefixer: {
+              flexbox: 'no-2009',
+            },
+            stage: 3,
+          }),
+        ],
       },
       devSourcemap: isUseSourceMap,
     },

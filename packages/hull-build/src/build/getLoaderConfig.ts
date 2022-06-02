@@ -1,8 +1,7 @@
 import { IGetBabelOptions } from '@hulljs/babel-preset-hull-app';
 import minCssExtract from 'mini-css-extract-plugin';
 import { getExistFile } from '@hulljs/utils';
-import { configTool } from './config';
-
+import { configTool } from './defineConfig';
 
 interface IngetJsLoaderConfig{
   isProduction: boolean;
@@ -105,7 +104,11 @@ export const getCssLoaderConfig = () => {
             plugins: [
               [
                 require.resolve('postcss-preset-env'),
-                { stage: 3 },
+                {
+                  autoprefixer: {
+                    flexbox: 'no-2009',
+                  },
+                  stage: 3 },
               ],
             ],
           },

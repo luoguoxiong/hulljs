@@ -6,7 +6,6 @@ import { getWebpackConfig } from './getWebpackConfig';
 import { getViteConfig } from './getViteConfig';
 import * as webpackDo from './webpackAction';
 import * as viteDo from './viteAction';
-import { configTool } from './config';
 import { defineConfig } from './defineConfig';
 
 type CITYPE = 'dev'| 'build' | 'server'
@@ -15,6 +14,7 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
   try {
     const { appDirectory, env, analyzer, port } = opts;
     const configFnOrObj = await getFileExport<IngetUserConfigRe>(appDirectory, CONFIG_FILES);
+
     let config;
     if(typeof configFnOrObj === 'function'){
       const resConf = configFnOrObj(env);
@@ -29,7 +29,8 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
     const buildOpts: RunBuildOpts = {
       ...opts,
       ...config,
-      isUseBundleAnalyzer: !!(analyzer || config.isUseBundleAnalyzer),
+      buildTool: opts.buildTool || config.buildTool || 'webpack',
+      isUseBundleAnalyzer: (analyzer || config.isUseBundleAnalyzer),
       devServer: {
         port: port || (config.devServer || {}).port || 8080,
         https: !!(config.devServer || {}).https,
@@ -37,9 +38,8 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
       isProd: env.includes('prod'),
     };
 
-    const defindBuildOpts = defineConfig(buildOpts);
 
-    configTool.setConfig(defindBuildOpts);
+    const defindBuildOpts = defineConfig(buildOpts);
 
     if(buildOpts.buildTool === 'webpack'){
       const webpackConf = await getWebpackConfig();
@@ -53,12 +53,11 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
       const viteConf = await getViteConfig();
       switch (ciType){
         case 'dev': await viteDo.startDevServer(viteConf, defindBuildOpts);break;
-        case 'build': await viteDo.startBuildPro(viteConf, defindBuildOpts);break;
+        case 'build': await viteDo.startBuildPro(viteConf);break;
         case 'server':await viteDo.startProServer(viteConf, defindBuildOpts);break;
         default: return;
       }
     }
-
   } catch (error: any) {
     throw Error(error);
   }

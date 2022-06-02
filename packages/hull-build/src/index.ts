@@ -4,6 +4,7 @@ import cac from 'cac';
 import build from './build';
 import { IBuildOptions, BuildConfig } from './types';
 export { BuildConfig, IBuildOptions };
+
 const cli = cac();
 
 cli.version(require('../package.json').version);
@@ -11,6 +12,7 @@ cli.version(require('../package.json').version);
 cli
   .command('dev', 'Start dev server!')
   .option('--port <port>', 'dev server port')
+  .option('--buildTool <buildTool>', 'is use webpack or vite to build?')
   .option('--analyzer', 'is use BundleAnalyzer?')
   .action((options: IBuildOptions) => {
     try {
@@ -18,6 +20,7 @@ cli
         appDirectory: fs.realpathSync(process.cwd()),
         port: options.port || 5000,
         env: 'development',
+        buildTool: options.buildTool,
         analyzer: options.analyzer,
       };
       build(option, 'dev');
@@ -28,12 +31,14 @@ cli
 
 cli
   .command('build', 'Build web app resource！')
+  .option('--buildTool <buildTool>', 'is use webpack or vite to build?')
   .option('--analyzer', 'is use BundleAnalyzer?')
   .action((options: IBuildOptions) => {
     try {
       const option = {
         appDirectory: fs.realpathSync(process.cwd()),
         env: 'production',
+        buildTool: options.buildTool,
         analyzer: options.analyzer,
       };
       build(option, 'build');
@@ -44,12 +49,14 @@ cli
 
 cli
   .command('server', 'Start static server for production app!')
+  .option('--buildTool <buildTool>', 'is use webpack or vite to build?')
   .option('--port <port>', 'static server port')
   .action((options: IBuildOptions) => {
     try {
       const option = {
         appDirectory: fs.realpathSync(process.cwd()),
         env: 'production',
+        buildTool: options.buildTool,
         port: options.port || 5000,
       };
       build(option, 'server');
