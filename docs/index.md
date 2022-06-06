@@ -3,7 +3,7 @@ title: hulljs
 order: 10
 hero:
   title: hulljs
-  desc: easy and quickly to build you web App & npm packages 
+  desc: easy and quickly to build you web App
   actions:
     - text: 开发指南
       link: ./guide/start
@@ -15,7 +15,7 @@ features:
     title: Webpack/Vite
     desc: 支持两种构建工具
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/7a26c287-d7d8-42d6-8a55-c9aa4c097149.webp
-    title: Npm Packages
-    desc: 轻松构建Npm库
+    title: easy setting
+    desc: 简单的配置
 footer: hulljs <br /> Open-source MIT Licensed | Copyright © 2022-present<br /> Docs by [dumi](https://d.umijs.org)
 ---

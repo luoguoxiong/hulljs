@@ -18,7 +18,7 @@ cli
     try {
       const option = {
         appDirectory: fs.realpathSync(process.cwd()),
-        port: options.port || 5000,
+        port: options.port,
         env: 'development',
         buildTool: options.buildTool,
         analyzer: options.analyzer,
@@ -31,7 +31,7 @@ cli
 
 cli
   .command('build', 'Build web app resource！')
-  .option('--buildTool <buildTool>', 'is use webpack or vite to build?')
+  .option('--vite <buildTool>', 'is use webpack or vite to build?')
   .option('--analyzer', 'is use BundleAnalyzer?')
   .action((options: IBuildOptions) => {
     try {
@@ -57,7 +57,7 @@ cli
         appDirectory: fs.realpathSync(process.cwd()),
         env: 'production',
         buildTool: options.buildTool,
-        port: options.port || 5000,
+        port: options.port,
       };
       build(option, 'server');
     } catch (error: any) {

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/luoguoxiong/hulljs#readme",
   "devDependencies": {
+    "dumi": "^1.1.42",
     "lerna": "^4.0.0"
   },
   "__npminstall_done": false

@@ -2,7 +2,6 @@ import type { PluginOption } from 'vite';
 import type { Options as MinifyOptions } from 'html-minifier-terser';
 import { minify as minifyFn } from 'html-minifier-terser';
 import { createFilter } from '@rollup/pluginutils';
-import type { UserOptions } from './typing';
 
 export const htmlFilter = createFilter(['**/*.html']);
 
@@ -42,7 +41,6 @@ export function createMinifyHtmlPlugin({
 }: any): PluginOption {
   return {
     name: 'vite:minify-html',
-    // apply: 'build',
     enforce: 'post',
     async generateBundle(_, outBundle) {
       if (minify) {

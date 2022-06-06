@@ -54,6 +54,10 @@ export default defineConfig({
       path: '/setting',
     },
     {
+      title: '插件',
+      path: '/plugins',
+    },
+    {
       title: 'Github',
       path: 'https://github.com/luoguoxiong/hulljs',
     },

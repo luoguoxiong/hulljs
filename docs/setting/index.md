@@ -7,8 +7,6 @@ toc: menu
 
 #  hull-conf.js 配置
 
-以下配置项通过字母排序。
-
 ## projectType
 
 - Type: `string`
@@ -69,13 +67,35 @@ export default {
 - Default: 1000 (1k)
 针对图片资源、svg等，进行base64编译的阈值
 
-## htmlPluginConfig
+## htmlPligunOpts
 - Type: `object`
-htmlwebpackPlugin 插件配置 https://webpack.js.org/plugins/html-webpack-plugin/
 
+```js
+export default {
+  htmlPligunOpts: {
+    template: path.resolve(__dirname, './public/index.html'),
+    inject: {
+      title: 'welcome-use-hulljs',
+    },
+  }
+}
+```
+`ejs语法`统一使用<%= htmlWebpackPlugin.options.title %>格式
+```html
+<!-- ./public/index.html -->
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
+```
 ## definePluginOptions
 - Type: `object`
-DefinePlugin 插件配置 https://webpack.js.org/plugins/define-plugin/#root
+[DefinePlugin 插件配置](https://webpack.js.org/plugins/define-plugin/#root)
 
 ## isUseBundleAnalyzer
 - Type: `boolean`
@@ -124,6 +144,24 @@ lessLoader配置
 ## postcss 配置
 在项目根目录创建postcss.config.js或postcss.config.cjs进行配置，已设置postcss-preset-env
 
+postcss 配置，它期望接收与 postcss.config.js 一致的格式。但对于 plugins 属性有些特别，只接收使用 [数组格式](https://github.com/postcss/postcss-load-config/blob/main/README.md#array)。
+
+
+```js
+module.exports = {
+  plugins: [
+    require('postcss-px-to-viewport')({
+      viewportWidth: 750,
+      unitPrecision: 3,
+      viewportUnit: 'vw',
+      selectorBlackList: ['.ignore'],
+      minPixelValue: 1,
+      mediaQuery: false,
+    }),
+  ],
+};
+```
+
 ## 关于样式处理方案
-1. 支持less和sass、scss两种样式方案。
+1. 内部集成了less和sass两种样式方案。
 2. css module,统一使用xx.module.（less|sass|css）命名规范。

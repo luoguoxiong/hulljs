@@ -1,11 +1,12 @@
 import { build, createServer } from 'vite';
 import { startStaticServer } from '@hulljs/utils';
-import { log } from '@hulljs/utils';
+import { log, choosePort } from '@hulljs/utils';
 import { RequiredBuildOpts, ViteConfig } from '../types';
 export const startDevServer = async(viteConfig: ViteConfig, buildOpts: RequiredBuildOpts) => {
+  const port = await choosePort(buildOpts.devServer.port);
   const server = await createServer(viteConfig);
-  await server.listen();
-  log.success(`you service is running at http://localhost:${buildOpts.devServer.port}`);
+  await server.listen(port);
+  log.success(`you service is running at http${buildOpts.devServer.https ? 's' : ''}://localhost:${port}`);
 };
 
 
@@ -19,9 +20,10 @@ export const startBuildPro = async(viteConfig: ViteConfig) => {
 export const startProServer = async(viteConfig: ViteConfig, buildOpts: RequiredBuildOpts) => {
   await startBuildPro(viteConfig);
 
+  const port = await choosePort(buildOpts.devServer.port);
   startStaticServer({
     assetsRoot: buildOpts.outputPath,
-    port: buildOpts.port,
+    port,
     isUseGzip: true,
     maxAge: 24 * 60 * 60 * 1000 * 360,
   });
