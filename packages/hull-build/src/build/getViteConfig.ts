@@ -26,6 +26,13 @@ export const getViteConfig = (): ViteConfig => {
 
   const { isOk, absFilePath } = getExistFile({ appDirectory, files: ['postcss.config.js', 'postcss.config.cjs'] });
 
+  const postcssPlugins = [];
+
+  if(isOk){
+    const plugin = require(absFilePath).plugins || [];
+    postcssPlugins.push(...plugin);
+  }
+
   const projectPlugins = projectType === 'react'
     ? [ reactRefresh() ]
     : [
@@ -87,7 +94,6 @@ export const getViteConfig = (): ViteConfig => {
         },
       },
       postcss: {
-        // config: isOk ? absFilePath : false,
         plugins: [
           postcssPreset({
             autoprefixer: {
@@ -95,6 +101,7 @@ export const getViteConfig = (): ViteConfig => {
             },
             stage: 3,
           }),
+          ...postcssPlugins,
         ],
       },
       devSourcemap: isUseSourceMap,

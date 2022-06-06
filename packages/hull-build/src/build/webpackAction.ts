@@ -30,7 +30,7 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Req
     const devService = new WebpackDevServer(config, compiler);
 
     await devService.start();
-    log.success(`you service is running at http://localhost:${port}`);
+    log.success(`you service is running at http${buildOpts.devServer.https ? 's' : ''}://localhost:${port}`);
   } catch (error: any) {
     throw Error(error);
   }
@@ -65,10 +65,11 @@ export const startBuildPro = async(webpackConfig: Configuration, buildOpts: Requ
 };
 
 export const startProServer = async(webpackConfig: Configuration, buildOpts: RequiredBuildOpts) => {
+  const port = await choosePort(buildOpts.port);
   const runServer = () => {
     startStaticServer({
       assetsRoot: buildOpts.outputPath,
-      port: buildOpts.port,
+      port,
       isUseGzip: true,
       maxAge: 24 * 60 * 60 * 1000 * 360,
     });
