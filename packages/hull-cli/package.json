@@ -7,7 +7,8 @@
     "hull": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc -w"
+    "build": "tsc",
+    "watch": "tsc -w"
   },
   "keywords": [
     "hull-cli"
@@ -28,6 +29,7 @@
     "tar-pack": "^3.4.1",
     "tmp": "^0.2.1",
     "@hulljs/utils":"0.0.1",
+    "@hulljs/build":"0.0.1",
     "validate-npm-package-name": "^4.0.0"
   }
 }

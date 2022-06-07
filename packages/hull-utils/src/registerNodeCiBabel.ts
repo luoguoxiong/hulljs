@@ -13,7 +13,6 @@ const slash = (input: string) => {
 export const registerNodeCiBabel = function(appDirectory: string, only: string[]): void {
   const babelOptions: IGetBabelOptions = {
     isTypeScript: true,
-    projectType: 'node',
     isProduction: true,
   };
   require('@babel/register')({

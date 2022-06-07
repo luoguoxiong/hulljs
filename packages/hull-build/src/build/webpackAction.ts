@@ -65,7 +65,7 @@ export const startBuildPro = async(webpackConfig: Configuration, buildOpts: Requ
 };
 
 export const startProServer = async(webpackConfig: Configuration, buildOpts: RequiredBuildOpts) => {
-  const port = await choosePort(buildOpts.port);
+  const port = await choosePort(buildOpts.devServer.port);
   const runServer = () => {
     startStaticServer({
       assetsRoot: buildOpts.outputPath,

@@ -5,7 +5,7 @@ type ViteExtraBuildOptions = Omit<BuildOptions, 'outDir' | 'assetsInlineLimit' |
 
 export type ENV = 'development' | 'production' | string
 
-export type ProjectType = 'react' | 'vue3' | 'node';
+export type ProjectType = 'react' | 'vue3';
 
 export type RunBuildOpts = IBuildOptions & BuildConfig
 

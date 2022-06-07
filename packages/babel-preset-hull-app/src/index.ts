@@ -1,12 +1,8 @@
 import { presetForCommon, persetForVue, persetForReact } from './create';
 export interface IGetBabelOptions {
-  projectType: 'react' | 'vue3' | 'node';
+  projectType?: 'react' | 'vue3';
   isTypeScript?: boolean;
   isProduction?: boolean;
-  lessInBabelMode?: boolean|{
-    paths?: any[];
-    plugins?: any[];
-  };
 }
 export interface PersentRe{
   presets: any[];
