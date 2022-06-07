@@ -6,6 +6,7 @@ import hyperquest from 'hyperquest';
 import cac from 'cac';
 import fs from 'fs-extra';
 import { chalk } from '@hulljs/utils';
+import { build, IBuildOptions, CliIn } from '@hulljs/build';
 import tmp from 'tmp';
 import validateProjectName from 'validate-npm-package-name';
 import { unpack } from 'tar-pack';
@@ -169,6 +170,62 @@ cli
       ),
     );
   });
+
+cli
+  .command('dev', 'Start dev server!')
+  .option('--port <port>', 'dev server port')
+  .option('--vite', 'is use vite?')
+  .action((options: CliIn) => {
+    try {
+      const option: IBuildOptions = {
+        appDirectory: fs.realpathSync(process.cwd()),
+        port: options.port,
+        env: 'development',
+        buildTool: options.vite ? 'vite' : 'webpack',
+        analyzer: false,
+      };
+      build(option, 'dev');
+    } catch (error: any) {
+      throw Error(error);
+    }
+  });
+
+cli
+  .command('build', 'Build web app resource！')
+  .option('--vite', 'is use vite?')
+  .option('--analyzer', 'is use BundleAnalyzer?')
+  .action((options: CliIn) => {
+    try {
+      const option: IBuildOptions = {
+        appDirectory: fs.realpathSync(process.cwd()),
+        env: 'production',
+        buildTool: options.vite ? 'vite' : 'webpack',
+        analyzer: options.analyzer,
+      };
+      build(option, 'build');
+    } catch (error: any) {
+      throw Error(error);
+    }
+  });
+
+cli
+  .command('server', 'Start static server for production app!')
+  .option('--vite', 'is use vite?')
+  .option('--port <port>', 'static server port')
+  .action((options: CliIn) => {
+    try {
+      const option: IBuildOptions = {
+        appDirectory: fs.realpathSync(process.cwd()),
+        env: 'production',
+        buildTool: options.vite ? 'vite' : 'webpack',
+        port: options.port,
+      };
+      build(option, 'server');
+    } catch (error: any) {
+      throw Error(error);
+    }
+  });
+
 
 cli.help();
 
