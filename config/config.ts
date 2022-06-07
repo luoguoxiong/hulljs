@@ -54,7 +54,7 @@ export default defineConfig({
       path: '/setting',
     },
     {
-      title: '插件',
+      title: '工具',
       path: '/plugins',
     },
     {

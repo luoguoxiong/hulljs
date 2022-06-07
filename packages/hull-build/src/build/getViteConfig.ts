@@ -85,11 +85,9 @@ export const getViteConfig = (): ViteConfig => {
           ...lessLoaderOptions,
         },
         scss: {
-          javascriptEnabled: true,
           ...sassLoaderOptions,
         },
         sass: {
-          javascriptEnabled: true,
           ...sassLoaderOptions,
         },
       },
@@ -113,10 +111,12 @@ export const getViteConfig = (): ViteConfig => {
       assetsInlineLimit: fileSizeLimit,
       rollupOptions: {
         plugins: [
-          ...isUseBundleAnalyzer ? [ visualizer({
-            filename: path.resolve(appDirectory, './visualizer.html'),
-            open: true,
-          })] : [],
+          ...(
+            isUseBundleAnalyzer && isProd ? [ visualizer({
+              filename: path.resolve(appDirectory, './visualizer.html'),
+              open: true,
+            })] : []
+          ),
         ],
       },
       sourcemap: isProd ? isUseSourceMap : 'inline',
