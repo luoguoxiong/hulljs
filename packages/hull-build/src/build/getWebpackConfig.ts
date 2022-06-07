@@ -79,7 +79,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
         ...definePluginOptions,
         'DEBUG': !isProd,
       }),
-      ...(isUseBundleAnalyzer ? [new BundleAnalyzerPlugin({ analyzerPort: await choosePort(8888) })] : []),
+      ...(isUseBundleAnalyzer && isProd ? [new BundleAnalyzerPlugin({ analyzerPort: await choosePort(8888) })] : []),
       ...(extraWebpackPlugins ? extraWebpackPlugins : []),
     ],
   };

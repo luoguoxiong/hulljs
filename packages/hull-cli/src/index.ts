@@ -1,17 +1,12 @@
 #!/usr/bin/env node
 import path from 'path';
-import { execSync } from 'child_process';
 import os from 'os';
-import hyperquest from 'hyperquest';
 import cac from 'cac';
 import fs from 'fs-extra';
 import { chalk } from '@hulljs/utils';
 import { build, IBuildOptions, CliIn } from '@hulljs/build';
-import tmp from 'tmp';
 import validateProjectName from 'validate-npm-package-name';
-import { unpack } from 'tar-pack';
 import prompts from 'prompts';
-// hull create app --template temp-webpack-react-ts
 
 const cli = cac();
 
@@ -44,47 +39,6 @@ const verifyAppName = (appName: string) => {
     console.error(chalk.red('\nPlease choose a different project name.'));
     process.exit(1);
   }
-};
-
-function getTemporaryDirectory() {
-  return new Promise((resolve, reject) => {
-    tmp.dir({ unsafeCleanup: true }, (err: any, tmpdir: string, callback: any) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({
-          tmpdir: tmpdir,
-          cleanup: () => {
-            callback();
-          },
-        });
-      }
-    });
-  });
-}
-
-function extractStream(stream: any, dest: any) {
-  return new Promise((resolve, reject) => {
-    stream.pipe(
-      unpack(dest, (err: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(dest);
-        }
-      }),
-    );
-  });
-}
-
-const dowmLoadNpmTemplate = () => {
-  const lastPackage = execSync('npm view create-react-app dist.tarball').toString();
-  getTemporaryDirectory().then((obj: any) => {
-    const stream = hyperquest('https://cdn.npmmirror.com/packages/create-react-app/5.0.1/create-react-app-5.0.1.tgz');
-    return extractStream(stream, obj.tmpdir).then(() => obj);
-  }).then((obj) => {
-    console.log(obj);
-  }).catch;
 };
 
 const copyTemplateToApp = (templateName: string, appRoot: string, projectName: string) => {
