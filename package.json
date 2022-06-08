@@ -32,12 +32,10 @@
     "husky": "^7.0.1",
     "@commitlint/cli": "^8.3.5",
     "lint-staged": "^10.0.7",
+    "yorkie": "^2.0.0",
     "@commitlint/config-conventional": "^8.3.4",
     "dumi": "^1.1.42",
     "lerna": "^4.0.0"
   },
-  "__npminstall_done": false,
-  "dependencies": {
-    "yorkie": "^2.0.0"
-  }
+  "__npminstall_done": false
 }
