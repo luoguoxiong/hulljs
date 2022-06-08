@@ -33,9 +33,15 @@ Usage:
 
 Commands:
   init <app>  create app project!
+  dev         Start dev server!
+  build       Build web app resource！
+  server      Start static server for production app!
 
 For more info, run any command with the `--help` flag:
   $ hull init --help
+  $ hull dev --help
+  $ hull build --help
+  $ hull server --help
 
 Options:
   -v, --version  Display version number 

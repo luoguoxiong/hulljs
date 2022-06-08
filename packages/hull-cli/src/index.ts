@@ -6,7 +6,11 @@ import fs from 'fs-extra';
 import { chalk } from '@hulljs/utils';
 import { build, IBuildOptions, CliIn } from '@hulljs/build';
 import validateProjectName from 'validate-npm-package-name';
+import semver from 'semver';
 import prompts from 'prompts';
+
+
+checkNodeVersion();
 
 const cli = cac();
 
@@ -19,6 +23,28 @@ const checkAppDir = (appRoot: string, projectName: string) => {
     process.exit(1);
   }
 };
+
+function checkNodeVersion() {
+
+  const packageJson = require('../package.json');
+
+  if (!packageJson.engines || !packageJson.engines.node) {
+    return;
+  }
+
+  if (!semver.satisfies(process.version, packageJson.engines.node)) {
+    console.error(
+      chalk.red(
+        'You are running Node %s.\n' +
+            'hulljs requires Node %s or higher. \n' +
+            'Please update your version of Node.',
+      ),
+      process.version,
+      packageJson.engines.node,
+    );
+    process.exit(1);
+  }
+}
 
 const verifyAppName = (appName: string) => {
   const validationResult = validateProjectName(appName);
@@ -45,7 +71,6 @@ const copyTemplateToApp = (templateName: string, appRoot: string, projectName: s
   fs.copySync(path.join(__dirname, `../template/${templateName}`), path.resolve(appRoot, projectName));
 };
 
-
 cli
   .command('init <app>', 'create app project!')
   .action(async(projectName: string) => {
@@ -54,8 +79,6 @@ cli
     verifyAppName(projectName);
     // 检查是否存在该工程
     checkAppDir(appRoot, projectName);
-    // 创建工程
-    fs.ensureDirSync(path.resolve(appRoot, projectName));
     const isReact = await prompts([
       {
         type: 'select',
@@ -67,6 +90,11 @@ cli
         ],
       },
     ]);
+    console.log(isReact.isReact);
+
+    if(isReact.isReact === undefined){
+      return;
+    }
     const isTs = await prompts([
       {
         type: 'select',
@@ -79,6 +107,13 @@ cli
       },
     ]);
 
+    if(isTs.isTs === undefined){
+      return;
+    }
+
+    // 创建工程
+    fs.ensureDirSync(path.resolve(appRoot, projectName));
+
     const options = { ...isReact, isWebpack: true, ...isTs };
 
     const templateName = [
@@ -86,7 +121,7 @@ cli
       `${options.isReact ? 'react' : 'vue'}`,
       `${options.isTs ? 'ts' : 'js'}`,
     ];
-    // 复制模板
+      // 复制模板
     copyTemplateToApp(templateName.join('-'), appRoot, projectName);
 
     const packageJson = {

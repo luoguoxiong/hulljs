@@ -13,7 +13,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
   const buildConfig = configTool.getConfig();
 
   const { appDirectory, shouldUseSourceMap, outputPath,
-    outputPublicPath, resolveAlias, entry, htmlPligunOpts,
+    outputPublicPath, resolveAlias, entry, htmlPluginOpts,
     extraWebpackPlugins, extraModuleRules, projectType,
     definePluginOptions, isUseBundleAnalyzer, splitChunks, isProd } = buildConfig;
 
@@ -72,14 +72,17 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
         filename: 'index.html',
         cache: false,
         minify: isProd,
-        template: htmlPligunOpts?.template || path.join(__dirname, '../../public/index.html'),
-        ...htmlPligunOpts?.inject,
+        template: htmlPluginOpts.template || path.join(__dirname, '../../public/index.html'),
+        ...htmlPluginOpts.inject,
       }),
       new webpack.DefinePlugin({
         ...definePluginOptions,
         'DEBUG': !isProd,
       }),
-      ...(isUseBundleAnalyzer && isProd ? [new BundleAnalyzerPlugin({ analyzerPort: await choosePort(8888) })] : []),
+      ...(isUseBundleAnalyzer && isProd ? [new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        reportFilename: path.resolve(appDirectory, './visualizer.html'),
+      })] : []),
       ...(extraWebpackPlugins ? extraWebpackPlugins : []),
     ],
   };
