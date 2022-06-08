@@ -9,6 +9,15 @@
     "build-doc": "dumi build",
     "bootstrap": "lerna bootstrap --hoist"
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint -eGIT_classnamesPARAMS $"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint  --fix"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/luoguoxiong/hulljs.git"
@@ -20,8 +29,13 @@
   },
   "homepage": "https://github.com/luoguoxiong/hulljs#readme",
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "dumi": "^1.1.42",
-    "lerna": "^4.0.0"
+    "husky": "^8.0.1",
+    "lerna": "^4.0.0",
+    "lint-staged": "^10.0.7",
+    "yorkie": "^2.0.0"
   },
   "__npminstall_done": false
 }

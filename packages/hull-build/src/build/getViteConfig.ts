@@ -1,5 +1,6 @@
+
 import path from 'path';
-import{ getModulesFromConfig } from '@hulljs/utils';
+import{ getModulesFromConfig, getExistFile } from '@hulljs/utils';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import { visualizer } from 'rollup-plugin-visualizer';
 import legacy from '@vitejs/plugin-legacy';
@@ -7,11 +8,10 @@ import { createHtmlPlugin } from '@hulljs/vite-plugin-html';
 import viteBabelPlugins from '@hulljs/vite-plugin-babel-plugins';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vue from '@vitejs/plugin-vue';
-import { getExistFile } from '@hulljs/utils';
 import postcssPreset from 'postcss-preset-env';
-import { ViteConfig, DevServer } from '../types';
+import { DevServer } from '../types';
 import { configTool } from './defineConfig';
-export const getViteConfig = (): ViteConfig => {
+export const getViteConfig = (): any => {
   const buildConfig = configTool.getConfig();
 
   const { appDirectory, lessLoaderOptions, sassLoaderOptions,
@@ -38,8 +38,7 @@ export const getViteConfig = (): ViteConfig => {
     : [
       vueJsx({}),
       vue({}),
-    ];
-
+    ] ;
   return {
     root: buildConfig.appDirectory,
     base: buildConfig.outputPublicPath,

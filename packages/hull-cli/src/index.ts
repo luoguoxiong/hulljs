@@ -9,7 +9,6 @@ import validateProjectName from 'validate-npm-package-name';
 import semver from 'semver';
 import prompts from 'prompts';
 
-
 checkNodeVersion();
 
 const cli = cac();
