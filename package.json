@@ -11,6 +11,10 @@
     "lint": "lint-staged",
     "commitlint": "commitlint -eGIT_classnamesPARAMS $"
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint -eGIT_classnamesPARAMS $"
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint  --fix"
@@ -35,5 +39,8 @@
     "lint-staged": "^10.0.7",
     "yorkie": "^2.0.0"
   },
-  "__npminstall_done": false
+  "__npminstall_done": false,
+  "dependencies": {
+    "yorkie": "^2.0.0"
+  }
 }
