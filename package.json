@@ -1,8 +1,5 @@
 {
-  "name": "hulljs",
-  "version": "0.0.5-beta.1",
-  "description": "hulljs",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "release": "bash ./script/release.sh",
     "version": "standard-version",
