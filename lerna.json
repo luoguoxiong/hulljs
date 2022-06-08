@@ -1,6 +1,11 @@
 {
   "npmClient": "cnpm",
   "version": "0.0.1",
+  "command": {
+    "version": {
+      "conventionalCommits": true
+    }
+  },
   "packages": [
     "packages/*"
   ]
