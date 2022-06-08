@@ -2,7 +2,6 @@
   "npmClient": "cnpm",
   "version": "independent",
   "changelog": {
-    "repo": "umijs/umi-next",
     "labels": {
       "pr(enhancement)": ":rocket: Enhancement",
       "pr(bug)": ":bug: Bug Fix",
