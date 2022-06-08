@@ -10,7 +10,8 @@
     "bootstrap": "lerna bootstrap --hoist"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint -eGIT_classnamesPARAMS $"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
