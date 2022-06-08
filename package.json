@@ -37,8 +37,5 @@
     "lint-staged": "^10.0.7",
     "yorkie": "^2.0.0"
   },
-  "__npminstall_done": false,
-  "dependencies": {
-    "yorkie": "^2.0.0"
-  }
+  "__npminstall_done": false
 }

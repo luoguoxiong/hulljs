@@ -42,7 +42,7 @@
     "source-map-loader": "^3.0.1",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
-    "vite": "^2.9.9",
+    "vite": "2.9.9",
     "vue": "^3.2.34",
     "vue-loader": "^17.0.0",
     "webpack": "^5.72.0",
