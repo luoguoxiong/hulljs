@@ -1,9 +1,10 @@
 {
   "name": "hulljs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "hulljs",
   "main": "index.js",
   "scripts": {
+    "version": "standard-version",
     "start": "dumi dev",
     "build": "lerna run build",
     "build-doc": "dumi build",
@@ -35,6 +36,7 @@
     "husky": "^8.0.1",
     "lerna": "^4.0.0",
     "lint-staged": "^10.0.7",
+    "standard-version": "^9.5.0",
     "yorkie": "^2.0.0"
   },
   "__npminstall_done": false
