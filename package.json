@@ -8,7 +8,7 @@
     "build": "lerna run build",
     "build-doc": "dumi build",
     "bootstrap": "lerna bootstrap --hoist",
-    "lint": "eslint  --fix",
+    "lint": "lint-staged",
     "commit-msg": "commitlint -e $GIT_PARAMS"
   },
   "lint-staged": {
