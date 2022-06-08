@@ -1,6 +1,6 @@
 {
   "name": "hulljs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "hulljs",
   "main": "index.js",
   "scripts": {
@@ -38,6 +38,51 @@
     "lint-staged": "^10.0.7",
     "standard-version": "^9.5.0",
     "yorkie": "^2.0.0"
+  },
+  "standard-version": {
+    "issueUrlFormat": "https://xxx.com/{{id}}",
+    "types": [
+      {
+        "type": "feat",
+        "section": "需求"
+      },
+      {
+        "type": "fix",
+        "section": "Bug 修复"
+      },
+      {
+        "type": "perf",
+        "section": "优化"
+      },
+      {
+        "type": "chore",
+        "hidden": true
+      },
+      {
+        "type": "docs",
+        "hidden": true
+      },
+      {
+        "type": "style",
+        "hidden": true
+      },
+      {
+        "type": "refactor",
+        "hidden": true
+      },
+      {
+        "type": "test",
+        "hidden": true
+      },
+      {
+        "type": "conflict",
+        "hidden": true
+      },
+      {
+        "type": "revert",
+        "hidden": true
+      }
+    ]
   },
   "__npminstall_done": false
 }
