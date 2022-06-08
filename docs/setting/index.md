@@ -91,12 +91,12 @@ export default {
 - Default: 1000 (1k)
 针对图片资源、svg等，进行base64编译的阈值
 
-## htmlPligunOpts
+## htmlPluginOpts
 - Type: `object`
 
 ```js
 export default {
-  htmlPligunOpts: {
+  htmlPluginOpts: {
     template: path.resolve(__dirname, './public/index.html'),
     inject: {
       title: 'welcome-use-hulljs',
@@ -153,9 +153,9 @@ lessLoader配置
 
 ```javascript
 export default {
-		proxy: {
-      '/api': 'http://localhost:3000',
-    }
+  proxy: {
+     '/api': 'http://localhost:3000',
+  }
 }
 ```
 
@@ -180,6 +180,24 @@ module.exports = {
 };
 ```
 
-## 关于样式处理方案
+## 关于样式
+
 1. 内部集成了less和sass两种样式方案。
 2. css module,统一使用xx.module.（less|sass|css）命名规范。
+
+## 关于浏览器兼容性
+
+针对js模块使用了@babel/preset-env,css模块使用了postcss-preset-env。都是根据根目录的.browserslistrc进行浏览器解析
+
+eg:
+
+```browserlistrc
+defaults
+not ie < 8
+last 2 versions
+> 1%
+iOS 7
+ie 8
+last 3 iOS versions
+```
+

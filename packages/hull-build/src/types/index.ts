@@ -53,7 +53,7 @@ export interface BuildConfig {
   /** fileSizeLimit 静态资源压缩为base64的大小限制 */
   fileSizeLimit?: number;
   /** html模板配置 */
-  htmlPligunOpts?: {
+  htmlPluginOpts?: {
     /** html模板路径 */
     template: string;
     /** html 模板插入数据 */

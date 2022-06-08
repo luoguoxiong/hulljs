@@ -20,7 +20,7 @@ const defaultConfig: RequiredBuildOpts = {
   shouldUseSourceMap: false,
   extraBabelPresets: [],
   fileSizeLimit: 1000,
-  htmlPligunOpts: {
+  htmlPluginOpts: {
     template: path.resolve(__dirname, '../../public/index.html'),
     inject: {
       title: 'welcome-use-hulljs',
@@ -69,7 +69,7 @@ const schema = {
       type: 'array',
     },
     fileSizeLimit: { type: 'number' },
-    htmlPligunOpts: {
+    htmlPluginOpts: {
       type: 'object',
       properties: {
         template: { type: 'string' },

@@ -16,7 +16,7 @@ export const getViteConfig = (): ViteConfig => {
 
   const { appDirectory, lessLoaderOptions, sassLoaderOptions,
     shouldUseSourceMap, fileSizeLimit, projectType, isUseBundleAnalyzer,
-    viteExtraBuildOptions, proxy, htmlPligunOpts, extraBabelPlugins, isProd } = buildConfig;
+    viteExtraBuildOptions, proxy, htmlPluginOpts, extraBabelPlugins, isProd } = buildConfig;
 
   const { alias } = getModulesFromConfig(appDirectory);
 
@@ -50,8 +50,8 @@ export const getViteConfig = (): ViteConfig => {
       createHtmlPlugin({
         minify: isProd,
         entry: buildConfig.entry,
-        template: htmlPligunOpts ? htmlPligunOpts.template : '',
-        inject: htmlPligunOpts?.inject,
+        template: htmlPluginOpts ? htmlPluginOpts.template : '',
+        inject: htmlPluginOpts.inject,
       }),
       ...projectPlugins,
       legacy(),
@@ -112,8 +112,10 @@ export const getViteConfig = (): ViteConfig => {
       rollupOptions: {
         plugins: [
           ...(
-            isUseBundleAnalyzer && isProd ? [ visualizer({
+            isUseBundleAnalyzer ? [ visualizer({
               filename: path.resolve(appDirectory, './visualizer.html'),
+              brotliSize: true,
+              gzipSize: true,
               open: true,
             })] : []
           ),
