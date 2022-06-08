@@ -1,6 +1,6 @@
 {
   "name": "hulljs",
-  "version": "0.0.4",
+  "version": "0.0.5-alpha.0",
   "description": "hulljs",
   "main": "index.js",
   "scripts": {
