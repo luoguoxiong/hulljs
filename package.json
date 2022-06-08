@@ -1,9 +1,10 @@
 {
   "name": "hulljs",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "hulljs",
   "main": "index.js",
   "scripts": {
+    "release": "bash ./script/release.sh",
     "version": "standard-version",
     "start": "dumi dev",
     "build": "lerna run build",
