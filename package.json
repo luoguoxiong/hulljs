@@ -7,7 +7,8 @@
     "start": "dumi dev",
     "build": "lerna run build",
     "build-doc": "dumi build",
-    "bootstrap": "lerna bootstrap --hoist"
+    "bootstrap": "lerna bootstrap --hoist",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
