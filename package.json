@@ -9,9 +9,11 @@
     "build-doc": "dumi build",
     "bootstrap": "lerna bootstrap --hoist"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "commitlint -eGIT_classnamesPARAMS $"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
