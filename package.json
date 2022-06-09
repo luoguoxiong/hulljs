@@ -5,6 +5,7 @@
   "scripts": {
     "release": "bash ./script/release.sh",
     "version": "standard-version",
+    "test": "lerna version --exact --no-commit-hooks --no-push",
     "start": "dumi dev",
     "build": "lerna run build",
     "build-doc": "dumi build",

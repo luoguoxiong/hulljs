@@ -4,7 +4,7 @@ const { execa } = require('@umijs/utils');
 const chalk = require('chalk');
 const git = require('./git');
 const _exec = require('./utils');
-
+const lernaCli = require.resolve('lerna/cli');
 
 const logErrorAndExit = (message) => {
   console.error(chalk.red(message));
@@ -50,8 +50,15 @@ const release = async() => {
   //   const logs = await getChangelog();
   //   console.log(logs(''));
   logStep('update version by lerna version');
-  const { stdout } = await execa('lerna version --exact --no-commit-hooks --no-push');
-  console.log(stdout);
+  await _exec('npm run version');
+//   await execa(lernaCli, [
+//     'version',
+//     '--exact',
+//     '--no-commit-hooks',
+//     '--no-git-tag-version',
+//     '--no-push',
+//   ]);
+//   console.log(stdout);
 };
 
 release();

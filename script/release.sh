@@ -36,5 +36,6 @@ elif  [ "$branch" = "dev" ]; then
 
 else
   # 其他分支直接退出
+  npm run test
   echo -e "\033[31m 只能在 master 或者 dev 分支上执行 yarn release！ \033[0m"
 fi
