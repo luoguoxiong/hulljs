@@ -1,6 +1,4 @@
-const { promisify } = require('util');
-const _exec = promisify(require('node:child_process').exec);
-
+const _exec = require('./utils');
 exports.latestTag = async() => {
   const { stdout } = await _exec('git describe --abbrev=0 --tags');
   return stdout;
@@ -14,10 +12,8 @@ const firstCommit = async() => {
 exports.latestTagOrFirstCommit = async() => {
   let latest;
   try {
-    // In case a previous tag exists, we use it to compare the current repo status to.
     latest = await exports.latestTag();
   } catch (_) {
-    // Otherwise, we fallback to using the first commit for comparison.
     latest = await firstCommit();
   }
 
@@ -29,8 +25,7 @@ exports.commitLogFromRevision = async() => {
   return stdout;
 };
 
-exports.gitStatusIsEmpty = async() => {
+exports.gitIsAddAll = async() => {
   const { stdout } = await _exec('git status --porcelain');
-  console.log(stdout);
   return stdout.length === 0;
 };

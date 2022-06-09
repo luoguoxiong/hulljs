@@ -36,7 +36,11 @@
     "lint-staged": "^10.0.7",
     "standard-version": "^9.5.0",
     "yorkie": "^2.0.0",
+    "chalk": "^4.0.1",
     "escape-goat": "^3.0.0"
   },
-  "__npminstall_done": false
+  "__npminstall_done": false,
+  "dependencies": {
+    "git-repo-info": "^2.1.1"
+  }
 }
