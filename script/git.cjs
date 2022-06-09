@@ -30,6 +30,6 @@ exports.commitLogFromRevision = async() => {
 };
 
 exports.gitStatusIsEmpty = async() => {
-  const { stdout } = await _exec('git status --porcelain');
+  const { stdout } = await _exec('git status');
   return stdout.length === 0;
 };
