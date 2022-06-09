@@ -1,0 +1,34 @@
+import { htmlEscape } from 'escape-goat';
+import git from './git.cjs';
+
+const getChangelog = async() => {
+  const repoUrl = 'https://github.com/luoguoxiong/hulljs';
+  const latest = await git.latestTagOrFirstCommit();
+  const log = await git.commitLogFromRevision(latest);
+
+  if (!log) {
+    throw new Error('get changelog failed, no new commits was found.');
+  }
+
+  const commits = log.split('\n').map((commit) => {
+    const splitIndex = commit.lastIndexOf(' ');
+    return {
+      message: commit.slice(0, splitIndex),
+      id: commit.slice(splitIndex + 1),
+    };
+  });
+
+  return (nextTag) =>
+    `${commits
+      .map((commit) => `- ${htmlEscape(commit.message)}  ${commit.id}`)
+      .join('\n') }\n\n${repoUrl}/compare/${latest}...${nextTag}`;
+};
+
+const release = async() => {
+  const isClean = await git.gitStatusIsEmpty();
+  console.log(isClean);
+  const releaseNotes = await getChangelog();
+  console.log(releaseNotes(''));
+};
+
+release();
