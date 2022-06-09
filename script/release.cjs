@@ -1,5 +1,5 @@
-import { htmlEscape } from 'escape-goat';
-import git from './git.cjs';
+const { htmlEscape } = require('escape-goat');
+const git = require('./git.cjs');
 
 const getChangelog = async() => {
   const repoUrl = 'https://github.com/luoguoxiong/hulljs';
