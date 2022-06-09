@@ -40,14 +40,14 @@ else
   git commit -m "chore(build): release"
 
 
-  npm run version
+#   npm run version
 
   npm run test
 
-  git push
+#   git push
   
   # 提交所有 tag
-  git push --tags
+#   git push --tags
 
   echo -e "\033[31m 只能在 master 或者 dev 分支上执行 yarn release！ \033[0m"
 fi

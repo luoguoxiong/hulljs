@@ -1,6 +1,5 @@
 {
   "name": "hulljs",
-  "version": "0.0.2",
   "private": true,
   "scripts": {
     "release": "bash ./script/release.sh",
