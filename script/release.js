@@ -49,7 +49,8 @@ const release = async() => {
   //   const logs = await getChangelog();
   //   console.log(logs(''));
   logStep('update version by lerna version');
-  await _exec('lerna version --exact --no-commit-hooks --no-push');
+  const { stdout } = await _exec('lerna version --exact --no-commit-hooks --no-push');
+  console.log(stdout);
 };
 
 release();
