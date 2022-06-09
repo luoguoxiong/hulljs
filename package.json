@@ -4,6 +4,7 @@
   "scripts": {
     "release": "bash ./script/release.sh",
     "version": "standard-version",
+    "test2":"lerna-changelog",
     "test": "lerna version --exact --no-commit-hooks --no-push",
     "start": "dumi dev",
     "build": "lerna run build",
@@ -39,5 +40,8 @@
     "standard-version": "^9.5.0",
     "yorkie": "^2.0.0"
   },
-  "__npminstall_done": false
+  "__npminstall_done": false,
+  "dependencies": {
+    "lerna-changelog": "^2.2.0"
+  }
 }
