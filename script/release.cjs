@@ -27,8 +27,8 @@ const getChangelog = async() => {
 const release = async() => {
   const isClean = await git.gitStatusIsEmpty();
   console.log(isClean);
-  const releaseNotes = await getChangelog();
-  console.log(releaseNotes(''));
+//   const releaseNotes = await getChangelog();
+//   console.log(releaseNotes(''));
 };
 
 release();
