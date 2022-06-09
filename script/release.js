@@ -40,13 +40,16 @@ const getChangelog = async() => {
 const release = async() => {
 //   const { branch } = getRepoInfo();
 //   branch !== 'main' && logErrorAndExit('your must release in main branch!');
-  const isAddAll = await git.gitIsAddAll();
-  !isAddAll && logErrorAndExit('git status is not clean. exit...');
+//   const isAddAll = await git.gitIsAddAll();
+//   !isAddAll && logErrorAndExit('git status is not clean. exit...');
   logStep('git status is checked');
   logStep('build');
-  await _exec('npm run build');
-  const logs = await getChangelog();
-  console.log(logs(''));
+  //   const { stderr } = await _exec('npm run build');
+  //   console.log(chalk.green(stderr));
+  //   const logs = await getChangelog();
+  //   console.log(logs(''));
+  logStep('update version by lerna version');
+  await _exec('lerna version --exact --no-commit-hooks --no-push');
 };
 
 release();
