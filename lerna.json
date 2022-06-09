@@ -1,6 +1,6 @@
 {
   "npmClient": "cnpm",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "changelog": {
     "repo": "umijs/umi-next",
     "labels": {
