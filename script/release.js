@@ -1,5 +1,6 @@
 const { htmlEscape } = require('escape-goat');
 const getRepoInfo = require('git-repo-info');
+const { execa } = require('@umijs/utils');
 const chalk = require('chalk');
 const git = require('./git');
 const _exec = require('./utils');
@@ -49,7 +50,7 @@ const release = async() => {
   //   const logs = await getChangelog();
   //   console.log(logs(''));
   logStep('update version by lerna version');
-  const { stdout } = await _exec('lerna version --exact --no-commit-hooks --no-push');
+  const { stdout } = await execa('lerna version --exact --no-commit-hooks --no-push');
   console.log(stdout);
 };
 

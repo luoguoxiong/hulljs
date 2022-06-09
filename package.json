@@ -43,6 +43,7 @@
   },
   "__npminstall_done": false,
   "dependencies": {
+    "@umijs/utils": "^3.5.26",
     "git-repo-info": "^2.1.1"
   }
 }
