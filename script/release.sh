@@ -4,7 +4,7 @@ set -e
 # 读取当前分支
 branch=`git symbolic-ref --short HEAD`
 
-if [ "$branch" = "master" ]; then
+if [ "$branch" = "main" ]; then
   # 编译
   yarn build
 
@@ -35,7 +35,19 @@ elif  [ "$branch" = "dev" ]; then
   git push origin dev
 
 else
-  # 其他分支直接退出
+  git add -A
+
+  git commit -m "chore(build): release"
+
+
+  npm run version
+
   npm run test
+
+  git push
+  
+  # 提交所有 tag
+  git push --tags
+
   echo -e "\033[31m 只能在 master 或者 dev 分支上执行 yarn release！ \033[0m"
 fi

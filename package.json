@@ -1,6 +1,5 @@
 {
   "name": "hulljs",
-  "version": "0.0.4",
   "private": true,
   "scripts": {
     "release": "bash ./script/release.sh",
@@ -38,13 +37,7 @@
     "lerna": "^4.0.0",
     "lint-staged": "^10.0.7",
     "standard-version": "^9.5.0",
-    "yorkie": "^2.0.0",
-    "chalk": "^4.0.1",
-    "escape-goat": "^3.0.0"
+    "yorkie": "^2.0.0"
   },
-  "__npminstall_done": false,
-  "dependencies": {
-    "@umijs/utils": "^3.5.26",
-    "git-repo-info": "^2.1.1"
-  }
+  "__npminstall_done": false
 }
