@@ -1,5 +1,6 @@
 {
-  "npmClient": "cnpm",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "version": "0.0.1",
   "command": {
     "version": {
