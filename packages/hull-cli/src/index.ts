@@ -35,7 +35,7 @@ function checkNodeVersion() {
     console.error(
       chalk.red(
         'You are running Node %s.\n' +
-            'hulljs requires Node %s or higher. \n' +
+            'hulljs requires Node %s or higher.\n' +
             'Please update your version of Node.',
       ),
       process.version,
