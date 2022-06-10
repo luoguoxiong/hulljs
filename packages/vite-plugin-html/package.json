@@ -1,6 +1,6 @@
 {
   "name": "@hulljs/vite-plugin-html",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "vite-plugin-html",
   "bin": {
     "hull-build": "./dist/index.js"

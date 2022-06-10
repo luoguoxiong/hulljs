@@ -1,6 +1,6 @@
 {
   "name": "@hulljs/utils",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "bull-utils",
   "type": "commonjs",
   "bin": {
@@ -22,7 +22,7 @@
   "dependencies": {
     "@babel/core": "7.12.3",
     "@babel/register": "7.12.1",
-    "@hulljs/babel-preset-hull-app": "0.1.0",
+    "@hulljs/babel-preset-hull-app": "0.0.1",
     "chalk": "^4.0.1",
     "detect-port-alt": "^1.1.6",
     "koa": "^2.13.4",
