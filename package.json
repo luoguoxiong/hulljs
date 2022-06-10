@@ -2,14 +2,13 @@
   "private": true,
   "scripts": {
     "release": "bash ./script/release.sh",
-    "test2": "lerna-changelog",
-    "test": "lerna version --exact --no-commit-hooks --no-push --conventional-commits",
-    "test3": "lerna version --exact --no-commit-hooks --no-push --conventional-commits  --force-git-tag",
-    "test4": "lerna publish --conventional-commits",
+    "install:all":"bash ./script/install.sh",
+    "version": "lerna version --exact --no-commit-hooks --no-push --conventional-commits  --force-git-tag",
     "start": "dumi dev",
     "build": "lerna run build",
     "build-doc": "dumi build",
-    "bootstrap": "lerna bootstrap --hoist"
+    "bootstrap": "lerna bootstrap --hoist",
+    "lerna:publish": "lerna publish from-package --yes"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",

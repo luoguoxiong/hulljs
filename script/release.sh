@@ -6,7 +6,7 @@ branch=`git symbolic-ref --short HEAD`
 
 if [ "$branch" = "main" ]; then
  
-  npm run test3
+  npm run version
 
   git push origin main
   
