@@ -12,13 +12,11 @@ if [ "$branch" = "main" ]; then
 
   npm run test
 
-
   git add -A
 
   git commit -m "chore(build): release"
 
   npm run version
-
 
   git push
   
