@@ -8,7 +8,7 @@ if [ "$branch" = "main" ]; then
  
   git add -A
 
-  npm run test3
+  npm run version
 
   git add -A
 
