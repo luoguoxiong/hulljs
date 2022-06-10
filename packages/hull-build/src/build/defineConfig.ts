@@ -121,6 +121,7 @@ const schema = {
 export const defineConfig = (opts: RunBuildOpts): RequiredBuildOpts => {
 
   const ajv = new Ajv();
+
   const validate = ajv.compile(schema);
 
   const valid = validate(opts);

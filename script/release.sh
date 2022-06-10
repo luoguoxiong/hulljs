@@ -8,8 +8,6 @@ if [ "$branch" = "main" ]; then
  
   git add -A
 
-  standard-version
-
   npm run version
 
   git add -A
