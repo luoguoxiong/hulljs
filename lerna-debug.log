@@ -1,0 +1,80 @@
+0 silly argv {
+0 silly argv   _: [ 'version' ],
+0 silly argv   exact: true,
+0 silly argv   'commit-hooks': false,
+0 silly argv   commitHooks: false,
+0 silly argv   push: false,
+0 silly argv   private: false,
+0 silly argv   'changelog-preset': 'angular-bitbucket',
+0 silly argv   changelogPreset: 'angular-bitbucket',
+0 silly argv   lernaVersion: '4.0.0',
+0 silly argv   '$0': '/Users/peroluo/github/hulljs/node_modules/.bin/lerna'
+0 silly argv }
+1 notice cli v4.0.0
+2 verbose rootPath /Users/peroluo/github/hulljs
+3 info current version 0.0.0
+4 silly isAnythingCommitted
+5 verbose isAnythingCommitted 1
+6 silly getCurrentBranch
+7 verbose currentBranch main
+8 silly hasTags
+9 verbose hasTags false
+10 info Assuming all packages changed
+11 verbose updated @hulljs/babel-preset-hull-app
+12 verbose updated @hulljs/eslint-config-hull-app
+13 verbose updated @hulljs/build
+14 verbose updated @hulljs/cli
+15 verbose updated @hulljs/utils
+16 verbose updated @hulljs/vite-plugin-babel-plugins
+17 verbose updated @hulljs/vite-plugin-html
+18 verbose git-describe undefined => "400f115"
+19 silly git-describe parsed => {"refCount":"166","sha":"400f115","isDirty":false}
+20 info execute Skipping git push
+21 info execute Skipping releases
+22 silly lifecycle No script for "preversion" in "hulljs", continuing
+23 silly lifecycle No script for "preversion" in "@hulljs/babel-preset-hull-app", continuing
+24 silly lifecycle No script for "preversion" in "@hulljs/eslint-config-hull-app", continuing
+25 silly lifecycle No script for "preversion" in "@hulljs/vite-plugin-babel-plugins", continuing
+26 silly lifecycle No script for "preversion" in "@hulljs/vite-plugin-html", continuing
+27 silly lifecycle No script for "version" in "@hulljs/babel-preset-hull-app", continuing
+28 silly lifecycle No script for "preversion" in "@hulljs/utils", continuing
+29 silly lifecycle No script for "version" in "@hulljs/vite-plugin-babel-plugins", continuing
+30 silly lifecycle No script for "version" in "@hulljs/vite-plugin-html", continuing
+31 silly lifecycle No script for "version" in "@hulljs/eslint-config-hull-app", continuing
+32 silly lifecycle No script for "version" in "@hulljs/utils", continuing
+33 silly lifecycle No script for "preversion" in "@hulljs/build", continuing
+34 silly lifecycle No script for "version" in "@hulljs/build", continuing
+35 silly lifecycle No script for "preversion" in "@hulljs/cli", continuing
+36 silly lifecycle No script for "version" in "@hulljs/cli", continuing
+37 silly lifecycle "version" starting in "hulljs"
+38 info lifecycle hulljs@0.0.0~version: hulljs@0.0.0
+39 verbose lifecycle hulljs@0.0.0~version: unsafe-perm in lifecycle true
+40 verbose lifecycle hulljs@0.0.0~version: PATH: /Users/peroluo/github/hulljs/node_modules/_npm-lifecycle@3.1.5@npm-lifecycle/node-gyp-bin:/Users/peroluo/github/hulljs/node_modules/.bin:/Users/peroluo/github/hulljs/node_modules/.bin:/Users/peroluo/github/node_modules/.bin:/Users/peroluo/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin
+41 verbose lifecycle hulljs@0.0.0~version: CWD: /Users/peroluo/github/hulljs
+42 silly lifecycle hulljs@0.0.0~version: Args: [ '-c', 'standard-version' ]
+43 silly lifecycle hulljs@0.0.0~version: Returned: code: 0  signal: null
+44 silly lifecycle "version" finished in "hulljs"
+45 silly gitAdd [
+45 silly gitAdd   'packages/babel-preset-hull-app/package.json',
+45 silly gitAdd   'packages/vite-plugin-babel-plugins/package.json',
+45 silly gitAdd   'packages/vite-plugin-babel-plugins/package-lock.json',
+45 silly gitAdd   'packages/vite-plugin-html/package.json',
+45 silly gitAdd   'packages/vite-plugin-html/package-lock.json',
+45 silly gitAdd   'packages/eslint-config-hull-app/package.json',
+45 silly gitAdd   'packages/eslint-config-hull-app/package-lock.json',
+45 silly gitAdd   'packages/hull-utils/package.json',
+45 silly gitAdd   'packages/hull-utils/package-lock.json',
+45 silly gitAdd   'packages/hull-build/package.json',
+45 silly gitAdd   'packages/hull-build/package-lock.json',
+45 silly gitAdd   'packages/hull-cli/package.json',
+45 silly gitAdd   'packages/hull-cli/package-lock.json',
+45 silly gitAdd   'lerna.json'
+45 silly gitAdd ]
+46 silly gitCommit v0.0.1
+47 verbose git [ 'commit', '--no-verify', '-m', 'v0.0.1' ]
+48 silly gitTag v0.0.1
+49 verbose git [ 'tag', 'v0.0.1', '-m', 'v0.0.1' ]
+50 error Error: Command failed with exit code 128: git tag v0.0.1 -m v0.0.1
+50 error fatal: tag 'v0.0.1' already exists
+50 error     at makeError (/Users/peroluo/github/hulljs/node_modules/_execa@5.1.1@execa/lib/error.js:60:11)
+50 error     at handlePromise (/Users/peroluo/github/hulljs/node_modules/_execa@5.1.1@execa/index.js:118:26)
