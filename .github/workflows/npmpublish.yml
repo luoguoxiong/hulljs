@@ -14,10 +14,10 @@ jobs:
         with:
           fetch-depth: 0
       - run: git fetch --prune
-      - name: Use Node.js 12
+      - name: Use Node.js 14
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
           registry-url: https://registry.npmjs.org/
       - run: yarn install
       - run: npm run lerna:publish
