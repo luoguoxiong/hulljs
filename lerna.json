@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "command": {
     "version": {
-      "allowBranch": "master"
+      "allowBranch": "main"
     }
   },
   "changelogPreset": {
