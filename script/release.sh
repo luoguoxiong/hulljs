@@ -8,9 +8,9 @@ if [ "$branch" = "main" ]; then
  
   git add -A
 
-  npm run test3
+  git commit -m "feat: test"
 
-  git add -A
+  npm run test3
 
   git push origin main
   
