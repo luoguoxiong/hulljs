@@ -119,15 +119,17 @@ const schema = {
 
 
 export const defineConfig = (opts: RunBuildOpts): RequiredBuildOpts => {
-  const config = Object.assign(defaultConfig, opts);
+
   const ajv = new Ajv();
   const validate = ajv.compile(schema);
 
-  const valid = validate(config);
+  const valid = validate(opts);
 
   if (!valid) {
     throw validate.errors;
   }
+  const config = Object.assign(defaultConfig, opts);
+
   configTool.setConfig(config);
   return config;
 };
