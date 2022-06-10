@@ -1,6 +1,5 @@
 {
   "private": true,
-  "version": "0.0.1",
   "scripts": {
     "release": "bash ./script/release.sh",
     "version": "standard-version",
