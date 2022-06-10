@@ -5,21 +5,27 @@ set -e
 branch=`git symbolic-ref --short HEAD`
 
 if [ "$branch" = "main" ]; then
-  # 编译
-  yarn build
-
-  # 提交编译后的文件
+ 
   git add -A
-  git commit -m "chore(build): 打包编译"
 
-  # 生成 CHANGELOG.md，修改版本号，打上版本号的 tag
-  yarn standard
+  git commit -m "chore(build): release"
 
-  # 发布
+  npm run test
+
+
+  git add -A
+
+  git commit -m "chore(build): release"
+
+  npm run version
+
+
   git push
-
+  
   # 提交所有 tag
   git push --tags
+
+  echo -e "\033[31m 只能在 master 或者 dev 分支上执行 yarn release！ \033[0m"
 
 elif  [ "$branch" = "dev" ]; then
   # dev分支不打tag，也不生成CHANGELOG.md
