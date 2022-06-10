@@ -7,7 +7,7 @@
     "version": "standard-version",
     "test2": "lerna-changelog",
     "test": "lerna version --exact --no-commit-hooks --no-push",
-    "test3": "lerna version --exact --no-commit-hooks --no-push --conventional-commits --changelog-preset",
+    "test3": "lerna version --exact --no-commit-hooks --no-push --conventional-commits --changelog-preset angular-bitbucket",
     "start": "dumi dev",
     "build": "lerna run build",
     "build-doc": "dumi build",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "conventional-changelog-angular-bitbucket": "^1.2.0",
     "dumi": "^1.1.42",
     "husky": "^8.0.1",
     "lerna": "^4.0.0",
