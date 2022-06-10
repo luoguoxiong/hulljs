@@ -1,16 +1,6 @@
 {
   "npmClient": "cnpm",
   "version": "0.2.0",
-  "changelog": {
-    "labels": {
-      "pr(enhancement)": ":rocket: Enhancement",
-      "pr(bug)": ":bug: Bug Fix",
-      "pr(documentation)": ":book: Documentation",
-      "pr(dependency)": ":deciduous_tree: Dependency",
-      "pr(chore)": ":turtle: Chore"
-    },
-    "cacheDir": ".changelog"
-  },
   "changelogPreset": {
     "name": "conventionalcommits",
     "types": [
