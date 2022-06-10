@@ -59,6 +59,7 @@ const build = async(opts: IBuildOptions, ciType: CITYPE) => {
       }
     }
   } catch (error: any) {
+    console.log(error);
     throw Error(error);
   }
 };

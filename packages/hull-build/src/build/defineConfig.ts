@@ -113,7 +113,7 @@ const schema = {
       type: 'object',
     },
   },
-  required: ['appDirectory', 'env', 'buildTool', 'entry', 'outputPath'],
+  required: ['projectType', 'entry'],
   additionalProperties: false,
 };
 
