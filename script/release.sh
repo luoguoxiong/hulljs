@@ -12,8 +12,6 @@ if [ "$branch" = "main" ]; then
 
   git add -A
 
-  git commit -m "chore(build): release"
-
   git push origin main
   
   git push --tags origin main
