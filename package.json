@@ -1,10 +1,11 @@
 {
   "name": "hulljs",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "release": "bash ./script/release.sh",
     "version": "standard-version",
-    "test2":"lerna-changelog",
+    "test2": "lerna-changelog",
     "test": "lerna version --exact --no-commit-hooks --no-push",
     "start": "dumi dev",
     "build": "lerna run build",
