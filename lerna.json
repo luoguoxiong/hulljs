@@ -7,9 +7,6 @@
             "allowBranch": "main"
         }
     },
-    "publishConfig": {
-        "access": "public"
-    },
     "changelogPreset": {
         "name": "conventionalcommits",
         "types": [
