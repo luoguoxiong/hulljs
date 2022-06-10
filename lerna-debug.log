@@ -24,8 +24,8 @@
 15 verbose updated @hulljs/utils
 16 verbose updated @hulljs/vite-plugin-babel-plugins
 17 verbose updated @hulljs/vite-plugin-html
-18 verbose git-describe undefined => "29c8d27"
-19 silly git-describe parsed => {"refCount":"177","sha":"29c8d27","isDirty":false}
+18 verbose git-describe undefined => "f2b260d"
+19 silly git-describe parsed => {"refCount":"180","sha":"f2b260d","isDirty":false}
 20 info execute Skipping git push
 21 info execute Skipping releases
 22 silly lifecycle No script for "preversion" in "hulljs", continuing
@@ -35,9 +35,9 @@
 26 silly lifecycle No script for "preversion" in "@hulljs/vite-plugin-html", continuing
 27 silly lifecycle No script for "version" in "@hulljs/babel-preset-hull-app", continuing
 28 silly lifecycle No script for "preversion" in "@hulljs/utils", continuing
-29 silly lifecycle No script for "version" in "@hulljs/vite-plugin-html", continuing
-30 silly lifecycle No script for "version" in "@hulljs/eslint-config-hull-app", continuing
-31 silly lifecycle No script for "version" in "@hulljs/vite-plugin-babel-plugins", continuing
+29 silly lifecycle No script for "version" in "@hulljs/vite-plugin-babel-plugins", continuing
+30 silly lifecycle No script for "version" in "@hulljs/vite-plugin-html", continuing
+31 silly lifecycle No script for "version" in "@hulljs/eslint-config-hull-app", continuing
 32 silly lifecycle No script for "version" in "@hulljs/utils", continuing
 33 silly lifecycle No script for "preversion" in "@hulljs/build", continuing
 34 silly lifecycle No script for "version" in "@hulljs/build", continuing
@@ -53,12 +53,12 @@
 44 silly lifecycle "version" finished in "hulljs"
 45 silly gitAdd [
 45 silly gitAdd   'packages/babel-preset-hull-app/package.json',
+45 silly gitAdd   'packages/vite-plugin-babel-plugins/package.json',
+45 silly gitAdd   'packages/vite-plugin-babel-plugins/package-lock.json',
 45 silly gitAdd   'packages/vite-plugin-html/package.json',
 45 silly gitAdd   'packages/vite-plugin-html/package-lock.json',
 45 silly gitAdd   'packages/eslint-config-hull-app/package.json',
 45 silly gitAdd   'packages/eslint-config-hull-app/package-lock.json',
-45 silly gitAdd   'packages/vite-plugin-babel-plugins/package.json',
-45 silly gitAdd   'packages/vite-plugin-babel-plugins/package-lock.json',
 45 silly gitAdd   'packages/hull-utils/package.json',
 45 silly gitAdd   'packages/hull-utils/package-lock.json',
 45 silly gitAdd   'packages/hull-build/package.json',
