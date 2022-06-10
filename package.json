@@ -40,8 +40,5 @@
     "standard-version": "^9.5.0",
     "yorkie": "^2.0.0"
   },
-  "__npminstall_done": false,
-  "dependencies": {
-    "lerna-changelog": "^2.2.0"
-  }
+  "__npminstall_done": false
 }
