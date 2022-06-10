@@ -6,10 +6,6 @@ branch=`git symbolic-ref --short HEAD`
 
 if [ "$branch" = "main" ]; then
  
-  git add -A
-
-  git commit -m "feat: test"
-
   npm run test3
 
   git push origin main
