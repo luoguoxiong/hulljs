@@ -16,9 +16,7 @@ if [ "$branch" = "main" ]; then
   
   git push --follow-tags origin main
 
-  echo -e "\033[31m 只能在 master 或者 dev 分支上执行 yarn release！ \033[0m"
-
 else
 
-  echo -e "\033[31m 只能在 master 或者 dev 分支上执行 yarn release！ \033[0m"
+  echo -e "\033[31m 只能在 main 执行  release！ \033[0m"
 fi
