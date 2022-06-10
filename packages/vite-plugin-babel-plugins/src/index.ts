@@ -13,7 +13,7 @@ function useViteBabelPlugins(plugins?: any[]): PluginOption {
           ast: true,
           plugins,
           sourceFileName: id,
-        }) as babel.BabelFileResult;
+        });
 
         return {
           code: result.code as string,
