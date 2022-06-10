@@ -25,7 +25,7 @@
     "@hulljs/build": "0.0.1",
     "@hulljs/utils": "0.0.1",
     "cac": "^6.7.12",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^10.0.1",
     "prompts": "^2.4.2",
     "semver": "^7.3.7",
     "validate-npm-package-name": "^4.0.0"
