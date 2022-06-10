@@ -1,9 +1,12 @@
 {
-  "name": "hulljs",
+  "private": true,
   "version": "0.0.0",
   "scripts": {
     "release": "bash ./script/release.sh",
-    "version": "lerna version --exact --no-commit-hooks --no-push --force-git-tag  --changelog-preset angular-bitbucket",
+    "version": "standard-version",
+    "test2": "lerna-changelog",
+    "test": "lerna version --exact --no-commit-hooks --no-push",
+    "test3": "lerna version --exact --no-commit-hooks --no-push --force-git-tag  --changelog-preset angular-bitbucket",
     "start": "dumi dev",
     "build": "lerna run build",
     "build-doc": "dumi build",
@@ -39,5 +42,8 @@
     "standard-version": "^9.5.0",
     "yorkie": "^2.0.0"
   },
-  "__npminstall_done": false
+  "__npminstall_done": false,
+  "dependencies": {
+    "lerna-changelog": "^2.2.0"
+  }
 }
