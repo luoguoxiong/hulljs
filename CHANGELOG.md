@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.0.5 (2022-06-11)</small>
+
+* fix: cli log ([8dfb859](https://github.com/luoguoxiong/hulljs/commit/8dfb859))
+
+
+
+
+
 ## <small>0.0.4 (2022-06-11)</small>
 
 * feat: test ([83c03c5](https://github.com/luoguoxiong/hulljs/commit/83c03c5))
