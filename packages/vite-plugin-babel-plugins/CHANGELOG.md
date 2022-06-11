@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0](https://github.com/luoguoxiong/hulljs/compare/v0.0.3...v0.1.0) (2022-06-11)
+
+
+### ✨ Features | 新功能
+
+* tst ([ce90f17](https://github.com/luoguoxiong/hulljs/commit/ce90f17f2beccd68a35cd5c908b05e15d87c1fd4))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* add publishconfig ([d2d89b2](https://github.com/luoguoxiong/hulljs/commit/d2d89b27e89bef094a0d7f3ade77122395a78bc0))
+
+
+
 ## 0.1.0 (2022-06-10)
 
 

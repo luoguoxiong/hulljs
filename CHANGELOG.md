@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0](https://github.com/luoguoxiong/hulljs/compare/v0.0.3...v0.1.0) (2022-06-11)
+
+
+### ✨ Features | 新功能
+
+* public ([5870b87](https://github.com/luoguoxiong/hulljs/commit/5870b87a46abeb7d260dfa11454e229a47be2be7))
+* publish ([1447316](https://github.com/luoguoxiong/hulljs/commit/14473163af01e88cfde0b3e524c3a1ccaab254a4))
+* test cli ([19970b9](https://github.com/luoguoxiong/hulljs/commit/19970b97aea2a87eab73a74b797915ee1b5fc983))
+* test last ([6edcbff](https://github.com/luoguoxiong/hulljs/commit/6edcbff5819040f26a7aaf159e954166cef62917))
+* test npm public ([7e70fb5](https://github.com/luoguoxiong/hulljs/commit/7e70fb5ece1931a882096269e2134bdcc068cf23))
+* test01 ([205ab97](https://github.com/luoguoxiong/hulljs/commit/205ab970c8c19dffa497ecd69ae34ff5fbb546fa))
+* tst ([ce90f17](https://github.com/luoguoxiong/hulljs/commit/ce90f17f2beccd68a35cd5c908b05e15d87c1fd4))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* add publishconfig ([d2d89b2](https://github.com/luoguoxiong/hulljs/commit/d2d89b27e89bef094a0d7f3ade77122395a78bc0))
+* babel-preset package.json ([7dfff2b](https://github.com/luoguoxiong/hulljs/commit/7dfff2b1dbcdf3ee9e25fbb95e19740b971c87d6))
+* test npm public ([111a280](https://github.com/luoguoxiong/hulljs/commit/111a2809512aeb8718b2c4b9c15ae5c015436eeb))
+
+
+
 ## 0.1.0 (2022-06-10)
 
 

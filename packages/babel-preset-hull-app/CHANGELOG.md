@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0](https://github.com/luoguoxiong/hulljs/compare/v0.0.3...v0.1.0) (2022-06-11)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* add publishconfig ([d2d89b2](https://github.com/luoguoxiong/hulljs/commit/d2d89b27e89bef094a0d7f3ade77122395a78bc0))
+* babel-preset package.json ([7dfff2b](https://github.com/luoguoxiong/hulljs/commit/7dfff2b1dbcdf3ee9e25fbb95e19740b971c87d6))
+
+
+
 ## 0.1.0 (2022-06-10)
 
 
