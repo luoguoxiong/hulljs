@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.0.6 (2022-06-11)</small>
+
+* fix: eslint 缺少typescript问题 ([864a559](https://github.com/luoguoxiong/hulljs/commit/864a559))
+
+
+
+
+
 ## <small>0.0.5 (2022-06-11)</small>
 
 * fix: cli log ([8dfb859](https://github.com/luoguoxiong/hulljs/commit/8dfb859))
