@@ -1,7 +1,8 @@
-# Change Log
+# Changelog
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [](https://github.com/luoguoxiong/hulljs/compare/v0.0.2...v) (2022-06-11)
 
 ## [0.1.0](https://github.com/luoguoxiong/hulljs/compare/v0.0.3...v0.1.0) (2022-06-11)
 
