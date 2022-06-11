@@ -8,7 +8,7 @@
     "build": "lerna run build",
     "build-doc": "dumi build",
     "bootstrap": "lerna bootstrap",
-    "lerna:publish": "lerna publish --access public from-package --yes"
+    "lerna:publish": "lerna publish from-package --yes"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
