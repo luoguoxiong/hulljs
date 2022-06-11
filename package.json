@@ -8,7 +8,7 @@
     "build": "lerna run build",
     "build-doc": "dumi build",
     "bootstrap": "lerna bootstrap",
-    "standard": "standard-version --skip.tag",
+    "standard": "standard-version -r --skip.tag",
     "lerna:publish": "lerna publish from-package --yes"
   },
   "gitHooks": {
