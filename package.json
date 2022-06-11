@@ -4,11 +4,11 @@
     "release": "bash ./script/release.sh",
     "install:all": "bash ./script/install.sh",
     "version": "lerna version --exact --no-commit-hooks --no-push  --force-git-tag",
+    "version2": "lerna version --exact --no-commit-hooks --no-push --conventional-commits  --force-git-tag",
     "start": "dumi dev",
     "build": "lerna run build",
     "build-doc": "dumi build",
     "bootstrap": "lerna bootstrap",
-    "standard": "standard-version --skip.tag",
     "lerna:publish": "lerna publish from-package --yes"
   },
   "gitHooks": {
@@ -38,7 +38,6 @@
     "husky": "^8.0.1",
     "lerna": "^4.0.0",
     "lint-staged": "^10.0.7",
-    "standard-version": "^9.5.0",
     "yorkie": "^2.0.0"
   },
   "workspaces": [
@@ -47,6 +46,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "__npminstall_done": false,
-  "version": null
+  "__npminstall_done": false
 }
