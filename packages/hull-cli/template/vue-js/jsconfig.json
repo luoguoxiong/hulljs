@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/src/*": ["./src/*"]
+    },
+    "strictNullChecks": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "jsx": "preserve",
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": false,
+    "target": "es6",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "importsNotUsedAsValues": "preserve"
+  },
+  "include": ["src/**/*"]
+}

@@ -116,7 +116,6 @@ cli
     const options = { ...isReact, isWebpack: true, ...isTs };
 
     const templateName = [
-      `${options.isWebpack ? 'webpack' : 'vite'}`,
       `${options.isReact ? 'react' : 'vue'}`,
       `${options.isTs ? 'ts' : 'js'}`,
     ];

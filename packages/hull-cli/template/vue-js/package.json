@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "hull dev",
+    "dev:vite": "hull dev --vite",
+    "build": "hull build",
+    "build:vite": "hull build  --vite",
+    "server": "hull server",
+    "server:vite": "hull server --vite"
+  },
+  "dependencies": {
+    "vue": "^3.2.36"
+  },
+  "devDependencies": {
+    "@hulljs/eslint-config-hull-app": "^0.0.6",
+    "@hulljs/cli": "^0.0.6"
+  }
+}
