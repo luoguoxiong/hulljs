@@ -1,6 +1,6 @@
 {
   "name": "@hulljs/eslint-config-hull-app",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "ESLint configuration used by hulljs",
   "files": [
     "index.js",

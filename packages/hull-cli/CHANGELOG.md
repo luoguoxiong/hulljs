@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.0.8 (2022-06-12)</small>
+
+* fix: npmignore ([e8833f2](https://github.com/luoguoxiong/hulljs/commit/e8833f2))
+
+
+
+
+
 ## <small>0.0.7 (2022-06-12)</small>
 
 * fix: 优化cli template ([7e42ac4](https://github.com/luoguoxiong/hulljs/commit/7e42ac4))
