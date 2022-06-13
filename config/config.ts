@@ -7,43 +7,6 @@ export default defineConfig({
   mode: 'site',
   outputPath: './dist',
   hash: true,
-  //   menus: {
-  //     '/utils': [{
-  //       title: '工具函数',
-  //       children: ['add', 'loadResource', 'fileCanUpload', 'getAllianceType', 'getFileExt', 'getSubCateLog'],
-  //     },
-  //     {
-  //       title: '数据存储',
-  //       children: ['dccCookie', 'dccCookie/key', 'sessionStorage'],
-  //     },
-  //     {
-  //       title: '资源上传',
-  //       children: ['aliUpload', 'qiniuUpload', 'uploadCreate'],
-  //     }],
-  //     '/hooks': [{
-  //       title: 'State',
-  //       children: ['useBoolean', 'useLocalStroage'],
-  //     },
-  //     {
-  //       title: 'Action',
-  //       children: ['useCount'],
-  //     },
-  //     ],
-  //     '/components': [{
-  //       title: '基础组件',
-  //       children: ['button'],
-  //     },
-  //     {
-  //       title: '业务组件',
-  //       children: ['video', 'creationTool', 'dataCard'],
-  //     }],
-  //     '/constants': [
-  //       {
-  //         title: '通用枚举',
-  //         children: ['/constants'],
-  //       },
-  //     ],
-  //   },
   navs: [
     {
       title: '文档',
@@ -56,6 +19,10 @@ export default defineConfig({
     {
       title: '工具',
       path: '/plugins',
+    },
+    {
+      title: 'example',
+      path: '/example',
     },
     {
       title: 'Github',
