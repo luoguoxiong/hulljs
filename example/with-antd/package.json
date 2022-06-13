@@ -1,0 +1,24 @@
+{
+  "name": "with-antd",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "hull dev",
+    "dev:vite": "hull dev --vite",
+    "build": "hull build",
+    "build:vite": "hull build  --vite",
+    "server": "hull server",
+    "server:vite": "hull server --vite"
+  },
+  "devDependencies": {
+    "@hulljs/cli": "^0.0.8",
+    "@hulljs/eslint-config-hull-app": "^0.0.8",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "babel-plugin-import": "^1.13.5"
+  },
+  "dependencies": {
+    "antd": "^4.21.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
