@@ -40,6 +40,7 @@ const defaultConfig: RequiredBuildOpts = {
   proxy: {},
   extraBabelPlugins: [],
   viteExtraBuildOptions: {},
+  viteExtraPlugins: [],
 };
 
 const schema = {
@@ -111,6 +112,9 @@ const schema = {
     },
     viteExtraBuildOptions: {
       type: 'object',
+    },
+    viteExtraPlugins: {
+      type: 'array',
     },
   },
   required: ['projectType', 'entry'],

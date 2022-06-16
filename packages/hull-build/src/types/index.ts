@@ -1,5 +1,5 @@
 import { WebpackPluginInstance, RuleSetRule } from 'webpack';
-import { UserConfig, BuildOptions } from 'vite';
+import { UserConfig, BuildOptions, PluginOption } from 'vite';
 
 type ViteExtraBuildOptions = Omit<BuildOptions, 'outDir' | 'assetsInlineLimit' | 'sourcemap' | 'assetsDir'>;
 
@@ -78,6 +78,8 @@ export interface BuildConfig {
   extraBabelPlugins?: any[];
   /** vite其他构建参数 */
   viteExtraBuildOptions?: ViteExtraBuildOptions;
+  /** vite其他插件 */
+  viteExtraPlugins?: PluginOption;
 }
 
 export type IngetUserConfigRe = Promise<(env: ENV) => BuildConfig | BuildConfig>
