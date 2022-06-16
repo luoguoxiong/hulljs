@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.0.9 (2022-06-16)</small>
+
+**Note:** Version bump only for package @hulljs/babel-preset-hull-app
+
+
+
+
+
 ## <small>0.0.8 (2022-06-12)</small>
 
 * fix: npmignore ([e8833f2](https://github.com/luoguoxiong/hulljs/commit/e8833f2))

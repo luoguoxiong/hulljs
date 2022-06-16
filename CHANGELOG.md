@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.0.9 (2022-06-16)</small>
+
+* fix: 添加 antd demo ([357791b](https://github.com/luoguoxiong/hulljs/commit/357791b))
+* fix: 添加vite额外插件配置 ([1146789](https://github.com/luoguoxiong/hulljs/commit/1146789))
+* fix: 添加with-postcss example ([3791038](https://github.com/luoguoxiong/hulljs/commit/3791038))
+* docs: 完善文档 ([a838c45](https://github.com/luoguoxiong/hulljs/commit/a838c45))
+* docs: 完善readme文档 ([53cf427](https://github.com/luoguoxiong/hulljs/commit/53cf427))
+* docs: antd example ([ded8671](https://github.com/luoguoxiong/hulljs/commit/ded8671))
+
+
+
+
+
 ## <small>0.0.8 (2022-06-12)</small>
 
 * fix: npmignore ([e8833f2](https://github.com/luoguoxiong/hulljs/commit/e8833f2))
