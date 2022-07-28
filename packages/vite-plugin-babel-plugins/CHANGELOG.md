@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.0 (2022-07-28)
+
+* feat: update vite version ([3fea53c](https://github.com/luoguoxiong/hulljs/commit/3fea53c))
+
+
+
+
+
 ## <small>0.0.9 (2022-06-16)</small>
 
 **Note:** Version bump only for package @hulljs/vite-plugin-babel-plugins

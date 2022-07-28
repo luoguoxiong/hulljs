@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.0 (2022-07-28)
+
+**Note:** Version bump only for package @hulljs/cli
+
+
+
+
+
 ## <small>0.0.9 (2022-06-16)</small>
 
 * fix: 添加vite额外插件配置 ([1146789](https://github.com/luoguoxiong/hulljs/commit/1146789))
