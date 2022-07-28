@@ -1,7 +1,7 @@
 
 import path from 'path';
 import{ getModulesFromConfig, getExistFile } from '@hulljs/utils';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import reactRefresh from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import legacy from '@vitejs/plugin-legacy';
 import { createHtmlPlugin } from '@hulljs/vite-plugin-html';
