@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.1.1 (2022-07-29)</small>
+
+* fix: update template version ([ba1e9dc](https://github.com/luoguoxiong/hulljs/commit/ba1e9dc))
+
+
+
+
+
 ## 0.1.0 (2022-07-28)
 
 * feat: update vite version ([3fea53c](https://github.com/luoguoxiong/hulljs/commit/3fea53c))
