@@ -10,8 +10,8 @@
     "server:vite": "hull server --vite"
   },
   "devDependencies": {
-    "@hulljs/cli": "^0.0.8",
-    "@hulljs/eslint-config-hull-app": "^0.0.8",
+    "@hulljs/cli": "^0.1.0",
+    "@hulljs/eslint-config-hull-app": "^0.1.0",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
     "postcss-px-to-viewport": "^1.1.1"
