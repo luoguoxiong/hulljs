@@ -4,7 +4,7 @@
     "version": "0.1.1",
     "command": {
         "version": {
-            "allowBranch": "main"
+            "allowBranch": "master"
         }
     },
     "publishConfig": {
