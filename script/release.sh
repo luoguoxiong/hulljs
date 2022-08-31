@@ -4,7 +4,7 @@ set -e
 # 读取当前分支
 branch=`git symbolic-ref --short HEAD`
 
-if [ "$branch" = "main" ]; then
+if [ "$branch" = "master" ]; then
  
   npm run version
 
