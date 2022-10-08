@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import path from 'path';
 import os from 'os';
 import cac from 'cac';
@@ -6,10 +5,7 @@ import fs from 'fs-extra';
 import { chalk } from '@hulljs/utils';
 import { build, IBuildOptions, CliIn } from '@hulljs/build';
 import validateProjectName from 'validate-npm-package-name';
-import semver from 'semver';
 import prompts from 'prompts';
-
-checkNodeVersion();
 
 const cli = cac();
 
@@ -22,28 +18,6 @@ const checkAppDir = (appRoot: string, projectName: string) => {
     process.exit(1);
   }
 };
-
-function checkNodeVersion() {
-
-  const packageJson = require('../package.json');
-
-  if (!packageJson.engines || !packageJson.engines.node) {
-    return;
-  }
-
-  if (!semver.satisfies(process.version, packageJson.engines.node)) {
-    console.error(
-      chalk.red(
-        'You are running Node %s.\n' +
-            'hulljs requires Node %s or higher.\n' +
-            'Please update your version of Node.',
-      ),
-      process.version,
-      packageJson.engines.node,
-    );
-    process.exit(1);
-  }
-}
 
 const verifyAppName = (appName: string) => {
   const validationResult = validateProjectName(appName);

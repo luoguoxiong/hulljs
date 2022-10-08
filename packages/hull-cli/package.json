@@ -4,7 +4,7 @@
   "description": "hull-cli",
   "main": "index.js",
   "bin": {
-    "hull": "./dist/index.js"
+    "hull": "./bin/index.js"
   },
   "scripts": {
     "build": "tsc",
