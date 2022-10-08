@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.2.1 (2022-10-08)</small>
+
+* fix: check node version before use cli ([4da7099](https://github.com/luoguoxiong/hulljs/commit/4da7099))
+
+
+
+
+
 ## 0.2.0 (2022-08-31)
 
 * fix: 删除changlog ([a49b45f](https://github.com/luoguoxiong/hulljs/commit/a49b45f))
