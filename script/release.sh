@@ -8,9 +8,9 @@ if [ "$branch" = "master" ]; then
  
   npm run version
 
-  git push origin main
+  git push origin master
   
-  git push --follow-tags origin main
+  git push --follow-tags origin master
 
 else
 
