@@ -35,6 +35,7 @@ const defaultConfig: RequiredBuildOpts = {
   extraWebpackPlugins: [],
   extraModuleRules: [],
   splitChunks: {},
+  splitChunksLibary: {},
   sassLoaderOptions: {},
   lessLoaderOptions: {},
   proxy: {},
@@ -98,6 +99,9 @@ const schema = {
     splitChunks: {
       type: 'object',
     },
+    splitChunksLibary: {
+      type: 'object',
+    },
     sassLoaderOptions: {
       type: 'object',
     },
@@ -133,6 +137,22 @@ export const defineConfig = (opts: RunBuildOpts): RequiredBuildOpts => {
   if (!valid) {
     throw validate.errors;
   }
+  const libary = opts.splitChunksLibary;
+
+  // schema暂时不知该如何定义
+  if(libary){
+    for(const key in libary){
+      if(!Array.isArray(libary[key])){
+        throw new Error(`splitChunksLibary.${key} mast be Array`);
+      }
+      for( const value of libary[key]){
+        if(typeof value !== 'string'){
+          throw new Error(`splitChunksLibary.${key} items mast be String`);
+        }
+      }
+    }
+  }
+
   const config = Object.assign(defaultConfig, opts);
 
   configTool.setConfig(config);

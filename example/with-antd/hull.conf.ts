@@ -10,4 +10,8 @@ export default {
         'style': true,
       }],
   ],
+  splitChunksLibary: {
+    "react": ["react", "react-dom"],
+    "antd": ["antd"]
+  }
 };

@@ -27,7 +27,7 @@ toc: menu
 ## splitChunks
 
 - Type: `object`
-  Webpackpack 代码分割
+  Webpack 代码分割
 
 ```js
 export default {
@@ -39,6 +39,19 @@ export default {
           chunks: 'all',
         },
       },
+    }
+}
+```
+
+## splitChunksLibary
+
+- Type: `object`
+  对node_modules的某些包进行分包
+```js
+export default {
+    splitChunksLibary: {
+        "react": ["react", "react-dom"],
+        "antd": ["antd"]
     }
 }
 ```

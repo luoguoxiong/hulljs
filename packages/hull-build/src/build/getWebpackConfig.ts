@@ -4,8 +4,9 @@ import { merge } from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { VueLoaderPlugin } from 'vue-loader';
-import{ choosePort, getModulesFromConfig } from '@hulljs/utils';
+import{ getModulesFromConfig } from '@hulljs/utils';
 import { WEBPACK_COMMON_CONF, WEBPACK_DEV_CONF, WEBPACK_PROD_CONF } from '../constants';
+import { createGranlarChunks } from '../features/codeSplitting';
 import { getFileLoaderConfig, getJsLoaderConfig, getCssLoaderConfig } from './getLoaderConfig';
 import { configTool } from './defineConfig';
 
@@ -15,13 +16,21 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
   const { appDirectory, shouldUseSourceMap, outputPath,
     outputPublicPath, resolveAlias, entry, htmlPluginOpts,
     extraWebpackPlugins, extraModuleRules, projectType,
-    definePluginOptions, isUseBundleAnalyzer, splitChunks, isProd } = buildConfig;
+    definePluginOptions, isUseBundleAnalyzer, splitChunks, splitChunksLibary, isProd } = buildConfig;
 
   const { modules, alias, isTypeScript } = getModulesFromConfig(appDirectory);
 
   const isUseSourceMap = isProd ? shouldUseSourceMap : false;
 
   const devtool = isProd ? (shouldUseSourceMap ? 'source-map' : false) : 'cheap-module-source-map';
+
+  const splitChunksOpts = {
+    ...splitChunks,
+    cacheGroups: {
+      ...splitChunks.cacheGroups || {},
+      ...createGranlarChunks(splitChunksLibary),
+    },
+  };
 
   const config: Configuration = {
     devtool,
@@ -46,7 +55,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
       },
     },
     optimization: {
-      splitChunks: isProd ? splitChunks : {},
+      splitChunks: isProd ? splitChunksOpts : {},
     },
     module: {
       strictExportPresence: true,

@@ -71,6 +71,8 @@ export interface BuildConfig {
   extraModuleRules?: RuleSetRule[];
   /** splitChunks */
   splitChunks?: any;
+  /** splitChunksLibary 对node_modules分包 */
+  splitChunksLibary?: Record<string, Array<string>>;
   sassLoaderOptions?: any;
   lessLoaderOptions?: any;
   proxy?: Record<string, any>;
