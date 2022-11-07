@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.0 (2022-11-07)
+
+* feat: 添加codeSplitting 策略 ([c43dfbd](https://github.com/luoguoxiong/hulljs/commit/c43dfbd))
+* fix: change release ([2c82798](https://github.com/luoguoxiong/hulljs/commit/2c82798))
+
+
+
+
+
 ## <small>0.2.1 (2022-10-08)</small>
 
 * fix: check node version before use cli ([4da7099](https://github.com/luoguoxiong/hulljs/commit/4da7099))
