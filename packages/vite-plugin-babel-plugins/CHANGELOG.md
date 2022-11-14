@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.0 (2022-11-14)
+
+* feat: extraBabelPresets for vite ([0ddac97](https://github.com/luoguoxiong/hulljs/commit/0ddac97))
+
+
+
+
+
 ## 0.3.0 (2022-11-07)
 
 **Note:** Version bump only for package @hulljs/vite-plugin-babel-plugins
