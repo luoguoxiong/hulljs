@@ -86,6 +86,12 @@ export default {
 }
 ```
 
+## extraBabelPresets
+
+- Type: Array
+- Default: []
+  额外配置的babel Presets
+
 ## fileSizeLimit
 - Type: number
 - Default: 1000 (1k)

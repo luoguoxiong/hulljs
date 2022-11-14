@@ -16,7 +16,7 @@ export const getViteConfig = (): any => {
 
   const { appDirectory, lessLoaderOptions, sassLoaderOptions,
     shouldUseSourceMap, fileSizeLimit, projectType, isUseBundleAnalyzer,
-    viteExtraBuildOptions, proxy, htmlPluginOpts, extraBabelPlugins, isProd, viteExtraPlugins } = buildConfig;
+    viteExtraBuildOptions, proxy, htmlPluginOpts, extraBabelPlugins, extraBabelPresets, isProd, viteExtraPlugins } = buildConfig;
 
   const { alias } = getModulesFromConfig(appDirectory);
 
@@ -56,6 +56,7 @@ export const getViteConfig = (): any => {
       legacy(),
       viteBabelPlugins(
         extraBabelPlugins || [],
+        extraBabelPresets || [],
       ),
       viteExtraPlugins,
     ],

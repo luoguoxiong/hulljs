@@ -5,13 +5,6 @@ nav:
 toc: menu
 ---
 # webpack 专属配置
-
-## extraBabelPresets
-
-- Type: Array
-- Default: []
-  额外配置的babel Presets
-
 ## extraWebpackPlugins
 
 - Type: Array
@@ -55,3 +48,4 @@ export default {
     }
 }
 ```
+![](/images/code.jpg)

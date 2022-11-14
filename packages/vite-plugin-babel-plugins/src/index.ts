@@ -1,6 +1,6 @@
 import { transform } from '@babel/core';
 import type { PluginOption } from 'vite';
-function useViteBabelPlugins(plugins?: any[]): PluginOption {
+function useViteBabelPlugins(plugins?: any[], presets?: any[]): PluginOption {
 
   return {
     name: 'vite-plugin-babel-plugins',
@@ -12,6 +12,7 @@ function useViteBabelPlugins(plugins?: any[]): PluginOption {
         const result = await transform(code, {
           ast: true,
           plugins,
+          presets,
           sourceFileName: id,
         });
 
