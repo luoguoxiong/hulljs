@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.4.1 (2022-11-15)</small>
+
+* docs: 完善关于浏览器兼容的配置 ([9eb9113](https://github.com/luoguoxiong/hulljs/commit/9eb9113))
+* fix: cli init template default version ([b3e94db](https://github.com/luoguoxiong/hulljs/commit/b3e94db))
+
+
+
+
+
 ## 0.4.0 (2022-11-14)
 
 * feat: extraBabelPresets for vite ([0ddac97](https://github.com/luoguoxiong/hulljs/commit/0ddac97))
