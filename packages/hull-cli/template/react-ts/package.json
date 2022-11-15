@@ -9,7 +9,8 @@
   },
   "devDependencies": {
     "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.4"
+    "@types/react-dom": "^18.0.4",
+    "@hulljs/eslint-config-hull-app": "^0.1.0"
   },
   "dependencies": {
     "react": "^17.0.1",

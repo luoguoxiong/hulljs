@@ -110,7 +110,6 @@ cli
       devDependencies: {
         ...config.devDependencies,
         '@hulljs/cli': version,
-        '@hulljs/eslint-config-hull-app': version,
       },
     };
     fs.writeFileSync(

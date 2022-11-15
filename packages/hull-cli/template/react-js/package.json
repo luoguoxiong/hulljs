@@ -7,6 +7,9 @@
     "server": "hull server",
     "server:vite": "hull server --vite"
   },
+  "devDependencies": {
+    "@hulljs/eslint-config-hull-app": "^0.1.0"
+  },
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
