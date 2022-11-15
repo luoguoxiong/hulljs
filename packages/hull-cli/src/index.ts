@@ -7,9 +7,12 @@ import { build, IBuildOptions, CliIn } from '@hulljs/build';
 import validateProjectName from 'validate-npm-package-name';
 import prompts from 'prompts';
 
+
+const { version } = require('../package.json');
+
 const cli = cac();
 
-cli.version(require('../package.json').version);
+cli.version(version);
 
 const checkAppDir = (appRoot: string, projectName: string) => {
   const isEsitDir = fs.existsSync(path.resolve(appRoot, projectName));
@@ -63,7 +66,6 @@ cli
         ],
       },
     ]);
-    console.log(isReact.isReact);
 
     if(isReact.isReact === undefined){
       return;
@@ -96,16 +98,24 @@ cli
       // 复制模板
     copyTemplateToApp(templateName.join('-'), appRoot, projectName);
 
-    const packageJson = {
-      name: projectName,
-      version: '0.1.0',
-    };
+
 
     const config = JSON.parse(fs.readFileSync(path.join(appRoot, `${projectName}/package.json`)).toString()) || {};
 
+
+    const packageJson = {
+      name: projectName,
+      version: '0.1.0',
+      ...config,
+      devDependencies: {
+        ...config.devDependencies,
+        '@hulljs/cli': version,
+        '@hulljs/eslint-config-hull-app': version,
+      },
+    };
     fs.writeFileSync(
       path.join(appRoot, `${projectName}/package.json`),
-      JSON.stringify({ ...packageJson, ...config }, null, 2) + os.EOL,
+      JSON.stringify(packageJson, null, 2) + os.EOL,
     );
     console.log(chalk.green('create success!'));
     console.log(chalk.gray(`Created ${projectName} at ./${projectName}`));
