@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.4.2 (2022-11-15)</small>
+
+* fix: 修复cli init 模板 版本号问题 ([81329ca](https://github.com/luoguoxiong/hulljs/commit/81329ca))
+
+
+
+
+
 ## <small>0.4.1 (2022-11-15)</small>
 
 * fix: cli init template default version ([b3e94db](https://github.com/luoguoxiong/hulljs/commit/b3e94db))
