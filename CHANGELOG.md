@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.5.0 (2022-11-16)
+
+* feat: 升级preset ([a8eeab8](https://github.com/luoguoxiong/hulljs/commit/a8eeab8))
+
+
+
+
+
 ## <small>0.4.2 (2022-11-15)</small>
 
 * fix: 修复cli init 模板 版本号问题 ([81329ca](https://github.com/luoguoxiong/hulljs/commit/81329ca))

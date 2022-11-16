@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.5.0 (2022-11-16)
+
+* feat: 升级preset ([a8eeab8](https://github.com/luoguoxiong/hulljs/commit/a8eeab8))
+
+
+
+
+
 ## 0.4.0 (2022-11-14)
 
 **Note:** Version bump only for package @hulljs/babel-preset-hull-app
