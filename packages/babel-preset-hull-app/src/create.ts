@@ -46,8 +46,27 @@ export const presetForCommon = (opts: IGetBabelOptions): PersentRe => {
       require.resolve('@babel/plugin-proposal-do-expressions'),
       require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
       require.resolve('@babel/plugin-proposal-optional-chaining'),
-      [require.resolve('@babel/plugin-proposal-decorators'), { legacy: true }],
-      [require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }],
+      [require.resolve('@babel/plugin-proposal-decorators'),
+        {
+          legacy: true,
+        },
+      ],
+      [require.resolve('@babel/plugin-proposal-class-properties'),
+        {
+          loose: true,
+        },
+      ],
+      [require.resolve('@babel/plugin-proposal-private-methods'),
+        {
+          loose: true,
+        },
+      ],
+      [
+        require.resolve('@babel/plugin-proposal-private-property-in-object'),
+        {
+          loose: true,
+        },
+      ],
       [require.resolve('@babel/plugin-transform-runtime'), {
         version: require('@babel/runtime/package.json').version,
         /** 如果不设置absoluteRuntime，在ci调试环境会找不到@babel/runtime */

@@ -21,7 +21,6 @@ export const WEBPACK_PROD_CONF: Configuration = {
           },
           compress: {
             ecma: 5,
-            warnings: false,
             comparisons: false,
             inline: 2,
             drop_console: true,
