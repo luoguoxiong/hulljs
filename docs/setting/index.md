@@ -198,13 +198,15 @@ module.exports = {
 eg:
 
 ```browserlistrc
-defaults
-not ie < 8
-last 2 versions
-> 1%
-iOS 7
-ie 8
-last 3 iOS versions
+[production]
+>0.2%
+not dead
+not op_mini all
+
+[development]
+last 1 chrome version
+last 1 firefox version
+last 1 safari version
 ```
 
 注意：由于开启babel-loader缓存,如果.browserlistrc修改了，需要手动删除babel缓存文件`node_modules/.cache`文件，重新构建
