@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.6.0 (2022-11-17)
+
+* feat: preset-env useBuiltIns使用usage模式 ([6f6dc42](https://github.com/luoguoxiong/hulljs/commit/6f6dc42))
+
+
+
+
+
 ## 0.5.0 (2022-11-16)
 
 * feat: 升级preset ([a8eeab8](https://github.com/luoguoxiong/hulljs/commit/a8eeab8))
