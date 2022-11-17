@@ -6,3 +6,5 @@ ReactDOM.render(
   <Button>按钮</Button>,
   document.getElementById('root'),
 );
+
+Promise.reject(222)

@@ -34,7 +34,7 @@ export const presetForCommon = (opts: IGetBabelOptions): PersentRe => {
           isTSX: true,
         }]] : []),
       [require.resolve('@babel/preset-env'), {
-        useBuiltIns: 'entry',
+        useBuiltIns: 'usage',
         corejs: 3,
         exclude: ['transform-typeof-symbol'],
       } ],

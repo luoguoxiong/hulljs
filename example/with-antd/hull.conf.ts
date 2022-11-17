@@ -12,6 +12,7 @@ export default {
   ],
   splitChunksLibary: {
     "react": ["react", "react-dom"],
-    "antd": ["antd"]
+    "antd": ["antd"],
+    "polyfill":["@babel/polyfill"]
   }
 };
