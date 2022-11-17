@@ -1,6 +1,6 @@
 {
   "name": "@hulljs/build",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "hull-build",
   "type": "commonjs",
   "author": "",
@@ -15,10 +15,10 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@hulljs/babel-preset-hull-app": "0.7.0",
-    "@hulljs/utils": "0.7.0",
-    "@hulljs/vite-plugin-babel-plugins": "0.7.0",
-    "@hulljs/vite-plugin-html": "0.7.0",
+    "@hulljs/babel-preset-hull-app": "0.8.0",
+    "@hulljs/utils": "0.8.0",
+    "@hulljs/vite-plugin-babel-plugins": "0.8.0",
+    "@hulljs/vite-plugin-html": "0.8.0",
     "@vitejs/plugin-legacy": "2.0.0",
     "@vitejs/plugin-react": "2.0.0",
     "@vitejs/plugin-vue": "3.0.1",

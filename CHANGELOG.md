@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.0 (2022-11-17)
+
+* docs: browserlistrc配置修改 ([5f8dfa4](https://github.com/luoguoxiong/hulljs/commit/5f8dfa4))
+* feat: change webpack cacheDirectory ([2aef1f7](https://github.com/luoguoxiong/hulljs/commit/2aef1f7))
+
+
+
+
+
 ## 0.7.0 (2022-11-17)
 
 * feat: 添加browserslist环境区分 ([b080c06](https://github.com/luoguoxiong/hulljs/commit/b080c06))
