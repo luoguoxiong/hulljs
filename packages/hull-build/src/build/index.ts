@@ -13,6 +13,8 @@ type CITYPE = 'dev'| 'build' | 'server'
 const build = async(opts: IBuildOptions, ciType: CITYPE) => {
   try {
     const { appDirectory, env, analyzer, port } = opts;
+    process.env.NODE_ENV = env;
+
     const configFnOrObj = await getFileExport<IngetUserConfigRe>(appDirectory, CONFIG_FILES);
 
     let config;
