@@ -45,7 +45,7 @@ export const getWebpackConfig = async(): Promise<Configuration> => {
       buildDependencies: {
         config: [__filename],
       },
-      cacheDirectory: path.resolve(appDirectory, `node_modules/.${isProd ? 'prod' : 'dev'}_cache`),
+      cacheDirectory: path.resolve(appDirectory, 'node_modules/.cache'),
     },
     resolve: {
       modules,

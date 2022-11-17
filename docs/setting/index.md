@@ -207,4 +207,4 @@ ie 8
 last 3 iOS versions
 ```
 
-注意：由于开启babel-loader缓存,如果.browserlistrc修改了，需要手动删除babel缓存文件`node_modules/.cache、.dev_cache、.prod_cache`文件，重新构建
+注意：由于开启babel-loader缓存,如果.browserlistrc修改了，需要手动删除babel缓存文件`node_modules/.cache`文件，重新构建
