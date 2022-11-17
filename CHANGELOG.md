@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.7.0 (2022-11-17)
+
+* feat: 添加browserslist环境区分 ([b080c06](https://github.com/luoguoxiong/hulljs/commit/b080c06))
+* feat: delete html ([bc951ed](https://github.com/luoguoxiong/hulljs/commit/bc951ed))
+
+
+
+
+
 ## 0.6.0 (2022-11-17)
 
 * feat: preset-env useBuiltIns使用usage模式 ([6f6dc42](https://github.com/luoguoxiong/hulljs/commit/6f6dc42))
