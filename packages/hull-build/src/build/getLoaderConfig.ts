@@ -15,7 +15,7 @@ export const getFileLoaderConfig = () => {
   const { fileSizeLimit = 1000 } = config;
   return [
     {
-      test: [/\.avif|svg|jpe?g|png|gif$/],
+      test: [/\.avif|jpe?g|png|gif$/],
       type: 'asset',
       parser: {
         dataUrlCondition: {
