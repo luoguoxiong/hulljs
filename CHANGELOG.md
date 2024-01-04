@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.8.1 (2024-01-04)</small>
+
+* fix: svg no use asset ([8b6d04f](https://github.com/luoguoxiong/hulljs/commit/8b6d04f))
+
+
+
+
+
 ## 0.8.0 (2022-11-17)
 
 * docs: browserlistrc配置修改 ([5f8dfa4](https://github.com/luoguoxiong/hulljs/commit/5f8dfa4))
