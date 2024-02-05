@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.8.2 (2024-02-05)</small>
+
+* fix: 热更新失效 ([dc70c64](https://github.com/luoguoxiong/hulljs/commit/dc70c64))
+
+
+
+
+
 ## <small>0.8.1 (2024-01-04)</small>
 
 **Note:** Version bump only for package @hulljs/cli
