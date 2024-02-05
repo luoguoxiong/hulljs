@@ -1,3 +1,4 @@
+import path from 'path';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack, { Configuration } from 'webpack';
 import rm from 'rimraf';
@@ -19,7 +20,8 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Req
         'Access-Control-Allow-Methods': '*',
         'Access-Control-Allow-Headers': '*',
       },
-      hot: true,
+      liveReload: true,
+      hot: false,
       allowedHosts: 'all',
       historyApiFallback: true,
       open: true,
@@ -27,6 +29,7 @@ export const startDevServer = async(webpackConfig: Configuration, buildOpts: Req
       port,
       https: devServer.https,
     };
+
     const devService = new WebpackDevServer(config, compiler);
 
     await devService.start();
